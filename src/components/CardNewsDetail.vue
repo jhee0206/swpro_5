@@ -8,6 +8,9 @@
         class="card-news"
         />
     </div>
+    <button class="arrow-button_reverse" @click="goBackToCardSelection">
+      이전으로
+    </button>
   </div>
 </template>
 
@@ -33,10 +36,48 @@ export default {
   methods: {
     getImagePath(filename) {
       return `/${this.type}/${filename}`;
+    },
+    goBackToCardSelection() {
+      if(this.type === 'main'){
+        this.$router.push('/');
+      }else{
+        this.$router.push('/NextDetailWindow');
+      }
     }
   }
 };
 </script>
 
 <style scoped>
+.detail-container {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.image-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.card-news {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.arrow-button_reverse {
+  padding: 15px 30px;
+  font-size: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
 </style>

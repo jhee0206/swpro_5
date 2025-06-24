@@ -3,11 +3,14 @@
     <h1 class="headline">카드뉴스를 선택하세요!</h1>
     <div class ="card-grid">
       <button
-        v-for="(card, index) in cardList"
-        :key="card.type"
-        class="card-button"
-        @click="goToDetail(card.type)">
+          v-for="(card, index) in cardList"
+          :key="card.type"
+          class="card-button"
+          @click="goToDetail(card.type)">
         <img :src="card.image" :alt="`card-${index}`" class="card-image" />
+      </button>
+      <button class="arrow-reverse" @click="GoBack">
+        이전으로
       </button>
     </div>
   </div>
@@ -29,32 +32,38 @@ export default {
     goToDetail(type) {
       this.$router.push({ path: '/detail', query: { type } });
     },
-  },
+    GoBack() {
+      this.$router.push('/');
+    }
+    }
 };
 </script>
 
 <style scoped>
-  .container {
-    text-align: center;
+.container {
+  text-align: center;
   padding: 30px 20px;
   font-family: 'Cafe24 Ssurround', serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-  .headline {
-    font-size: 24px;
+.headline {
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
   line-height: 1.5;
 }
 
-  .card-grid {
+.card-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
 }
 
-  .card-button {
+.card-button {
   width: 100px;
   height: 100px;
   background-color: #ddd;
@@ -64,9 +73,20 @@ export default {
   border: none;
 }
 
-  .card-image {
+.card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
+.arrow-reverse{
+  padding: 5px 15px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 </style>
