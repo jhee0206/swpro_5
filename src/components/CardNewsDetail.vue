@@ -14,22 +14,24 @@
 <script>
 export default {
   name: 'CardNewsDetail',
-  data(){
-    return{
+  data() {
+    return {
       type: this.$route.query.type || 'main',
       imageMap: {
-        main: ['9-1-1.png','gojo.png','mission.png','titan.png','san.png']
-        //예지파일 :[...]
+        main: ['9-1-1.png', 'gojo.png', 'mission.png', 'titan.png', 'san.png'],
+        sub0: ['truman.png', 'truman_rain.png', 'truman_sleep.png'],
+        sub1: ['black.png', 'black_ia.png'],
+        sub2: ['spider.png', 'spider_3.png', 'spider_book.png', 'spider_ia', 'spider_new.png']
       }
     };
   },
-  computed:{
-    getImageList(){
+  computed: {
+    getImageList() {
       return this.imageMap[this.type] || [];
     }
   },
-  methods:{
-    getImagePath(filename){
+  methods: {
+    getImagePath(filename) {
       return `/${this.type}/${filename}`;
     }
   }

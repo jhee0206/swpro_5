@@ -20,7 +20,7 @@ export default {
   name:"CardNewsMain",
   methods:{
     goToNextPage(){
-      //this.$router.push('/예지페이지');
+      this.$router.push('/NextDetailWindow');
     },
     goToDetail(){
       this.$router.push({ path: '/detail', query: { type: 'main' } });
