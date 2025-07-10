@@ -8,15 +8,23 @@
         class="card-news"
         />
     </div>
-    <button class="arrow-button_reverse" @click="goBackToCardSelection">
+    <Button_com
+        :customStyle="{ marginTop: 'auto', alignSelf: 'flex-end', padding: '20px 20px'}"
+        label="이전으로"
+        @click="goBackToCardSelection"
+    />
+    <!--<button class="arrow-button_reverse" @click="goBackToCardSelection">
       이전으로
-    </button>
+    </button>-->
   </div>
 </template>
 
 <script>
+import Button_com from "@/components/Button_com.vue";
+
 export default {
   name: 'CardNewsDetail',
+  components: {Button_com},
   data() {
     return {
       type: this.$route.query.type || 'main',
@@ -24,7 +32,7 @@ export default {
         main: ['9-1-1.png', 'gojo.png', 'mission.png', 'titan.png', 'san.png'],
         sub0: ['truman.png', 'truman_rain.png', 'truman_sleep.png'],
         sub1: ['black.png', 'black_ia.png'],
-        sub2: ['spider.png', 'spider_3.png', 'spider_book.png', 'spider_ia', 'spider_new.png']
+        sub2: ['spider.png', 'spider_3.png', 'spider_book.png', 'spider_ia.png', 'spider_new.png']
       }
     };
   },
@@ -50,7 +58,6 @@ export default {
 
 <style scoped>
 .detail-container {
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,13 +78,4 @@ export default {
   display: block;
 }
 
-.arrow-button_reverse {
-  padding: 15px 30px;
-  font-size: 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
 </style>

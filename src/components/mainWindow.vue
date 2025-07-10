@@ -42,6 +42,8 @@ const touchEndX=ref(0)
   align-items: center;
   min-height: 100vh;
   background-color: #fff;
+  overflow: hidden;
+  touch-action: none;
 }
 
 .divider {
@@ -49,7 +51,7 @@ const touchEndX=ref(0)
   margin: 10px auto;
   border: none;
   height: 1px;
-  background-color: #1a4eff;
+  background-color: #2260FF;
 }
 
 
@@ -61,7 +63,7 @@ const touchEndX=ref(0)
 
 .title {
   font-size: 2rem;
-  color: #3366ff;
+  color: #2260FF;
   font-weight: bold;
   line-height: 1.5;
   text-align: center;

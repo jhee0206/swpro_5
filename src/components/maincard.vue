@@ -9,19 +9,23 @@
     <button class="card-button" @click="goToDetail">
       <img :src="'/optimize.png'" alt="maincardnews" class="card-image"/>
     </button>
-    <button class="arrow-button" @click="goToNextPage">
-      더보기
-    </button>
+    <Button_com
+        :customStyle="{ position: 'absolute', bottom: '125px', right: '80px', fontSize: '15px'}"
+        label="더보기"
+        @click="goToNextPage"
+    />
+
     <NavigationBar />
   </div>
 </template>
 
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
+import Button_com from "@/components/Button_com.vue";
 
 export default {
   name:"CardNewsMain",
-  components: {NavigationBar},
+  components: {NavigationBar, Button_com},
   methods:{
     goToNextPage(){
       this.$router.push('/NextDetailWindow');
@@ -33,11 +37,14 @@ export default {
   }
 </script>
 
+
 <style scoped>
 .container{
   text-align:center;
   padding: 30px 20px;
   font-family: 'Cafe24 Ssurround',serif;
+  overflow: hidden;
+  touch-action: none;
 }
 
 .headline{
@@ -51,7 +58,7 @@ export default {
   margin: 10px auto;
   border: none;
   height: 1px;
-  background-color: #1a4eff;
+  background-color: #2260FF;
 }
 
 .sub-headline {
@@ -74,18 +81,5 @@ export default {
   height: 95%;
   object-fit:cover;
 }
-
-.arrow-button{
-    padding: 5px 15px;
-    font-size: 14px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    position: absolute;
-    bottom: 125px;
-    right: 80px;
-  }
-
 
 </style>

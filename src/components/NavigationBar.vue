@@ -1,20 +1,16 @@
 <template>
   <nav class="bottom-nav">
     <div class ="nav-item" @click="goTo('Home')">
-      <i class="icon">🏠</i>
-      <!--<img src="/icon/home_icon.png" class="icon" alt="홈"/>-->
+      <img src="/icon/home.svg" class="icon" alt="홈"/>
     </div>
     <div class="nav-item" @click="goTo('Chat')">
-      <i class="icon">💬</i>
-      <!--<img src="/icon/list_icon.png" class="icon" alt="설문조사"/>-->
+      <img src="/icon/chat.svg" class="icon" alt="설문조사"/>
     </div>
-    <div class="nav-item" @click="goTo('profile')">
-      <i class="icon">👤</i>
-      <!--<img src="/icon/chat_icon.png" class="icon" alt="챗봇"/>-->
+    <div class="nav-item" @click="goTo('list')">
+      <img src="/icon/list.svg" class="icon" alt="챗봇"/>
     </div>
     <div class="nav-item" @click="goTo('diar')">
-      <i class="icon">📔</i>
-      <!--<img src="/icon/diar_icon.png" class="icon" alt="다이어리"/>-->
+      <img src="/icon/dair.svg" class="icon" alt="다이어리"/>
     </div>
   </nav>
 </template>
@@ -36,17 +32,18 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
-  background-color: #1a4eff;
+  height: 65px;
+  background-color: #2260FF;
   justify-content:space-between;
   display: flex;
-  color:white;
-  padding: 0 20px;
+  padding: 0 25px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .nav-item{
   text-align: center;
-  font-size: 35px;
+  font-size: 33px;
   cursor: pointer;
+  margin-top: 13px;
 }
 </style>

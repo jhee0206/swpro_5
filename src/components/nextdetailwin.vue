@@ -9,16 +9,21 @@
           @click="goToDetail(card.type)">
         <img :src="card.image" :alt="`card-${index}`" class="card-image" />
       </button>
-      <button class="arrow-reverse" @click="GoBack">
-        이전으로
-      </button>
+      <Button_com
+          :customStyle="{ marginTop: 'auto', alignSelf: 'flex-end', padding: '20px 20px'}"
+          label="이전으로"
+          @click="GoBack"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import Button_com from "@/components/Button_com.vue";
+
 export default {
   name: "NextDetailwin",
+  components: {Button_com},
   data(){
     return{
       cardList:[
@@ -79,14 +84,5 @@ export default {
   object-fit: cover;
 }
 
-.arrow-reverse{
-  padding: 5px 15px;
-  font-size: 14px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
 
 </style>
