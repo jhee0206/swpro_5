@@ -1,6 +1,6 @@
 <template>
   <nav class="bottom-nav">
-    <div class ="nav-item" @click="goTo('Home')">
+    <div class ="nav-item" @click="goTo('CardNewsMain')">
       <img src="/icon/home.svg" class="icon" alt="홈"/>
     </div>
     <div class="nav-item" @click="goTo('Chat')">

@@ -16,14 +16,16 @@
       />
     </div>
   </div>
+  <NavigationBar />
 </template>
 
 <script>
 import Button_com from "@/components/Button_com.vue";
+import NavigationBar from "@/components/NavigationBar.vue";
 
 export default {
   name: "NextDetailwin",
-  components: {Button_com},
+  components: {NavigationBar, Button_com},
   data(){
     return{
       cardList:[

@@ -8,53 +8,43 @@ import NextDetailWindow from "../components/nextdetailwin.vue";
 
 import MainWindow from "../components/mainWindow.vue";
 
+import DiarList from "@/components/DiarList.vue";
+
 
 
 const routes = [
 
     {
-
         path: '/CardNewsMain',
-
         name:'CardNewsMain',
-
         component: CardNewsMain,
-
     },
 
     {
-
         path:'/detail',
-
         name:'CardNewsDetail',
-
         component: CardNewsDetail,
-
     },
 
     {
-
         path:'/NextDetailWindow',
-
         name:'NextDetailWindow',
-
         component: NextDetailWindow,
-
     },
 
     {
-
         path:'/',
-
         name:'MainWindow',
-
         component: MainWindow,
+    },
 
+    {
+        path: '/DiarList',
+        name: 'DiarList',
+        component: DiarList,
     }
 
 ];
-
-
 
 const router = createRouter({
 
