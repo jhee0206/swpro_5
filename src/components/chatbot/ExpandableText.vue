@@ -27,12 +27,11 @@ const displayText = computed(() => {
   return props.text.substring(0, props.maxLength) + '...';
 });
 
-// ★★★ 핵심 변경점: 'subheadings_only' 모드의 정규 표현식을 수정합니다. ★★★
 const highlightedText = computed(() => {
 
   if (props.highlightMode === 'subheadings_only') {
-    // 요청하신 모든 키워드를 |(OR) 연산자로 연결한 정규 표현식입니다.
-    // 데이터에 맞춰 콜론(:)이 있는 키워드와 없는 키워드를 구분했습니다.
+    // 모든 키워드를 |(OR) 연산자로 연결한 정규 표현식.
+    // 데이터에 맞춰 콜론(:)이 있는 키워드와 없는 키워드를 구분.
     const regex = /(불법행위 신고 대상|신고시 유의사항|신고 방법:|전화신고:|인터넷 신고:|모바일 신고:|방문, 팩스, 우편 신고:)/g;
     return displayText.value.replace(regex, '<strong>$1</strong>');
   }
