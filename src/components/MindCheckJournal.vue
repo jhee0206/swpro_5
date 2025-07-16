@@ -1,12 +1,8 @@
 <template>
+  <body>
   <div id="app">
     <h1>마음 체크 일지</h1>
-
     <div class="header-section">
-      <p>
-        <strong>날짜</strong>
-        <input type="text" id="entryDate" v-model="entryDate" readonly />
-      </p>
       <p>
         <strong>제목</strong>
         <input type="text" id="entryTitle" v-model="entryTitle" />
@@ -72,24 +68,21 @@
         </div>
       </div>
     </div>
-
-    <div class="text-input-area">
-      <h2 class="checklist-title">오늘 하루를 기록해 주세요.</h2>
-      <textarea
-          id="dailyRecord"
-          placeholder="오늘 하루에 대한 자세한 내용을 자유롭게 작성해주세요. 기분 변화, 있었던 일, 느낀 점 등을 기록하면 좋습니다."
-          v-model="dailyRecord"
-      ></textarea>
+    <div class="flex-center-x">
+      <button class="button-item">저장하기</button>
     </div>
-
-    <div class="clover-bottom-left"></div>
-    <div class="hand-drawing"></div>
-  </div>
+    </div>
+  </body>
+  <NavigationBar />
 </template>
 
 <script>
+import NavigationBar from "@/components/NavigationBar.vue";
+
 export default {
-  name: 'MindCheckJournal', // 컴포넌트 이름
+  name: 'MindCheckJournal',
+  components: {NavigationBar},
+ // 컴포넌트 이름
   data() {
     return {
       // appData 객체를 Vue의 data 속성으로 변환
@@ -145,4 +138,3 @@ export default {
   },
 };
 </script>
-<style **scoped src="../components/Journal.css"**></style>

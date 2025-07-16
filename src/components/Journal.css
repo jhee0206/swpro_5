@@ -5,25 +5,31 @@
     */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
-
+ @font-face {
+     font-family: 'Cafe24Ssurround';
+     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+ }
 /* body 태그에 대한 전역 스타일 설정 */
 /* Vue 앱의 최상위 App.vue 등에 적용하거나, 이 컴포넌트가 최상위 컴포넌트라면 여기에 두셔도 무방합니다. */
 body {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Cafe24Ssurround', sans-serif;
     background-color: #fcf5ed;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
     margin: 0px;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
 }
 
 /* 앱 컨테이너 (#app) 스타일 */
 #app {
     background-color: #fcf5ed;
-
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 /* h1 태그 (제목) 스타일 */
@@ -31,20 +37,20 @@ h1 {
     text-align: center;
     color: #ff8c94;
     font-size: 1.8em;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-weight: bolder;
 }
 
 /* 헤더 섹션 (날짜, 제목, 기분, 문구 입력 부분) 스타일 */
 .header-section {
     background-color: #fcf5ed;
-    border-radius: 15px;
-    padding: 5px 30px;
-    margin-bottom: 30px;
+    border-radius: 10px;
+    padding: 3px 25px;
+    margin-bottom: 20px;
     position: relative;
     overflow: hidden;
     border: 1px solid #ff8c94;
-    width: 80%;
+    width: 95%;
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
@@ -63,7 +69,7 @@ h1 {
 /* 헤더 섹션 내 strong 태그 (항목 이름) 스타일 */
 .header-section p strong {
     display: inline-block;
-    width: 100px;
+    width: 80px;
     color: #ff8c94;
     font-weight: 500;
     flex-shrink: 0;
@@ -73,7 +79,8 @@ h1 {
 .header-section input[type="text"] {
     border: none;
     border-bottom: 1px solid #ccc;
-    padding: 5px 0;
+    color: #545454;
+    padding: 3px 0;
     font-size: 0.9em;
     width: calc(100% - 100px);
     flex-grow: 1;
@@ -83,7 +90,7 @@ h1 {
 
 /* 라이프스타일 체크리스트 섹션 스타일 */
 .lifestyle-checklist {
-    margin-top: 30px;
+    margin-top: 10px;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -94,20 +101,20 @@ h1 {
 .checklist-title {
     color: #ff8c94;
     font-size: 1.0em;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-weight: 500;
 }
 
 /* 각 체크리스트 항목 스타일 */
 .checklist-item {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 /* 체크리스트 항목의 strong 태그 (질문) 스타일 */
 .checklist-item strong {
     display: block;
     margin-bottom: 10px;
-    color: #555;
+    color: #ff8c94;
     font-size: 0.9em;
     font-weight: 500;
     width: 100%;
@@ -135,7 +142,7 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked {
-    background-color: #ffffff;
+    background-color: #fcf5ed;
     border-color: #ff8c94;
 }
 
@@ -144,7 +151,7 @@ input[type="radio"]:checked {
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: #666;
+    color: #ff8c94;
     font-size: 0.8em;
     white-space: nowrap;
 }
@@ -179,3 +186,20 @@ input[type="radio"]:checked {
     box-sizing: border-box;
     font-family: 'Noto Sans KR', sans-serif;
 }
+.button-item {
+    font-family: 'Cafe24Ssurround';
+    padding: 3px 5px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    font-size: 0.8em;
+    background-color: #faf3eb;
+    border-color: #ffb4b8;
+    border-radius: 5px;
+    color: #ff8c94;
+
+}
+ .flex-center-x {
+     display: flex;
+     justify-content: center; /* 가로축(메인 축)을 따라 아이템을 중앙 정렬 */
+     /* 필요에 따라 높이 설정: height: 100px; */
+ }
