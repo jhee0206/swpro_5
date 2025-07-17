@@ -5,15 +5,13 @@
       마약 없는 세상
     </h1>
     <hr class="divider" />
-    <h2 class="sub-headline">오늘의 카드뉴스</h2>
-    <button class="card-button" @click="goToDetail">
-      <img :src="'/optimize.png'" alt="maincardnews" class="card-image"/>
-    </button>
-    <Button_com
-        :customStyle="{ position: 'absolute', bottom: '125px', right: '80px', fontSize: '15px'}"
-        label="더보기"
-        @click="goToNextPage"
-    />
+    <h2 class="sub-headline">이동할 페이지의 버튼을 눌러주세요!</h2>
+    <div class="button-grid" >
+      <button class="nav-button" @click="goToNextPage('education')">예방 교육</button>
+      <button class="nav-button" @click="goToNextPage('news')">관련 뉴스</button>
+      <button class="nav-button" @click="goToNextPage('check')">자가 진단</button>
+      <button class="nav-button" @click="goToNextPage('support')">도움 받기</button>
+  </div>
 
     <NavigationBar />
   </div>
@@ -21,20 +19,16 @@
 
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
-import Button_com from "@/components/Button_com.vue";
 
 export default {
   name:"CardNewsMain",
-  components: {NavigationBar, Button_com},
+  components: {NavigationBar},
   methods:{
-    goToNextPage(){
-      this.$router.push('/NextDetailWindow');
-    },
-    goToDetail(){
-      this.$router.push({ path: '/detail', query: { type: 'main' } });
-      },
+    goToNextPage(page){
+      this.$router.push(`/${page}`);
     }
-  }
+    }
+  };
 </script>
 
 
@@ -67,19 +61,24 @@ export default {
   margin: 20px 0;
 }
 
-.card-button {
-  width: 70%;
-  height: 280px;
-  margin: 0 auto;
-  background-color: #ddd;
-  border-radius: 10px;
-  display: block;
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
 }
 
-.card-image{
-  width: 98%;
-  height: 95%;
-  object-fit:cover;
+.nav-button {
+  background-color: #2260FF;
+  color: white;
+  padding: 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s;
 }
+
 
 </style>

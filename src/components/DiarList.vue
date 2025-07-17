@@ -38,52 +38,11 @@ export default {
   },
   mounted() {
     const stored = localStorage.getItem('diaryList');
-    // this.diaryList = stored ? JSON.parse(stored) : [];
-    if (!stored) {
-      this.diaryList = [
-        {
-          id: 1,
-          date: '2025-07-10',
-          title: '테스트 일기'
-        },
-        {
-          id: 2,
-          date: '2025-07-11',
-          title: '테스트 일기2'
-        },
-        {
-          id: 3,
-          date: '2025-07-13',
-          title: '테스트 일기3'
-        },
-        {
-          id: 4,
-          date: '2025-07-14',
-          title: '테스트 일기4'
-        },
-        {
-          id: 5,
-          date: '2025-07-10',
-          title: '테스트 일기5'
-        },
-        {
-          id: 6,
-          date: '2025-07-16',
-          title: '테스트 일기6'
-        },
-        {
-          id: 7,
-          date: '2025-07-17',
-          title: '테스트 일기7'
-        }
-      ];
-    } else {
-      this.diaryList = JSON.parse(stored);
-    }
+    this.diaryList = stored ? JSON.parse(stored) : [];
   },
   methods: {
-    viewDiary(entry){
-      console.log("일기 클릭", entry.id);
+    viewDiary(entry) {
+      this.$router.push({path: '/diarydetail', query: {id: entry.id}})
     }
   }
 }

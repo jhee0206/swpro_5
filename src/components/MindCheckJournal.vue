@@ -2,7 +2,7 @@
   <body>
   <div id="app">
     <h1>마음 체크 일지</h1>
-    <div class="header-section">
+    <div class="header-section" id="journal-content-to-capture">
       <p>
         <strong>제목</strong>
         <input type="text" id="entryTitle" v-model="entryTitle" />
@@ -69,40 +69,37 @@
       </div>
     </div>
     <div class="flex-center-x">
-      <button class="button-item">저장하기</button>
+      <button class="button-item" @click="saveJournal">저장하기</button>
     </div>
-    </div>
+  </div>
   </body>
   <NavigationBar />
 </template>
 
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
+import html2canvas from 'html2canvas'; // html2canvas 임포트
 
 export default {
   name: 'MindCheckJournal',
   components: {NavigationBar},
- // 컴포넌트 이름
   data() {
     return {
-      // appData 객체를 Vue의 data 속성으로 변환
       entryDate: '',
       entryTitle: '',
       entryMood: '',
       entryPhrase: '',
       checklist: {
         water: '',
-        hour: '', // water에서 hour로 수정되었습니다.
-        meals: '', // exercise에서 meals로 수정되었습니다. (질문과 라디오 버튼 name을 맞춤)
+        hour: '',
+        meals: '',
         enjoyableActivity: '',
         socialInteraction: '',
-        // newChallenge, rest는 기존 HTML에 없었으므로 제거
       },
       dailyRecord: '',
     };
   },
   mounted() {
-    // 컴포넌트가 DOM에 마운트된 후에 실행될 로직 (DOMContentLoaded와 유사)
     this.setCurrentDate();
   },
   methods: {
@@ -113,10 +110,46 @@ export default {
       const day = String(today.getDate()).padStart(2, '0');
       this.entryDate = `${year}.${month}.${day}`;
     },
+    async saveJournal() {
+      const elementToCapture = document.getElementById('journal-content-to-capture');
+
+      if (elementToCapture) {
+        try {
+          const canvas = await html2canvas(elementToCapture, {
+            useCORS: true,
+            height: elementToCapture.scrollHeight,
+            windowHeight: elementToCapture.scrollHeight,
+          });
+
+          const imageDataURL = canvas.toDataURL('image/png');
+
+          const newEntry = {
+            id: Date.now(), // 고유 ID 생성
+            date: this.entryDate,
+            title: this.entryTitle,
+            mood: this.entryMood,
+            phrase: this.entryPhrase,
+            checklist: this.checklist,
+            image: imageDataURL,
+          };
+
+          const storedDiaryList = JSON.parse(localStorage.getItem('diaryList')) || [];
+          storedDiaryList.push(newEntry);
+          localStorage.setItem('diaryList', JSON.stringify(storedDiaryList));
+
+          alert('일지 저장 완료!');
+          this.$router.push('/DiarList');
+        } catch (error) {
+          console.error('이미지 캡처 및 저장 중 오류 발생:', error);
+          alert('일지 저장 중 오류가 발생했습니다.');
+        }
+      } else {
+        console.error('캡처할 요소를 찾을 수 없습니다.');
+        alert('일지 내용을 캡처할 수 없습니다.');
+      }
+    },
   },
   watch: {
-    // Vue의 watch를 사용하여 데이터 변경을 감지하고 콘솔에 출력
-    // 모든 필드를 개별적으로 watch하거나, checklist와 같이 객체는 deep watch를 사용할 수 있습니다.
     entryTitle(newVal) {
       console.log('제목:', newVal);
     },
@@ -133,7 +166,7 @@ export default {
       handler(newVal) {
         console.log('체크리스트:', newVal);
       },
-      deep: true, // checklist 객체 내부의 변경도 감지
+      deep: true,
     },
   },
 };

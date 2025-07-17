@@ -5,6 +5,7 @@ import NextDetailWindow from "../components/nextdetailwin.vue";
 import DiarList from "@/components/DiarList.vue";
 import mainWindow from "../components/mainWindow.vue";
 import MindCheckJournal from "@/components/MindCheckJournal.vue";
+import DiaryDetail from "@/components/DiaryDetail.vue";
 
 
 
@@ -35,6 +36,12 @@ const routes = [
     },
 
     {
+        path: '/DiaryDetail',
+        name: 'DiaryDetail',
+        component:DiaryDetail
+    },
+
+    {
         path: '/DiarList',
         name: 'DiarList',
         component: DiarList,
@@ -43,7 +50,24 @@ const routes = [
         path: '/MindCheckJournal',
         name: 'MindCheckJournal',
         component: MindCheckJournal,
+    },
+    {
+        path: '/education',
+        component: () => import('@/components/nextdetailwin.vue')
+    },
+    /*{
+        path: '/news',
+        component: () => import('@/views/NewsPage.vue')
+    },*/
+    /*{
+        path: '/check',
+        component: () => import('@/views/SelfCheck.vue')
+    },*/
+    {
+        path: '/support',
+        component: () => import('@/components/MindCheckJournal.vue')
     }
+
 
 ];
 
