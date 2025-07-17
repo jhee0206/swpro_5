@@ -6,6 +6,7 @@ const router = useRouter()
 import FixedHeaderResult from "@/component/FixedHeaderResult.vue";
 import NavigationBar from "@/component/NavigationBar.vue";
 import ResultCheckButton from "@/component/ResultCheckButton.vue";
+import ResultSafety from "@/component/ResultSafety.vue";
 
 function handlePrev() {
   router.push('/')
@@ -22,13 +23,16 @@ function handlePrev() {
         safety="안전"
         color="#6AAA5B"/>
     <div class="w-full flex flex-col justify-between flex-1"> <!-- 컨텐츠 -->
-      <div class="w-full h-[300px] bg-black"> <!-- 그래프 -->
+      <div class="w-full h-[200px] bg-black"> <!-- 그래프 -->
 
       </div>
+      <ResultSafety/>
       <div> <!-- 텍스트 -->
-        <p class="information-text">현재 저위험 단계에 해당합니다! <br>
-          주기적인 자가진단을 권장하며 자기보호를 위한 상황별 대응법이 중요합니다. <br> <br>
-          해당 카드뉴스를 안내해드리겠습니다.</p>
+        <p class="information-text">
+          현재 <span class="font-bold">저위험</span> 단계에 해당합니다!<br>
+          <span class="font-bold">주기적인 자가진단</span>을 권장하며 자기보호를 위한 상황별 대응법이 중요합니다.<br><br>
+          해당 카드뉴스를 안내해드리겠습니다.
+        </p>
       </div>
       <div class="flex justify-center pb-[65px]"> <!-- 확인버튼 -->
         <ResultCheckButton

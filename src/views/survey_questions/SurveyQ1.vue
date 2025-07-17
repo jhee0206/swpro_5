@@ -45,7 +45,7 @@ function goToNext() {
 </script>
 
 <template>
-  <div class="flex flex-col justify-between min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
+  <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
     <FixedHeader
         prevLink="/"
         nextLink="다음버튼"

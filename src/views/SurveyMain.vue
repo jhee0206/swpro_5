@@ -19,23 +19,6 @@ import NavigationBar from "@/component/NavigationBar.vue";
           나열된 물질 중 의사가 처방한 대로 사용한 약물은 제외하고, 처방된 목적 외에 다른 이유로 사용하
           거나, 처방된 것보다 더 자주 혹은 더 많은 용량을 사용한 적이 있다면 체크해 주시기 바랍니다. </p>
       </div>
-      <div class="">
-        <div class="px-[24px] py-[12px]"><p class="font-bold">위험도 평가</p></div>
-        <div class="flex justify-between">
-          <div class="safety-low-div">
-            <p class="safety-low-p">저위험</p>
-            <p class="safety-step-descript">약물 0-3점,<br> 알코올 0-10점</p>
-          </div>
-          <div class="safety-middle-div">
-            <p class="safety-middle-p">중증도 위험</p>
-            <p class="safety-step-descript">약물 4-26점,<br> 알코올 11-26점</p>
-          </div>
-          <div class="safety-high-div">
-            <p class="safety-high-p">고위험</p>
-            <p class="safety-step-descript">27점 이상</p>
-          </div>
-        </div>
-      </div>
       <div class="w-full flex justify-center pb-[65px]">
         <router-link to="/survey/q1" class="survey-start-button"><span>자가 설문 시작하기</span></router-link>
       </div>
@@ -61,54 +44,5 @@ import NavigationBar from "@/component/NavigationBar.vue";
   padding-top: 12px;
   padding-bottom: 12px;
   border-radius: 8px;
-}
-
-.safety-low-p {
-  font-size: 14px;
-  text-align: center;
-  border-top-left-radius: 8px;
-  color: #ffffff;
-
-}
-.safety-middle-p {
-  font-size: 14px;
-  text-align: center;
-  color: #ffffff;
-
-}
-.safety-high-p {
-  font-size: 14px;
-  text-align: center;
-  color: #ffffff;
-
-}
-
-.safety-low-div {
-  background-color: #6AAA5B;
-  padding: 8px;
-  flex: 1 1 0%;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-}
-
-.safety-middle-div {
-  background-color: #F5AF2D;
-  padding: 8px;
-  flex: 1 1 0%;
-}
-
-.safety-high-div {
-  background-color: #C31D1D;
-  padding: 8px;
-  flex: 1 1 0%;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
-.safety-step-descript {
-  font-size: 11px;
-  text-align: center;
-  color: #ffffff;
-
 }
 </style>
