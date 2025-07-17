@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import SurveyMain from '@/views/component/SurveyMain.vue'
+import SurveyMain from '@/component/SurveyMain.vue'
 import SurveyQ1 from "@/views/survey_questions/SurveyQ1.vue";
 import SurveyQ2 from "@/views/survey_questions/SurveyQ2.vue";
 import SurveyQ3 from "@/views/survey_questions/SurveyQ3.vue";

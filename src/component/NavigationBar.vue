@@ -2,16 +2,16 @@
   <div>
     <nav class="bottom-nav">
       <div class ="nav-item" @click="goTo('Home')">
-        <img src="/public/icon/home.svg" class="icon" alt="홈"/>
+        <img src="/icon/home.svg" class="icon" alt="홈"/>
       </div>
       <div class="nav-item" @click="goTo('Chat')">
-        <img src="/public/icon/chat.svg" class="icon" alt="설문조사"/>
+        <img src="/icon/chat.svg" class="icon" alt="설문조사"/>
       </div>
       <div class="nav-item" @click="goTo('list')">
-        <img src="/public/icon/list.svg" class="icon" alt="챗봇"/>
+        <img src="/icon/list.svg" class="icon" alt="챗봇"/>
       </div>
       <div class="nav-item" @click="goTo('diar')">
-        <img src="/public/icon/dair.svg" class="icon" alt="다이어리"/>
+        <img src="/icon/dair.svg" class="icon" alt="다이어리"/>
       </div>
     </nav>
   </div>

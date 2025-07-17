@@ -3,9 +3,9 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-import FixedHeaderResult from "@/views/component/FixedHeaderResult.vue";
-import NavigationBar from "@/views/component/NavigationBar.vue";
-import ResultCheckButton from "@/views/component/ResultCheckButton.vue";
+import FixedHeaderResult from "@/component/FixedHeaderResult.vue";
+import NavigationBar from "@/component/NavigationBar.vue";
+import ResultCheckButton from "@/component/ResultCheckButton.vue";
 
 function handlePrev() {
   router.push('/')

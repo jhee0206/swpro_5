@@ -4,8 +4,8 @@ import { useRouter } from "vue-router";
 
 const router = useRouter()
 
-import FixedHeader from "@/views/component/FixedHeader.vue";
-import NavigationBar from "@/views/component/NavigationBar.vue";
+import FixedHeader from "@/component/FixedHeader.vue";
+import NavigationBar from "@/component/NavigationBar.vue";
 
 const items = ref([
   { label: '담배제품', score: null },

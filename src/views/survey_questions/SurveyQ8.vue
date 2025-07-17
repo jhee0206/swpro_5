@@ -5,8 +5,8 @@ import { useRoute, useRouter } from 'vue-router'
 const route = useRoute();
 const router = useRouter();
 
-import FixedHeader from "@/views/component/FixedHeader.vue";
-import NavigationBar from "@/views/component/NavigationBar.vue";
+import FixedHeader from "@/component/FixedHeader.vue";
+import NavigationBar from "@/component/NavigationBar.vue";
 
 const frequencyOptions = [
   { label: '전혀없다', value: 0 },

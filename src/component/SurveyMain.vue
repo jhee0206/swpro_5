@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import FixedHeader from "@/views/component/FixedHeader.vue";
-import NavigationBar from "@/views/component/NavigationBar.vue";
+import FixedHeader from "@/component/FixedHeader.vue";
+import NavigationBar from "@/component/NavigationBar.vue";
 </script>
 
 <template>
