@@ -4,12 +4,12 @@
       <img src="/icon/home.svg" class="icon" alt="홈"/>
     </div>
     <div class="nav-item" @click="goTo('Chat')">
-      <img src="/icon/chat.svg" class="icon" alt="설문조사"/>
+      <img src="/icon/chat.svg" class="icon" alt="챗봇"/>
     </div>
     <div class="nav-item" @click="goTo('list')">
-      <img src="/icon/list.svg" class="icon" alt="챗봇"/>
+      <img src="/icon/list.svg" class="icon" alt="설문조사"/>
     </div>
-    <div class="nav-item" @click="goTo('diar')">
+    <div class="nav-item" @click="goTo('MindCheckJournal')">
       <img src="/icon/dair.svg" class="icon" alt="다이어리"/>
     </div>
   </nav>

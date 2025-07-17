@@ -29,9 +29,16 @@ export default {
   data(){
     return{
       cardList:[
-        { type: "sub0", image: "/sub0/truman.png" },
-        { type: "sub1", image: "/sub1/black.png" },
-        { type: "sub2", image: "/sub2/spider.png" },
+        { type: "sub0", image: "/sub0/sns속 마약 유혹 001.png" },
+        { type: "sub1", image: "/sub1/마약 한번이면 중독001.png" },
+        { type: "sub2", image: "/sub2/작은 방심001.png" },
+        { type: "sub3", image: "/sub3/건강을 지켜라 001.png" },
+        { type: "sub4", image: "/sub4/얼마나001.png" },
+        { type: "sub5", image: "/sub5/어떻게 치료하지001.png" },
+        { type: "sub6", image: "/sub6/유형 및 처벌001.png" },
+        { type: "sub7", image: "/sub7/탈마약중독001.png" },
+        { type: "sub8", image: "/sub8/이게마약 001.png"},
+        { type: "sub9", image: "/sub9/마약 경로와 예방법001.png" }
       ],
     };
   },
@@ -71,8 +78,8 @@ export default {
 }
 
 .card-button {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   background-color: #ddd;
   border-radius: 12px;
   overflow: hidden;
@@ -85,6 +92,4 @@ export default {
   height: 100%;
   object-fit: cover;
 }
-
-
 </style>

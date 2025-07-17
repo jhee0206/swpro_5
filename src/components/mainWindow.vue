@@ -1,5 +1,11 @@
 <template>
-  <div class="container" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
+  <div class="container"
+       @touchstart="handleStart"
+       @touchend="handleEnd"
+       @mousedown="handleStart"
+       @mouseup="handleEnd">
+       <!--@touchstart="handleTouchStart"
+       @touchend="handleTouchEnd">-->
     <div class="content">
       <hr class="divider" />
       <img src="/logo.png" alt="로고" class="logo_v.svg" />
@@ -12,7 +18,7 @@
   </div>
 </template>
 
-<script setup>
+<!--<script setup>
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 
@@ -32,7 +38,30 @@ const touchEndX=ref(0)
      router.push('/CardNewsMain')
    }
  }
+</script>-->
+
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const startX = ref(0);
+const endX = ref(0);
+
+const handleStart = (e) => {
+  // 모바일 터치 이벤트(e.changedTouches) or 마우스 이벤트(e.clientX)
+  startX.value = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+};
+
+const handleEnd = (e) => {
+  endX.value = e.type.includes('touch') ? e.changedTouches[0].clientX : e.clientX;
+  const diff = startX.value - endX.value;
+  if (diff > 50) {
+    router.push('/CardNewsMain');
+  }
+};
 </script>
+
 
 
 <style scoped>

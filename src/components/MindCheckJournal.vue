@@ -138,3 +138,5 @@ export default {
   },
 };
 </script>
+
+<style scoped src ="./Journal.css"></style>
