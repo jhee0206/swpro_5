@@ -1,8 +1,8 @@
 <template>
-  <body>
   <div id="app">
+    <div id ="journal-content-to-capture">
     <h1>마음 체크 일지</h1>
-    <div class="header-section" id="journal-content-to-capture">
+    <div class="header-section">
       <p>
         <strong>제목</strong>
         <input type="text" id="entryTitle" v-model="entryTitle" />
@@ -68,11 +68,11 @@
         </div>
       </div>
     </div>
-    <div class="flex-center-x">
-      <button class="button-item" @click="saveJournal">저장하기</button>
-    </div>
   </div>
-  </body>
+      <div class="flex-center-x">
+        <button class="button-item" @click="saveJournal">저장하기</button>
+  </div>
+    </div>
   <NavigationBar />
 </template>
 
@@ -110,66 +110,49 @@ export default {
       const day = String(today.getDate()).padStart(2, '0');
       this.entryDate = `${year}.${month}.${day}`;
     },
-    async saveJournal() {
+    saveJournal: async function () {
       const elementToCapture = document.getElementById('journal-content-to-capture');
 
       if (elementToCapture) {
-        try {
-          const canvas = await html2canvas(elementToCapture, {
-            useCORS: true,
-            height: elementToCapture.scrollHeight,
-            windowHeight: elementToCapture.scrollHeight,
-          });
+        setTimeout(async () => {
+          try {
+            const canvas = await html2canvas(elementToCapture, {
+              useCORS: true,
+              scrollY: -window.scrollY, // 전체 캡처에 중요!
+              height: elementToCapture.scrollHeight,
+              windowHeight: elementToCapture.scrollHeight,
+            });
 
-          const imageDataURL = canvas.toDataURL('image/png');
+            const imageDataURL = canvas.toDataURL('image/png');
 
-          const newEntry = {
-            id: Date.now(), // 고유 ID 생성
-            date: this.entryDate,
-            title: this.entryTitle,
-            mood: this.entryMood,
-            phrase: this.entryPhrase,
-            checklist: this.checklist,
-            image: imageDataURL,
-          };
+            const newEntry = {
+              id: Date.now(),
+              date: this.entryDate,
+              title: this.entryTitle,
+              mood: this.entryMood,
+              phrase: this.entryPhrase,
+              checklist: this.checklist,
+              image: imageDataURL,
+            };
 
-          const storedDiaryList = JSON.parse(localStorage.getItem('diaryList')) || [];
-          storedDiaryList.push(newEntry);
-          localStorage.setItem('diaryList', JSON.stringify(storedDiaryList));
+            const storedDiaryList = JSON.parse(localStorage.getItem('diaryList')) || [];
+            storedDiaryList.push(newEntry);
+            localStorage.setItem('diaryList', JSON.stringify(storedDiaryList));
 
-          alert('일지 저장 완료!');
-          this.$router.push('/DiarList');
-        } catch (error) {
-          console.error('이미지 캡처 및 저장 중 오류 발생:', error);
-          alert('일지 저장 중 오류가 발생했습니다.');
-        }
+            alert('일지 저장 완료!');
+            this.$router.push('/DiarList');
+          } catch (error) {
+            console.error('이미지 캡처 및 저장 중 오류 발생:', error);
+            alert('일지 저장 중 오류가 발생했습니다.');
+          }
+        }, 500); // ⏱ 캡처 안정화를 위한 딜레이
       } else {
         console.error('캡처할 요소를 찾을 수 없습니다.');
         alert('일지 내용을 캡처할 수 없습니다.');
       }
-    },
-  },
-  watch: {
-    entryTitle(newVal) {
-      console.log('제목:', newVal);
-    },
-    entryMood(newVal) {
-      console.log('기분:', newVal);
-    },
-    entryPhrase(newVal) {
-      console.log('문구:', newVal);
-    },
-    dailyRecord(newVal) {
-      console.log('일일 기록:', newVal);
-    },
-    checklist: {
-      handler(newVal) {
-        console.log('체크리스트:', newVal);
-      },
-      deep: true,
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped src ="./Journal.css"></style>

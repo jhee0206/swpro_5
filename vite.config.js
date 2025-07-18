@@ -16,6 +16,6 @@ export default defineConfig({
   },
   server: {
     host: true, // ✅ 이 줄 추가!
-    port: 5173  // (선택) 포트 지정도 가능, 기본은 5173
+    port: 5173,
   }
 })

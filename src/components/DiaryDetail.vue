@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <h2>저장된 일기 이미지</h2>
-    <img :src="imageData" alt="캡처된 일기 이미지" />
+  <div class="image-wrapper">
+    <img :src="imageData" alt="캡처된 일기 이미지" class="captured-image" />
   </div>
 </template>
 
@@ -22,3 +21,21 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.image-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto; /* 필요 시 스크롤 */
+}
+
+.captured-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+</style>
+

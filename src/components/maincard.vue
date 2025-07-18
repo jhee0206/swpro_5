@@ -5,14 +5,15 @@
       마약 없는 세상
     </h1>
     <hr class="divider" />
-    <h2 class="sub-headline">이동할 페이지의 버튼을 눌러주세요!</h2>
     <div class="button-grid" >
-      <button class="nav-button" @click="goToNextPage('education')">예방 교육</button>
-      <button class="nav-button" @click="goToNextPage('news')">관련 뉴스</button>
-      <button class="nav-button" @click="goToNextPage('check')">자가 진단</button>
-      <button class="nav-button" @click="goToNextPage('support')">도움 받기</button>
+      <button class="nav-button" @click="goToNextPage('education')">카드뉴스 보기</button>
+      <button class="nav-button" @click="goToNextPage('list')">자가진단 하기</button>
+      <button class="nav-button" @click="goToNextPage('chatbot')">챗봇 이용</button>
+      <button class="nav-button" @click="goToNextPage('support')">마음일기 작성</button>
   </div>
 
+
+    <hr class="divider" />
     <NavigationBar />
   </div>
 </template>
@@ -48,8 +49,8 @@ export default {
   line-height: 1.5;
 }
 .divider {
-  width: 80%;
-  margin: 10px auto;
+  width: 100%;
+  margin: 20px auto;
   border: none;
   height: 1px;
   background-color: #2260FF;
@@ -69,10 +70,10 @@ export default {
 }
 
 .nav-button {
-  background-color: #2260FF;
-  color: white;
-  padding: 20px;
-  border: none;
+  background-color: white;
+  color: rgba(90, 114, 170, 0.81);
+  padding: 30px 10px;
+  border: 1px solid black;
   border-radius: 12px;
   font-size: 16px;
   font-weight: bold;
