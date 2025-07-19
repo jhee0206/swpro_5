@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import FixedHeader from "@/component/FixedHeader.vue";
+import NavigationBar from "@/component/NavigationBar.vue";
 
 const route = useRoute();
 const router = useRouter();
-
-import FixedHeader from "@/component/FixedHeader.vue";
-import NavigationBar from "@/component/NavigationBar.vue";
 
 const frequencyOptions = [
   { label: '전혀없음', value: 0 },
@@ -19,6 +18,9 @@ const frequencyOptions = [
 // Q1에서 '예'로 선택한 항목만 받아서 items로 만듦
 const items = ref<{ label: string; value: number|null }[]>([])
 
+// 이전까지 누적된 답변들
+const previousAnswers = ref<any[]>([])
+
 onMounted(() => {
   if (route.query.selected) {
     const arr = JSON.parse(route.query.selected as string)
@@ -27,6 +29,8 @@ onMounted(() => {
       value: null
     }))
   }
+  // 이전 답변 누적 배열 (없으면 빈 배열)
+  previousAnswers.value = route.query.answers ? JSON.parse(route.query.answers as string) : []
 })
 
 // 다음 버튼 클릭 시 모든 항목 체크 여부 등 유효성 검사
@@ -37,10 +41,21 @@ function handleNext() {
     return
   }
 
+  // 현재 페이지(Q4)의 답변을 answers 구조로 만듦
+  const thisAnswers = items.value.map(item => ({
+    label: item.label,
+    value: item.value,
+    questionNo: 4,
+  }))
+  const allAnswers = [...previousAnswers.value, ...thisAnswers]
+
   // 'SurveyQ5'으로 이동
   router.push({
     path: '/survey/q5',
-    query: { selected: JSON.stringify(items.value.map(i => i.label)) }
+    query: {
+      selected: JSON.stringify(items.value.map(i => i.label)),
+      answers: JSON.stringify(allAnswers)
+    }
   })
 }
 </script>

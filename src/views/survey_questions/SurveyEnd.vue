@@ -1,34 +1,43 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useSurveyStore } from '@/views/survey'
+import { useRoute } from 'vue-router'
+const route = useRoute();
 
-const store = useSurveyStore()
+const answers = computed(() => {
+  if (!route.query.answers) return [];
+  return JSON.parse(route.query.answers as string);
+});
 
-const selectedLabels = computed(() =>
-    store.q1.filter(item => item.score === 3).map(item => item.label)
-)
+// Q2~Q7 문항만 집계
+const QUESTION_RANGE = [2, 3, 4, 5, 6, 7];
 
-const materialScores = computed(() =>
-    selectedLabels.value.map(label => {
-      const sum = (store.q2to7[label] ?? []).reduce((acc, v) => acc + (v ?? 0), 0)
-      return { label, total: sum }
-    })
-)
+const allLabels = computed(() => {
+  return [
+    ...new Set(
+        answers.value
+            .filter(a => QUESTION_RANGE.includes(a.questionNo))
+            .map(a => a.label)
+    )
+  ];
+});
+
+// 물질별 총점
+const substanceScores = computed(() => {
+  return allLabels.value.map(label => {
+    const total = answers.value
+        .filter(a => a.label === label && QUESTION_RANGE.includes(a.questionNo))
+        .reduce((sum, a) => sum + (Number(a.value) || 0), 0)
+    return { label, total }
+  })
+});
 </script>
 
 <template>
-  <table>
-    <thead>
-    <tr>
-      <th>물질명</th>
-      <th>Q2~Q7 점수 합계</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr v-for="row in materialScores" :key="row.label">
-      <td>{{ row.label }}</td>
-      <td>{{ row.total }}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="w-full max-w-[600px] mx-auto mt-12 mb-20 text-lg">
+    <h2 class="font-bold text-xl mb-8">Q2~Q7 문항에 대한 물질별 점수</h2>
+    <div v-for="item in substanceScores" :key="item.label" class="my-2">
+      <span class="font-semibold">{{ item.label }} :</span>
+      <span class="ml-2 text-blue-700 font-bold">{{ item.total }}</span>
+    </div>
+  </div>
 </template>

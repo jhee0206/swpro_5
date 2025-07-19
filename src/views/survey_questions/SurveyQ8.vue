@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import FixedHeader from "@/component/FixedHeader.vue";
+import NavigationBar from "@/component/NavigationBar.vue";
 
 const route = useRoute();
 const router = useRouter();
-
-import FixedHeader from "@/component/FixedHeader.vue";
-import NavigationBar from "@/component/NavigationBar.vue";
 
 const frequencyOptions = [
   { label: '전혀없다', value: 0 },
@@ -14,11 +13,24 @@ const frequencyOptions = [
   { label: '있었지만, 지난 3개월간 없었다', value: 1 },
 ]
 
+const previousAnswers = ref<any[]>([])
+
+onMounted(() => {
+  previousAnswers.value = route.query.answers ? JSON.parse(route.query.answers as string) : []
+})
 
 // 다음 버튼 클릭 시 모든 항목 체크 여부 등 유효성 검사
 function handleNext() {
-  // 'SurveyEnd'으로 이동
-  router.push('/survey/end')
+  if (previousAnswers.value === null) {
+    alert('반드시 하나를 선택해 주세요!')
+    return
+  }
+  const thisAnswer = { label: '주사약물사용', value: previousAnswers.value, questionNo: 8 }
+  const allAnswers = [ ...previousAnswers.value, thisAnswer ]
+  router.push({
+    path: '/survey/end',
+    query: { answers: JSON.stringify(allAnswers) }
+  })
 }
 </script>
 
@@ -32,36 +44,33 @@ function handleNext() {
       <div> <!-- 세부 질문 -->
         <div> <!-- 질문지 -->
           <div class="w-full">
-            <!-- 질문 제목 -->
-            <div class="question-title">
-              <p>Q8. 주사로 약물을 사용한 적이 있습니까?
-                <span>(의학적 사용은 제외)</span></p>
+            <div class="question-title"> <!-- 질문 제목 -->
+              <p>Q8. 주사로 약물을 사용한 적이 있습니까? <span>(의학적 사용은 제외)</span></p>
             </div>
-            <!-- 표 그리드 -->
-            <div class="overflow-x-auto">
-              <table class="min-w-full text-center text-[15px]">
+            <div> <!-- 표 그리드 -->
+              <table class="w-full table-fixed border border-gray-300 text-center text-[15px]">
                 <thead class="bg-blue-50">
                 <tr>
-                  <th v-for="opt in frequencyOptions" :key="opt.value" class="w-[33%] border border-gray-200 px-2 py-2">
+                  <th
+                      v-for="opt in frequencyOptions"
+                      :key="opt.value"
+                      class="w-1/3 border-r border-gray-200 px-2 py-3 font-semibold">
                     {{ opt.label }}
                   </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                  <td class="border border-gray-200 px-2 py-2"></td>
                   <td
                       v-for="opt in frequencyOptions"
-                      :key="opt.value"
-                      class="border border-gray-200 px-2 py-2"
-                  >
+                      :key="opt.value + '-input'"
+                      class="border-t border-r border-gray-200 px-2 py-4">
                     <input
                         type="radio"
-                        :name="`freq_${idx}`"
                         :value="opt.value"
-                        v-model="item.value"
-                        class="accent-blue-500"
-                    />
+                        v-model="value"
+                        class="accent-blue-500 scale-110"
+                        :aria-label="opt.label"/>
                   </td>
                 </tr>
                 </tbody>
@@ -77,4 +86,9 @@ function handleNext() {
 
 <style scoped>
   @import "/src/assert/main.css";
+  .question-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
 </style>

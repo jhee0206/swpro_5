@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import FixedHeader from "@/component/FixedHeader.vue";
+import NavigationBar from "@/component/NavigationBar.vue";
 
 const route = useRoute();
 const router = useRouter();
-
-import FixedHeader from "@/component/FixedHeader.vue";
-import NavigationBar from "@/component/NavigationBar.vue";
 
 const frequencyOptions = [
   { label: '전혀없음', value: 0 },
@@ -19,14 +18,16 @@ const frequencyOptions = [
 // Q1에서 '예'로 선택한 항목만 받아서 items로 만듦
 const items = ref<{ label: string; value: number|null }[]>([])
 
+// 이전까지 누적된 답변들
+const previousAnswers = ref<any[]>([])
+
 onMounted(() => {
   if (route.query.selected) {
     const arr = JSON.parse(route.query.selected as string)
-    items.value = arr.map((label: string) => ({
-      label,
-      value: null
-    }))
+    items.value = arr.map((label: string) => ({label, value: null}))
   }
+  // 이전 답변 누적 배열 (없으면 빈 배열)
+  previousAnswers.value = route.query.answers ? JSON.parse(route.query.answers as string) : []
 })
 
 // 다음 버튼 클릭 시 모든 항목 체크 여부 등 유효성 검사
@@ -36,16 +37,34 @@ function handleNext() {
     alert('모든 항목에 답변해 주세요!')
     return
   }
+
+  // 현재 페이지(Q2)의 답변을 answers 구조로 만듦
+  const thisAnswers = items.value.map(item => ({
+    label: item.label,
+    value: item.value,
+    questionNo: 2,
+  }))
+  const allAnswers = [...previousAnswers.value, ...thisAnswers]
+
   // 모든 답변이 '전혀없음'(0) → Q6로 이동
   if (items.value.every(item => item.value === 0)) {
-    // Q6으로 이동
-    router.push('/survey/q6')
+    router.push({
+      path: '/survey/q6',
+      query: {
+        selected: JSON.stringify(items.value.map(i => i.label)),
+        answers: JSON.stringify(allAnswers)
+      }
+    })
     return
   }
+
   // 'SurveyQ3'으로 이동
   router.push({
     path: '/survey/q3',
-    query: { selected: JSON.stringify(items.value.map(i => i.label)) }
+    query: {
+      selected: JSON.stringify(items.value.map(i => i.label)),
+      answers: JSON.stringify(allAnswers)
+    }
   })
 }
 </script>
