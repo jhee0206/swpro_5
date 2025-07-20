@@ -121,7 +121,8 @@
     gap: 15px;
 }
 
- input[type="radio"] {
+ input[type="radio" ],
+ input[type="checkbox"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -135,7 +136,8 @@
     flex-shrink: 0;
 }
 
- input[type="radio"]:checked {
+ input[type="radio"],
+ input[type="checkbox"]:checked {
     background-color: #fcf5ed;
     border-color: #ff8c94;
 }
@@ -150,8 +152,10 @@
     white-space: nowrap;
 }
 
+
 /* 라디오 버튼 input 스타일 */
-.radio-group input[type="radio"] {
+.radio-group input[type="radio"],
+input[type="checkbox"]{
     margin-right: 8px;
     width: 18px;
     height: 18px;

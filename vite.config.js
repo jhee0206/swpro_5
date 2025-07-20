@@ -15,7 +15,7 @@ export default defineConfig({
     },
   },
   server: {
-    host: true, // ✅ 이 줄 추가!
-    port: 5173,
+    host: '0.0.0.0', // ✅ 이 줄 추가!
+    port: 8080,
   }
 })

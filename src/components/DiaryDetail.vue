@@ -2,10 +2,18 @@
   <div class="image-wrapper">
     <img :src="imageData" alt="캡처된 일기 이미지" class="captured-image" />
   </div>
+  <Button_com
+      :customStyle="{ marginTop: 'auto', alignSelf: 'flex-end', padding: '20px 20px'}"
+      label="이전으로"
+      @click="goBack"
+  />
 </template>
 
 <script>
+import Button_com from "@/components/Button_com.vue";
+
 export default {
+  components: {Button_com},
   data() {
     return {
       imageData: null,
@@ -19,6 +27,11 @@ export default {
       this.imageData = diaryList[diaryList.length - 1].image;
     }
   },
+  methods: {
+    goBack() {
+      this.$router.push('/DiarList');
+    }
+  }
 };
 </script>
 
