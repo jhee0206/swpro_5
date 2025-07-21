@@ -86,12 +86,12 @@ export default {
 }
 
 .info-mes {
-  max-height: none;
+  max-height: 40vh;
   padding: 20px;
   margin: 20px 0;
   border-radius: 12px;
   box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
-  overflow-y: visible;
+  overflow-y: auto;
   text-align: left;
 }
 

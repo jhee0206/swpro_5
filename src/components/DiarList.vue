@@ -1,24 +1,24 @@
 <template>
   <div class="diary-list-container">
-    <h2>내가 쓴 일지</h2>
-  </div>
+    <div class="top-bar">
+      <h2>내가 쓴 일지</h2>
+      <span class="sort-label">최신순</span>
+    </div>
 
-  <div class="diary-button-list">
-    <button
-      v-for="(entry) in sortedDailyList"
-      :key="entry.id"
-      class="diary-button"
-      @click="viewDiary(entry)">
-
-      <img src="/diarimg.png" alt="diary icon" class="diary-icon" />
-      <div class="entry-text">
-      📔{{entry.date}} <br/> {{entry.title || '제목없음'}}
+    <div class="diary-button-list">
+      <div
+          v-for="(entry) in sortedDailyList"
+          :key="entry.id"
+          class="diary-entry-box"
+      >
+        <span class="entry-date">날짜 {{ entry.date }}</span>
+        <button class="view-button" @click="viewDiary(entry)">보기</button>
       </div>
-    </button>
+    </div>
   </div>
+
   <NavigationBar />
 </template>
-
 <script>
 
 import NavigationBar from "@/components/NavigationBar.vue";
@@ -50,12 +50,8 @@ export default {
 
 <style scoped>
 .diary-list-container {
-  text-align: center;
-  padding: 30px 20px;
+  padding: 25px 20px 90px;
   font-family: 'Cafe24 Ssurround', serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .diary-button-list {
@@ -64,32 +60,50 @@ export default {
   justify-content: center;
   gap: 12px;
 }
+.top-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom:25px;
+}
 
-.diary-button {
-  width: 130px;
-  height: auto;
-  border-radius: 12px;
-  padding: 0;
-  border: none;
+.top-bar h2{
+  font-size: 18px;
+  margin:0;
+}
+
+.sort-label {
+  font-size: 14px;
+  color: #555;
+}
+
+.diary-button-list {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+.diary-entry-box {
+  border: 1.5px solid #222;
+  border-radius: 6px;
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-start;
+  font-size: 15px;
+  background-color: white;
 }
 
-.diary-icon{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px 12px 0 0;
+.entry-date {
+  font-weight: bold;
 }
 
-.entry-text {
-  padding: 10px;
-  text-align: center;
-  font-size: 13px;
-  width:100%;
-  box-sizing: border-box;
-  word-break: break-word;
+.view-button {
+  border: 1.5px solid #222;
+  background-color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 4px;
 }
+
 </style>
