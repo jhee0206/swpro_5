@@ -73,7 +73,7 @@ function handleNext() {
               <p>Q6. 물질 사용에 대해 가족 혹은 다른 누군가가 걱정이나 우려를 표현한 적이 있었습니까?</p>
             </div>
             <!-- 표 그리드 -->
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto mb-[65px]">
               <table class="min-w-full text-center text-[15px]">
                 <thead class="bg-blue-50">
                 <tr>

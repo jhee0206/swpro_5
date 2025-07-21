@@ -75,7 +75,7 @@ function handleNext() {
               <p>Q3. 지난 3개월 동안, 물질 사용에 대한 강한 욕구나 충동을 얼마나 자주 느꼈습니까?</p>
             </div>
             <!-- 표 그리드 -->
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto mb-[65px]">
               <table class="min-w-full text-center text-[15px]">
                 <thead class="bg-blue-50">
                 <tr>

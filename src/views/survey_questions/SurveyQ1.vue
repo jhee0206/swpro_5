@@ -6,6 +6,7 @@ const router = useRouter()
 
 import FixedHeader from "@/component/FixedHeader.vue";
 import NavigationBar from "@/component/NavigationBar.vue";
+import PrevNextButton from "@/component/PrevNextButton.vue";
 
 const items = ref([
   { label: '담배제품', score: null },
@@ -100,6 +101,7 @@ function goToNext() {
       </div>
     </div>
   </div>
+  <PrevNextButton/>
   <NavigationBar/>
 </template>
 

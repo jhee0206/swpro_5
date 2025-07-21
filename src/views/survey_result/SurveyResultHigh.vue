@@ -17,7 +17,7 @@ function handlePrev() {
   <div class="flex flex-col justify-between min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!-- 전체영역 -->
     <FixedHeaderResult
         prevLink="이전버튼"
-        step="중증도 위험"
+        step="고위험"
         nextLink="다음버튼"
         @prev="handlePrev"
         safety="주의"

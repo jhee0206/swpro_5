@@ -19,7 +19,7 @@ const emit = defineEmits(['next'])
         >{{ nextLink || '다음버튼' }}</button>
       </div>
     </div>
-    <div class="my-[20px]">
+    <div>
       <p class="survey-title">ASSIST 검사</p>
     </div>
   </div>
@@ -33,7 +33,7 @@ const emit = defineEmits(['next'])
   border-bottom-width: 2px;
   border-bottom-style: solid;
   border-bottom-color: #2260FF;
-  padding-top: 40px;
+  padding-top: 32px;
   padding-bottom: 32px;
 }
 </style>

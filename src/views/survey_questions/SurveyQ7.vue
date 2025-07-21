@@ -72,7 +72,7 @@ function handleNext() {
               <p>Q7. 물질 사용을 조절하거나 줄이거나 끊으려고 했으나 실패한 적이 있었습니까?</p>
             </div>
             <!-- 표 그리드 -->
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto mb-[65px]">
               <table class="min-w-full text-center text-[15px]">
                 <thead class="bg-blue-50">
                 <tr>

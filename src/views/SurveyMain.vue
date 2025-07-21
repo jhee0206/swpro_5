@@ -4,13 +4,12 @@ import NavigationBar from "@/component/NavigationBar.vue";
 </script>
 
 <template>
-  <div class="flex flex-col justify-between min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
+  <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
     <FixedHeader
         prevLink="#"
         title="SBIRT-ASSIST"/>
-    <div class="w-full flex flex-col justify-between flex-1"> <!-- 컨텐츠 -->
-
-      <div class="w-full flex  flex-col border-[1px] border-[#456] rounded-[8px] p-[12px]">
+    <div class="w-full"> <!-- 컨텐츠 -->
+      <div class="w-full border-[1px] border-[#456] rounded-[8px] p-[12px]">
         <p class="p-[12px] font-bold">설문 소개</p>
         <p class="survey-descript">  ASSIST는 'Alcohol, Smoking, Substance Involvement Screening Test’의 약자로 세계
           보건기구 (WHO)에서 개발한 알코올, 담배, 약물 사용 문제 선별 및 단기개입 도구입니다.<br><br>
@@ -19,14 +18,13 @@ import NavigationBar from "@/component/NavigationBar.vue";
           나열된 물질 중 의사가 처방한 대로 사용한 약물은 제외하고, 처방된 목적 외에 다른 이유로 사용하
           거나, 처방된 것보다 더 자주 혹은 더 많은 용량을 사용한 적이 있다면 체크해 주시기 바랍니다. </p>
       </div>
-      <div class="w-full flex justify-center pb-[65px]">
+      <div class="w-full flex justify-center pt-[32px] mb-[65px]">
         <router-link to="/survey/q1" class="survey-start-button"><span>자가 설문 시작하기</span></router-link>
       </div>
     </div>
     <NavigationBar/>
   </div>
 </template>
-
 
 <style scoped>
 .survey-descript {

@@ -75,7 +75,7 @@ function handleNext() {
               <p>Q5. 지난 3개월 동안, 물질 사용으로 인해 해야 할 일을 하지 못한 적이 얼마나 자주 있었습니까?</p>
             </div>
             <!-- 표 그리드 -->
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto mb-[65px]">
               <table class="min-w-full text-center text-[15px]">
                 <thead class="bg-blue-50">
                 <tr>
