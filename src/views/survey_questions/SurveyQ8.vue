@@ -19,6 +19,10 @@ onMounted(() => {
   previousAnswers.value = route.query.answers ? JSON.parse(route.query.answers as string) : []
 })
 
+function handlePrev() {
+  router.push('/')
+}
+
 // 다음 버튼 클릭 시 모든 항목 체크 여부 등 유효성 검사
 function handleNext() {
   if (previousAnswers.value === null) {
@@ -37,8 +41,9 @@ function handleNext() {
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
     <FixedHeader
-        prevLink="/survey/q1"
+        prevLink="이전버튼"
         nextLink="다음버튼"
+        @prev="handlePrev"
         @next="handleNext"/>
     <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
       <div> <!-- 세부 질문 -->

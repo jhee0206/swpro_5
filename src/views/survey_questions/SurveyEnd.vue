@@ -68,5 +68,8 @@ const riskReport = computed(() => {
         {{ item.risk }}
       </span>
     </div>
+    <a href="/survey/result/low">저위험</a><br>
+    <a href="/survey/result/middle">중증도 위험</a><br>
+    <a href="/survey/result/high">고위험</a>
   </div>
 </template>

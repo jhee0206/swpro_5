@@ -3,14 +3,17 @@ const props = defineProps<{
   prevLink?: string
   nextLink?: string
 }>()
-const emit = defineEmits(['next'])
+const emit = defineEmits(['prev','next'])
 </script>
 
 <template>
   <div class="mb-[32px]">
     <div class="w-full flex justify-between pt-[12px]">
       <div>
-        <router-link v-if="prevLink" :to="prevLink">이전버튼</router-link>
+        <button
+            v-if="prevLink"
+            @click="$emit('prev')"
+        >{{ prevLink || '이전버튼' }}</button>
       </div>
       <div>
         <button

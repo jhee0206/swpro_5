@@ -21,7 +21,10 @@ const items = ref([
   { label: '기타', score: null },
 ])
 
-function goToNext() {
+function handlePrev() {
+  router.push('/')
+}
+function handleNext() {
   // 1. 모든 문항에 체크했는지 검사
   const allChecked = items.value.every(item => item.score !== null)
   if (!allChecked) {
@@ -48,9 +51,10 @@ function goToNext() {
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
     <FixedHeader
-        prevLink="/"
+        prevLink="이전버튼"
         nextLink="다음버튼"
-        @next="goToNext"/>
+        @prev="handlePrev"
+        @next="handleNext"/>
     <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
       <div> <!-- 세부 질문 -->
         <div> <!-- 질문지 -->
