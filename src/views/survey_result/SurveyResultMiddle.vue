@@ -26,7 +26,9 @@ function handlePrev() {
       <div class="w-full h-[200px] bg-black"> <!-- 그래프 -->
 
       </div>
-      <ResultSafety/>
+      <div class="py-[20px]">
+        <ResultSafety/>
+      </div>
       <div> <!-- 텍스트 -->
         <p class="information-text">
           현재 <span class="font-bold">중증도</span> 위험 단계에 해당합니다!<br>
@@ -47,10 +49,8 @@ function handlePrev() {
 
 <style scoped>
 .information-text {
-  border-top-width: 2px;
-  border-top-color: #2260FF;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 12px;
+  padding-bottom: 32px;
   font-size: 16px;
 }
 
