@@ -1,132 +1,195 @@
-<!--
-  [ ChatbotWindow.vue ]
-  - 챗봇 UI의 최상위 컨테이너 컴포넌트.
-  - 전체 대화 내용(State)을 관리하고, 자식 컴포넌트(View)를 지휘하는 핵심 로직 포함.
--->
 <template>
   <div class="chatbot-window">
-    <!-- 대화 기록 표시 영역 -->
-    <div class="chat-history">
-      <!--
-        - 메시지 배열 순회 및 각 대화 턴(메시지 + 버튼) 렌더링.
-        - <template> 태그는 실제 HTML 요소로 렌더링되지 않는 논리적 그룹핑 역할.
-      -->
-      <template v-for="(msg, idx) in messages" :key="idx">
-
-        <!-- 자식 컴포넌트 1: 메시지 말풍선 렌더링 -->
-        <!-- props를 통해 자식에게 데이터 전달. (role, content, highlightMode) -->
+    <div class="chat-history" ref="chatHistoryRef">
+      <template v-for="msg in messages" :key="msg.id">
         <ChatMessage
             :role="msg.role"
             :content="msg.content"
             :highlight-mode="msg.highlightMode"
-        />
-
-        <!-- 자식 컴포넌트 2: 버튼 목록 렌더링 -->
-        <!-- v-if: 메시지 객체에 'questions' 배열이 있을 경우에만 표시. -->
-        <!-- @select: 자식의 'select' 이벤트를 수신하여 'handleSelect' 메소드 실행. -->
-        <ChatButtonList
-            v-if="msg.questions && msg.questions.length > 0"
-            :questions="msg.questions"
-            @select="handleSelect"
+            :image-url="msg.imageUrl"
         />
       </template>
+    </div>
+    <div class="button-area" v-if="latestQuestions.length > 0">
+      <ChatButtonList
+          :questions="latestQuestions"
+          @select="handleSelect"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-// --- [ 1. 모듈 임포트 ] ---
-import { ref, onMounted } from 'vue';
-import ChatMessage from './ChatMessage.vue';
-import ChatButtonList from './ChatButtonList.vue';
+// --- Vue Core & Components ---
+import { ref, onMounted, nextTick, computed } from 'vue';
+import ChatMessage from '@/components/chatbot/ChatMessage.vue';
+import ChatButtonList from '@/components/chatbot/ChatButtonList.vue';
+
+// --- Services & Data ---
 import { getBotAnswer } from '@/services/chatbotService.js';
 import { questionList } from '@/constants/questionList.js';
+import { rehabCategories, seoulAddictionCenters, nationwideDrugCenters } from '@/constants/rehabData.js';
+import { counselingProvinces, counselingSubRegions, counselingCenterData } from '@/constants/counselingData.js';
 
-
-// --- [ 2. 반응형 상태(State) 정의 ] ---
-// ref(): Vue의 반응형 시스템이 추적할 수 있는 상태 변수 생성.
-// 이 배열의g 내용이 변경되면, <template> 부분의 UI가 자동으로 업데이트됨.
+// --- State Management ---
 const messages = ref([]);
+const chatHistoryRef = ref(null);
+let idCounter = 0;
 
-
-// --- [ 3. 라이프사이클 훅(Lifecycle Hook) ] ---
-// onMounted: 컴포넌트가 화면에 처음 렌더링된 직후 한 번만 실행되는 함수.
-onMounted(() => {
-  // 초기 챗봇 인사말과 첫 버튼 목록을 messages 상태에 추가.
-  messages.value.push({
-    role: 'bot',
-    content: '안녕하세요 챗봇입니다!\n어떻게 도와드릴까요? 궁금한 점이 있으면 언제든지 물어보세요!',
-    questions: questionList
-  });
+const latestQuestions = computed(() => {
+  const lastMessageWithQuestions = [...messages.value]
+      .reverse()
+      .find(msg => msg.questions && msg.questions.length > 0);
+  return lastMessageWithQuestions ? lastMessageWithQuestions.questions : [];
 });
 
+// --- Helper Functions ---
+const scrollToBottom = async () => {
+  await nextTick();
+  if (chatHistoryRef.value) {
+    chatHistoryRef.value.scrollTop = chatHistoryRef.value.scrollHeight;
+  }
+};
 
-// --- [ 4. 헬퍼 함수(Helper Function) ] ---
-/**
- * 한글 단어의 받침 유무에 따른 조사('이'/'가') 계산.
- * @param {string} word - 검사할 단어.
- * @returns {'이'|'가'} - 계산된 조사.
- */
+const addMessage = (role, content, options = {}) => {
+  messages.value.push({
+    id: idCounter++,
+    role,
+    content,
+    ...options
+  });
+  scrollToBottom();
+};
+
+async function displayFinalCard(centerData, defaultMessage) {
+  if (centerData) {
+    const cardContent =
+        `${centerData.name}\n\n` +
+        `[주소] ${centerData.address}\n\n` +
+        `[연락처] ${centerData.contact}\n`;
+    addMessage('bot', cardContent, { imageUrl: centerData.imageUrl });
+  } else {
+    addMessage('bot', defaultMessage);
+  }
+
+  addMessage('bot', '다른 궁금한 점이 있으신가요?', { questions: questionList });
+}
+
 function getParticle(word) {
-  const lastChar = word.charCodeAt(word.length - 1);
-  if (lastChar < 0xAC00 || lastChar > 0xD7A3) return '가';
+  if (typeof word !== 'string' || word.length === 0) {
+    return '가';
+  }
+  const pureWord = word.replace(/<[^>]*>?/g, '');
+  const lastChar = pureWord.charCodeAt(pureWord.length - 1);
+  if (lastChar < 0xAC00 || lastChar > 0xD7A3) {
+    return '가';
+  }
   const hasJongseong = (lastChar - 0xAC00) % 28 > 0;
   return hasJongseong ? '이' : '가';
 }
 
+// --- Lifecycle Hook ---
+onMounted(() => {
+  addMessage(
+      'bot',
+      '안녕하세요 챗봇입니다!\n어떻게 도와드릴까요?',
+      { questions: questionList }
+  );
+});
 
-// --- [ 5. 메인 이벤트 핸들러(Event Handler) ] ---
-/**
- * ChatButtonList에서 'select' 이벤트 발생 시 실행되는 메인 로직.
- * @param {object} selectedQuestion - 사용자가 클릭한 버튼의 객체.
- */
-function handleSelect(selectedQuestion) {
-  // 5-1. 기존 버튼 목록 제거
-  messages.value.forEach(msg => {
-    if (msg.questions && msg.questions.length > 0) {
-      msg.questions = [];
-    }
-  });
+// --- Main Event Handler ---
+async function handleSelect(selectedItem) {
+  if (!selectedItem || !selectedItem.label) {
+    console.error('handleSelect: 잘못된 selectedItem 객체입니다.', selectedItem);
+    return;
+  }
 
-  // 5-2. 사용자 선택 메시지 생성 및 추가
-  const userQueryText = selectedQuestion.label;
+  const userQueryText = selectedItem.label;
   const particle = getParticle(userQueryText);
-  messages.value.push({
-    role: 'user',
-    content: `<strong>${userQueryText}</strong>${particle} 궁금해요`
-  });
+  addMessage('user', `"${userQueryText}"${particle} 궁금해요`);
 
-  // 5-3. 서비스 로직 호출: 챗봇 답변 데이터 요청
-  const rawAnswer = getBotAnswer(selectedQuestion.key);
+  const { action, key, label, source } = selectedItem;
 
-  // '신고 방법'일 때만 다른 강조 모드를 지정
-  const highlightMode = selectedQuestion.key === '신고 방법' ? 'subheadings_only' : 'numbered';
+  // 1. 초기 질문 처리
+  if (!action) {
+    if (key === '재활 센터') {
+      addMessage('bot', '어떤 기관을 안내해 드릴까요?', { questions: rehabCategories });
+    } else if (key === '치료 기관') {
+      addMessage('bot', '안내를 원하시는 권역을 선택해주세요.', { questions: counselingProvinces });
+    } else {
+      const rawAnswer = getBotAnswer(key);
+      const highlightMode = key === '신고 방법' ? 'subheadings_only' : 'numbered';
+      addMessage('bot', rawAnswer, { questions: questionList, highlightMode: highlightMode });
+    }
+    return;
+  }
 
-  // 5-5. 챗봇 답변 메시지 생성 및 추가
-  messages.value.push({
-    role: 'bot',
-    content: rawAnswer,
-    questions: questionList,
-    highlightMode: highlightMode // 계산된 강조 모드를 전달
-  });
+  // 2. 흐름 처리
+  switch (action) {
+    case 'select_category': {
+      const nextQuestions = key === 'addiction_seoul' ? seoulAddictionCenters.buttons : nationwideDrugCenters.provinces;
+      const message = key === 'addiction_seoul'
+          ? '서울시 중독관리통합센터 안내입니다. 원하시는 지역구를 선택해주세요.'
+          : '전국 마약퇴치 운동센터 안내입니다. 원하시는 도(道)를 선택해주세요.';
+      addMessage('bot', message, { questions: nextQuestions });
+      break;
+    }
+
+    case 'select_province':
+    case 'select_counseling_province': {
+      const subRegions = action === 'select_province' ? nationwideDrugCenters.subRegions[label] : counselingSubRegions[label];
+
+      if (Array.isArray(subRegions) && subRegions.length === 1) {
+        const singleRegion = subRegions[0];
+        const centerData = action === 'select_province'
+            ? nationwideDrugCenters.data[singleRegion.label]
+            : counselingCenterData[singleRegion.label];
+        const defaultMsg = action === 'select_province'
+            ? '해당 지역의 재활기관 정보가 아직 등록되지 않았습니다.'
+            : '해당 지역의 치료기관 정보가 아직 등록되지 않았습니다.';
+        await displayFinalCard(centerData, defaultMsg);
+      } else {
+        addMessage('bot', `${label}의 하위 지역을 선택해주세요.`, { questions: subRegions || [] });
+      }
+      break;
+    }
+
+    case 'show_final_info':
+    case 'show_counseling_info': {
+      const centerData = source === 'seoul_addiction'
+          ? seoulAddictionCenters.data[label]
+          : nationwideDrugCenters.data[label] || counselingCenterData[label];
+      const defaultMsg = action === 'show_final_info'
+          ? '해당 지역의 재활기관 정보가 아직 등록되지 않았습니다.'
+          : '해당 지역의 치료기관 정보가 아직 등록되지 않았습니다.';
+      await displayFinalCard(centerData, defaultMsg);
+      break;
+    }
+  }
 }
-
 </script>
 
 <style scoped>
-/* 최상위 챗봇 창 스타일 정의. */
 .chatbot-window {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
   max-width: 500px;
   margin: 0 auto;
-  border: 1px solid #ccc;
-  padding: 15px;
+  border: none;
   border-radius: 8px;
+  overflow: hidden;
 }
-
-/* 대화 기록 영역 스타일 정의. */
 .chat-history {
-  height: 600px;
-  /* `overflow-y: auto`로 내용이 영역을 벗어나면 세로 스크롤바 자동 생성. */
+  flex-grow: 1;
   overflow-y: auto;
+  overflow-x: hidden;
+  padding: 15px;
+}
+.button-area {
+  flex-shrink: 0;
+  padding: 12px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
 }
 </style>

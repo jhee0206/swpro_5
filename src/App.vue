@@ -1,7 +1,16 @@
+<!-- App.vue -->
 <template>
-  <ChatbotView />
+  <main>
+    <ChatbotView />
+  </main>
 </template>
 
 <script setup>
-import ChatbotView from './views/ChatbotView.vue'
+import ChatbotView from './views/ChatbotView.vue';
 </script>
+
+<style scoped>
+main {
+  font-family: sans-serif;
+}
+</style>
