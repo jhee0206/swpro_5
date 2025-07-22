@@ -1,11 +1,11 @@
 <!--
   [ ChatMessage.vue ]
-    -부모로부터 role, content, highlightMode 등의 데이털르 props로 받아,
+    -부모로부터 role, content, highlightMode 등의 데이터를 props로 받아,
      화면에 적절한 스타일로 표시.
 -->
 
 <template>
-  <!-- ★ 변경점: v-if 분기를 제거하고, 모든 메시지를 하나의 구조로 렌더링합니다. -->
+  <!-- 모든 메시지를 하나의 구조로 렌더링합니다. -->
   <div :class="['chat-message-wrapper', roleClass]">
     <div :class="['chat-bubble', roleClass]">
       <strong>{{ role === 'bot' ? '챗봇:' : '나:' }}</strong>
