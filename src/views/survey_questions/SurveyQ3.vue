@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import FixedHeader from "@/component/FixedHeader.vue";
 import NavigationBar from "@/component/NavigationBar.vue";
+import ButtonComponent from "@/component/ButtonComponent.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -66,11 +67,7 @@ function handleNext() {
 
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader
-        prevLink="이전버튼"
-        nextLink="다음버튼"
-        @prev="handlePrev"
-        @next="handleNext"/>
+    <FixedHeader/>
     <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
       <div> <!-- 세부 질문 -->
         <div> <!-- 질문지 -->
@@ -80,7 +77,7 @@ function handleNext() {
               <p>Q3. 지난 3개월 동안, 물질 사용에 대한 강한 욕구나 충동을 얼마나 자주 느꼈습니까?</p>
             </div>
             <!-- 표 그리드 -->
-            <div class="overflow-x-auto mb-[65px]">
+            <div class="overflow-x-auto">
               <table class="min-w-full text-center text-[15px]">
                 <thead class="bg-blue-50">
                 <tr>
@@ -96,15 +93,13 @@ function handleNext() {
                   <td
                       v-for="opt in frequencyOptions"
                       :key="opt.value"
-                      class="border border-gray-200 px-2 py-2"
-                  >
+                      class="border border-gray-200 px-2 py-2">
                     <input
                         type="radio"
                         :name="`freq_${idx}`"
                         :value="opt.value"
                         v-model="item.value"
-                        class="accent-blue-500"
-                    />
+                        class="accent-blue-500"/>
                   </td>
                 </tr>
                 </tbody>
@@ -113,6 +108,12 @@ function handleNext() {
           </div>
         </div>
       </div>
+    </div>
+    <div class="flex justify-end pt-[12px] mb-[65px]"> <!-- 다음버튼 -->
+      <ButtonComponent
+          nextLink="다음"
+          @next="handleNext"
+      />
     </div>
   </div>
   <NavigationBar/>

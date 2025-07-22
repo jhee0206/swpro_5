@@ -9,8 +9,8 @@ const emit = defineEmits(['next'])
   <div> <!-- 전체 영역 -->
     <button
         class="button"
-        @click="$emit('next')"
-    >
+        v-if="nextLink"
+        @click="$emit('next')">
       {{ nextLink || '확인' }}
     </button>
   </div>
@@ -18,8 +18,8 @@ const emit = defineEmits(['next'])
 
 <style scoped>
 .button {
-  border-width: 2px;
-  border-color: #2260FF;
+  background-color: #2260FF;
+  color: #FFFFFF;
   font-size: 16px;
   padding-top: 8px;
   padding-bottom: 8px;

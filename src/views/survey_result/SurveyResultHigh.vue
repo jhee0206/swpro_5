@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import ResultFixedHeader from "@/component/ResultFixedHeader.vue";
+import NavigationBar from "@/component/NavigationBar.vue";
+import ButtonComponent from "@/component/ButtonComponent.vue";
+import ResultSafety from "@/component/ResultSafety.vue";
 
 const router = useRouter()
-
-import FixedHeaderResult from "@/component/FixedHeaderResult.vue";
-import NavigationBar from "@/component/NavigationBar.vue";
-import ResultCheckButton from "@/component/ResultCheckButton.vue";
-import ResultSafety from "@/component/ResultSafety.vue";
 
 function handlePrev() {
   router.push('/')
@@ -15,11 +14,8 @@ function handlePrev() {
 
 <template>
   <div class="flex flex-col justify-between min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!-- 전체영역 -->
-    <FixedHeaderResult
-        prevLink="이전버튼"
+    <ResultFixedHeader
         step="고위험"
-        nextLink="다음버튼"
-        @prev="handlePrev"
         safety="주의"
         color="#C31D1D"/>
     <div class="w-full flex flex-col justify-between flex-1"> <!-- 컨텐츠 -->
@@ -38,8 +34,8 @@ function handlePrev() {
         </p>
       </div>
       <div class="flex justify-center pb-[65px]"> <!-- 확인버튼 -->
-        <ResultCheckButton
-            @next=""/> <!-- 관련 카드 뉴스로 이동 -->
+        <ButtonComponent
+            @next=""/> <!-- chat-bot으로 이동 -->
       </div>
     </div>
     <NavigationBar/>

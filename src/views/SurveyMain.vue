@@ -6,7 +6,6 @@ import NavigationBar from "@/component/NavigationBar.vue";
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
     <FixedHeader
-        prevLink="이전버튼"
         title="SBIRT-ASSIST"/>
     <div class="w-full"> <!-- 컨텐츠 -->
       <div class="w-full border-[1px] border-[#456] rounded-[8px] p-[12px]">

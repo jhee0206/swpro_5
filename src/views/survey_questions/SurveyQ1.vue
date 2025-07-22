@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from "vue-router";
-
-const router = useRouter()
-
 import FixedHeader from "@/component/FixedHeader.vue";
 import NavigationBar from "@/component/NavigationBar.vue";
-import PrevNextButton from "@/component/PrevNextButton.vue";
+import ButtonComponent from "@/component/ButtonComponent.vue";
+
+const router = useRouter()
 
 const items = ref([
   { label: '담배제품', score: null },
@@ -50,11 +49,7 @@ function handleNext() {
 
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader
-        prevLink="이전버튼"
-        nextLink="다음버튼"
-        @prev="handlePrev"
-        @next="handleNext"/>
+    <FixedHeader/>
     <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
       <div> <!-- 세부 질문 -->
         <div> <!-- 질문지 -->
@@ -65,7 +60,7 @@ function handleNext() {
               <span>(의학적 사용은 제외)</span></p>
             </div>
             <!-- 표 그리드 -->
-            <div class="grid grid-cols-4 border-t border-b border-gray-300 text-center text-[15px]">
+            <div class="grid grid-cols-4 border border-gray-200 text-center text-[15px]">
               <div class="py-2 bg-blue-50 border border-gray-200 col-span-2">물질의 종류</div>
               <div class="py-2 bg-blue-50 border border-gray-200">아니오</div>
               <div class="py-2 bg-blue-50">예</div>
@@ -93,7 +88,7 @@ function handleNext() {
             </div>
           </div>
         </div>
-        <div class="opacity-50 bg-[#2260ff] text-[#fff] p-[12px] mb-[65px]"> <!-- 안내사항 -->
+        <div class="bg-blue-50 text-[#777] border border-gray-200 p-[12px]"> <!-- 안내사항 -->
           <div> <!-- 안내사항1 -->
             <p>. 만약 모든 답변이 <span>'아니오'</span>일 경우<span>-> 면담 중단</span></p>
             <p class="text-[11px]">(이 경우, 학교에 다녔던 시기에도 하지 않았는지 확인한다.)</p>
@@ -104,8 +99,13 @@ function handleNext() {
         </div>
       </div>
     </div>
+    <div class="flex justify-end pt-[12px] mb-[65px]"> <!-- 다음버튼 -->
+      <ButtonComponent
+        nextLink="다음"
+        @next="handleNext"
+      />
+    </div>
   </div>
-  <PrevNextButton/>
   <NavigationBar/>
 </template>
 

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ButtonComponent from "@/component/ButtonComponent.vue";
+
 const props = defineProps<{
   prevLink?: string
   nextLink?: string
@@ -8,23 +10,7 @@ const emit = defineEmits(['prev','next'])
 
 <template>
   <div class="mb-[32px]">
-    <div class="w-full flex justify-between pt-[12px]">
-      <div>
-        <button
-            v-if="prevLink"
-            @click="$emit('prev')"
-        >{{ prevLink || '이전버튼' }}</button>
-      </div>
-      <div>
-        <button
-            v-if="nextLink"
-            @click="$emit('next')"
-        >{{ nextLink || '다음버튼' }}</button>
-      </div>
-    </div>
-    <div>
-      <p class="survey-title">ASSIST 검사</p>
-    </div>
+    <p class="survey-title">ASSIST 검사</p>
   </div>
 </template>
 

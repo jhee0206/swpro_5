@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import FixedHeader from "@/component/FixedHeader.vue";
 import NavigationBar from "@/component/NavigationBar.vue";
+import ButtonComponent from "@/component/ButtonComponent.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -75,11 +76,7 @@ function handleNext() {
 
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader
-        prevLink="이전버튼"
-        nextLink="다음버튼"
-        @prev="handlePrev"
-        @next="handleNext"/>
+    <FixedHeader/>
     <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
       <div> <!-- 세부 질문 -->
         <div> <!-- 질문지 -->
@@ -122,7 +119,7 @@ function handleNext() {
             </div>
           </div>
         </div>
-        <div class="opacity-50 bg-[#2260ff] text-[#fff] p-[12px] mb-[65px]"> <!-- 안내사항 -->
+        <div class="bg-blue-50 text-[#777] border border-gray-200 p-[12px]"> <!-- 안내사항 -->
           <div> <!-- 안내사항1 -->
             <p>. 만약 모든 답변이 <span>'전혀없음'</span>일 경우<span>-> Q6로 이동</span></p>
           </div>
@@ -131,6 +128,12 @@ function handleNext() {
           </div>
         </div>
       </div>
+    </div>
+    <div class="flex justify-end pt-[12px] mb-[65px]"> <!-- 다음버튼 -->
+      <ButtonComponent
+          nextLink="다음"
+          @next="handleNext"
+      />
     </div>
   </div>
   <NavigationBar/>

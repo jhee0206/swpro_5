@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import ResultFixedHeader from "@/component/ResultFixedHeader.vue";
+import NavigationBar from "@/component/NavigationBar.vue";
+import ButtonComponent from "@/component/ButtonComponent.vue";
+import ResultSafety from "@/component/ResultSafety.vue";
 
 const router = useRouter()
-
-import FixedHeaderResult from "@/component/FixedHeaderResult.vue";
-import NavigationBar from "@/component/NavigationBar.vue";
-import ResultCheckButton from "@/component/ResultCheckButton.vue";
-import ResultSafety from "@/component/ResultSafety.vue";
 
 function handlePrev() {
   router.push('/')
@@ -15,11 +14,8 @@ function handlePrev() {
 
 <template>
   <div class="flex flex-col justify-between min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!-- 전체영역 -->
-    <FixedHeaderResult
-        prevLink="이전버튼"
-        step="중증도 위험"
-        nextLink="다음버튼"
-        @prev="handlePrev"
+    <ResultFixedHeader
+        step="중등도 위험"
         safety="주의"
         color="#F5AF2D"/>
     <div class="w-full flex flex-col justify-between flex-1"> <!-- 컨텐츠 -->
@@ -31,7 +27,7 @@ function handlePrev() {
       </div>
       <div> <!-- 텍스트 -->
         <p class="information-text">
-          현재 <span class="font-bold">중증도</span> 위험 단계에 해당합니다!<br>
+          현재 <span class="font-bold">중등도</span> 위험 단계에 해당합니다!<br>
           약물 사용에 대한 <span class="font-bold">위험 신호</span>를 일부 보입니다.<br>
           지금은 큰 문제가 아니더라도,<br>
           습관이 누적되면 중독으로 변할 수 있어요. <br><br>
@@ -39,7 +35,7 @@ function handlePrev() {
         </p>
       </div>
       <div class="flex justify-center pb-[65px]"> <!-- 확인버튼 -->
-        <ResultCheckButton
+        <ButtonComponent
             @next=""/> <!-- 관련 카드 뉴스로 이동 -->
       </div>
     </div>

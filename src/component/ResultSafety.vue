@@ -10,7 +10,7 @@
         <p class="safety-step-descript">약물 0-3점,<br> 알코올 0-10점</p>
       </div>
       <div class="safety-middle-div">
-        <p class="safety-middle-p">중증도 위험</p>
+        <p class="safety-middle-p">중등도 위험</p>
         <p class="safety-step-descript">약물 4-26점,<br> 알코올 11-26점</p>
       </div>
       <div class="safety-high-div">

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  prevLink?: string
   step?: string
-  nextLink?: string
   safety?: string
   color?: string
 }>()
@@ -10,17 +8,9 @@ const emit = defineEmits(['prev'])
 </script>
 
 <template>
-  <div class="w-full pt-[12px] mb-[32px]">
-    <div>
-      <button
-          v-if="prevLink"
-          @click="$emit('prev')"
-      >
-        {{ prevLink || '이전버튼' }}
-      </button>
-    </div>
+  <div class="w-full pt-[12px]">
     <div class="px-[12px]">
-      <div class="my-[20px]">
+      <div class="pb-[20px]">
         <p class="step">당신은 현재 <br> {{ step }} 단계입니다.</p>
       </div>
       <div>
