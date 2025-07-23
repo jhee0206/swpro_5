@@ -6,6 +6,7 @@ import DiarList from "@/components/DiarList.vue";
 import mainWindow from "../components/mainWindow.vue";
 import MindCheckJournal from "@/components/MindCheckJournal.vue";
 import DiaryDetail from "@/components/DiaryDetail.vue";
+import JournalImage from "@/components/JournalImage.vue";
 
 
 
@@ -64,8 +65,9 @@ const routes = [
         component: () => import('@/views/SelfCheck.vue')
     },*/
     {
-        path: '/support',
-        component: () => import('@/components/MindCheckJournal.vue')
+        path: '/JournalImage',
+        name: 'JournalImage',
+        component: JournalImage,
     }
 
 

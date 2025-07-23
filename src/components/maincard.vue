@@ -9,7 +9,7 @@
       <button class="nav-button" @click="goToNextPage('education')">카드뉴스 보기</button>
       <button class="nav-button" @click="goToNextPage('list')">자가진단 하기</button>
       <button class="nav-button" @click="goToNextPage('chatbot')">챗봇 이용</button>
-      <button class="nav-button" @click="goToNextPage('support')">마음일기 작성</button>
+      <button class="nav-button" @click="goToNextPage('JournalImage')">마음일기 작성</button>
   </div>
 
     <hr class="divider" />

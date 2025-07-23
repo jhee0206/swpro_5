@@ -59,7 +59,8 @@ h1 {
 /* 헤더 섹션 내 strong 태그 (항목 이름) 스타일 */
 .header-section p strong {
     display: inline-block;
-    width: 80px;
+    width: 100%;
+    text-align: center;
     color: #ff8c94;
     font-weight: 500;
     flex-shrink: 0;
