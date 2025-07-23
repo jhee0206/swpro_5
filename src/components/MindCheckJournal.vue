@@ -12,7 +12,9 @@
               id="entryMood"
               v-model="entryMood"
               maxlength="50"
-              rows="2"
+              rows="1"
+              ref="myAutoGrowTextarea"
+              @input="adjustTextareaHeight"
               style="width: 100%; resize: vertical; white-space: pre-wrap; word-wrap: break-word;"
               placeholder="최대 50자까지 입력할 수 있습니다."
           ></textarea>
@@ -85,11 +87,10 @@
             <label><input type="radio" name="kindness" value="no" v-model="checklist.kindness" /> 아니다</label>
           </div>
         </div>
-
-        <div class="flex-center-x" style="margin-top: 1rem;">
-          <button class="button-item" @click="saveJournal">저장하기</button>
-        </div>
       </div>
+    </div>
+    <div class="flex-center-x" style="margin-top: 1rem;">
+      <button class="button-item" @click="saveJournal">저장하기</button>
     </div>
 
     <NavigationBar />
@@ -131,6 +132,15 @@ export default {
       const month = String(today.getMonth() + 1).padStart(2, "0");
       const day = String(today.getDate()).padStart(2, "0");
       this.entryDate = `${year}.${month}.${day}`;
+    },
+    adjustTextareaHeight() {
+      this.$nextTick(() => { // DOM 업데이트 후에 실행되도록 보장
+        const textarea = this.$refs.myAutoGrowTextarea; // ref로 요소 접근
+        if (textarea) {
+          textarea.style.height = 'auto'; // 높이 초기화
+          textarea.style.height = (textarea.scrollHeight) + 'px'; // 스크롤 가능한 높이만큼 설정
+        }
+      });
     },
     saveJournal: async function () {
       const elementToCapture = document.getElementById("journal-content-to-capture");

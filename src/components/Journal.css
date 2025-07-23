@@ -67,20 +67,20 @@ h1 {
 }
 
 /* 헤더 섹션 내 input[type="text"] 스타일 */
-.header-section input[type="text"] {
+.header-section textarea {
     border: none;
     border-bottom: 1px solid #ccc;
     color: #545454;
-    font-size: 0.9em;
+    padding: 3px 0;
+    font-size: 1.2em;
     width: calc(100% - 100px);
     flex-grow: 1;
     outline: none;
     background-color: transparent;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    line-height: 1.2;
-    height: auto;
-    min-height: 20px;
+    resize: none;             /* 사용자가 크기 조절 못하게 함 */
+    overflow: hidden;         /* 스크롤바 숨기기 */
+    min-height: 45px;         /* (필수) 초기 1줄 + 패딩/보더를 고려한 최소 높이 */
+    line-height: 1.5em;
 }
 
 /* 라이프스타일 체크리스트 섹션 스타일 */
@@ -122,41 +122,115 @@ h1 {
     gap: 15px;
 }
 
-input[type="radio"] {
+/* 라디오 버튼의 각 라벨 스타일 (텍스트와 함께 정렬) */
+.radio-group label {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    cursor: pointer;
+    color: #ff8c94; /* 텍스트 색상 */
+    font-size: 0.8em;
+    white-space: nowrap;
+    gap: 8px; /* 라디오 버튼과 텍스트 사이 간격 */
+}
+
+/* 실제 라디오 버튼 input[type="radio"] 스타일 */
+.radio-group input[type="radio"] {
+    /* 브라우저 기본 스타일 제거 (가장 중요) */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    outline: none;
-    cursor: pointer;
-    background-color: white;
-    flex-shrink: 0;
+
+    /* 커스텀 라디오 버튼의 기본 모양 (빈 원) */
+    width: 20px;          /* 크기 */
+    height: 20px;         /* 크기 */
+    border: 2px solid #ccc; /* 기본 테두리 색상 (연한 회색) */
+    border-radius: 50%;   /* 완벽한 둥근 원 */
+    outline: none;        /* 포커스 시 기본 아웃라인 제거 */
+    cursor: pointer;      /* 마우스 오버 시 포인터 변경 */
+    background-color: white; /* 기본 배경색 흰색 */
+    flex-shrink: 0;       /* 공간이 부족해도 줄어들지 않도록 */
+    transition: all 0.2s ease; /* 부드러운 전환 효과 */
+    margin: 0; /* 기본 마진 제거 */
 }
 
-input[type="radio"]:checked {
-    background-color: #fcf5ed;
-    border-color: #ff8c94;
+/* 라디오 버튼이 선택되었을 때의 스타일 */
+.radio-group input[type="radio"]:checked {
+    background-color: #ff8c94; /* 선택 시 핑크색으로 채움 */
+    border-color: #ff8c94;     /* 선택 시 테두리 색상도 핑크색으로 */
+    position: relative;        /* ::after 가상 요소를 위한 위치 기준 */
 }
 
-/* 라디오 버튼 레이블 스타일 */
-.radio-group label {
+/* 선택된 라디오 버튼 중앙에 흰색 점 추가 */
+.radio-group input[type="radio"]:checked::after {
+    content: '';
+    display: block;
+    width: 8px;           /* 점의 크기 */
+    height: 8px;          /* 점의 크기 */
+    background-color: white; /* 점의 색상 */
+    border-radius: 50%;   /* 점을 둥글게 */
+    position: absolute;   /* 라디오 버튼 중앙에 위치 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 정확히 중앙 정렬 */
+}
+
+/* 체크박스 그룹 스타일 (기존과 동일) */
+.checkbox-group {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px; /* 라벨 사이 간격 */
+}
+
+/* 체크박스의 각 라벨 스타일 */
+.checkbox-group label {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
     cursor: pointer;
-    color: #ff8c94;
+    color: #ff8c94; /* 텍스트 색상 */
     font-size: 0.8em;
     white-space: nowrap;
+    gap: 8px; /* 체크박스와 텍스트 사이 간격 */
 }
 
-/* 라디오 버튼 input 스타일 */
-.radio-group input[type="radio"] {
-    margin-right: 8px;
-    width: 18px;
-    height: 18px;
-    accent-color: #ff8c94;
+/* 실제 체크박스 input[type="checkbox"] 스타일 */
+.checkbox-group input[type="checkbox"] {
+    /* 브라우저 기본 스타일 제거 (가장 중요) */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* 커스텀 체크박스의 기본 모양 (빈 사각형) */
+    width: 20px;          /* 크기 */
+    height: 20px;         /* 크기 */
+    border: 2px solid #ccc; /* 기본 테두리 색상 (연한 회색) */
+    border-radius: 5px;   /* 살짝 둥근 사각형 (이미지 참고) */
+    outline: none;        /* 포커스 시 기본 아웃라인 제거 */
+    cursor: pointer;      /* 마우스 오버 시 포인터 변경 */
+    background-color: white; /* 기본 배경색 흰색 */
+    flex-shrink: 0;       /* 공간이 부족해도 줄어들지 않도록 */
+    transition: all 0.2s ease; /* 부드러운 전환 효과 */
+    margin: 0; /* 기본 마진 제거 */
+}
+
+/* 체크박스가 선택되었을 때의 스타일 */
+.checkbox-group input[type="checkbox"]:checked {
+    background-color: #ff8c94; /* 선택 시 핑크색으로 채움 */
+    border-color: #ff8c94;     /* 선택 시 테두리 색상도 핑크색으로 */
+    position: relative;        /* ::after 가상 요소를 위한 위치 기준 */
+}
+
+/* 선택된 체크박스에 체크마크 (✓) 추가 */
+.checkbox-group input[type="checkbox"]:checked::after {
+    content: '✓'; /* 체크마크 유니코드 */
+    display: block;
+    color: white; /* 체크마크 색상 흰색 */
+    font-size: 1.2em; /* 체크마크 크기 */
+    font-weight: bold;
+    position: absolute;   /* 체크박스 중앙에 위치 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 정확히 중앙 정렬 */
+    line-height: 1; /* 텍스트 정렬을 위해 */
 }
 
 /* 자유 텍스트 입력 영역 스타일 */
