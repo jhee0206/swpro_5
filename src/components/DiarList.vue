@@ -49,6 +49,7 @@ export default {
 </script>
 
 <style scoped>
+
 .diary-list-container {
   text-align: center;
   padding: 30px 20px;

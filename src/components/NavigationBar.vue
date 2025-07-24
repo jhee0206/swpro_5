@@ -9,7 +9,7 @@
     <div class="nav-item" @click="goTo('list')">
       <img src="/icon/list.svg" class="icon" alt="설문조사"/>
     </div>
-    <div class="nav-item" @click="goTo('JournalImage')">
+    <div class="nav-item" @click="goTo('MyRecord')">
       <img src="/icon/dair.svg" class="icon" alt="다이어리"/>
     </div>
   </nav>
