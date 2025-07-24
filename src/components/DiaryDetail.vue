@@ -3,7 +3,7 @@
     <img :src="imageData" alt="캡처된 일기 이미지" class="captured-image" />
   </div>
   <Button_com
-      :customStyle="{ marginTop: 'auto', alignSelf: 'flex-end', padding: '20px 20px'}"
+      :customStyle="{ marginTop: 'auto', alignSelf: 'flex-end', padding: '10px 10px'}"
       label="이전으로"
       @click="goBack"
   />

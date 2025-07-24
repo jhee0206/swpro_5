@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="journal-content-to-capture">
-      <h1>마음 체크 일지</h1>
+      <h1>하루톡</h1>
 
       <div class="header-section" style="text-align: center;">
         <p>
@@ -11,12 +11,12 @@
           <textarea
               id="entryMood"
               v-model="entryMood"
-              maxlength="50"
+              maxlength="20"
               rows="1"
               ref="myAutoGrowTextarea"
               @input="adjustTextareaHeight"
               style="width: 100%; resize: vertical; white-space: pre-wrap; word-wrap: break-word;"
-              placeholder="최대 50자까지 입력할 수 있습니다."
+              placeholder="최대 20자까지 입력할 수 있습니다."
           ></textarea>
         </p>
       </div>
