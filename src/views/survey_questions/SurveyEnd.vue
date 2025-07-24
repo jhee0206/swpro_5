@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { useRoute } from "vue-router"
+import FixedHeader from "@/component/FixedHeader.vue";
+
 const route = useRoute()
 
 const QUESTION_RANGE = [2,3,4,5,6,7]
@@ -25,14 +27,12 @@ const answers = computed(() => {
   return JSON.parse(route.query.answers as string)
 })
 
-// Q2~Q7 나타난 모든 물질
 const allLabels = computed(() => {
   return [...new Set(
       answers.value.filter(a => QUESTION_RANGE.includes(a.questionNo)).map(a => a.label)
   )]
 })
 
-// 물질별 점수 및 위험군 계산
 function getRiskGrade(label, total) {
   const rule = RISK_RANGES[label]
   if (!rule) return '-'
@@ -56,20 +56,37 @@ const riskReport = computed(() => {
 </script>
 
 <template>
-  <div class="max-w-[600px] mx-auto mt-12 text-lg">
-    <div v-for="item in riskReport" :key="item.label" class="py-2">
-      <span class="font-semibold">{{ item.label }} :</span>
-      <span class="ml-2 text-blue-700 font-bold">{{ item.total }}점</span>
-      <span class="ml-4" :class="{
-        'text-green-600': item.risk==='저위험',
-        'text-yellow-700': item.risk==='중등도 위험',
-        'text-red-600': item.risk==='고위험'
-      }">
-        {{ item.risk }}
-      </span>
+  <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]">
+    <FixedHeader/>
+    <table class="min-w-full border text-center">
+      <thead>
+      <tr class="bg-blue-50">
+        <th class="border p-[8px]">물질</th>
+        <th class="border p-[8px]">점수</th>
+        <th class="border p-[8px]">위험군</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="item in riskReport" :key="item.label">
+        <td class="border p-[8px]">{{ item.label }}</td>
+        <td class="border p-[8px]">{{ item.total }}점</td>
+        <td class="border p-[8px]"
+          :class="{
+        'bg-[#6AAA5B] text-[#FFFFFF] border-[#000000]': item.risk==='저위험',
+        'bg-[#F5AF2D] text-[#FFFFFF] border-[#000000]': item.risk==='중등도 위험',
+        'bg-[#C31D1D] text-[#FFFFFF] border-[#000000]': item.risk==='고위험'
+        }">{{ item.risk }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div>
+      <a href="/survey/result/low">저위험</a><br>
+      <a href="/survey/result/middle">중등도 위험</a><br>
+      <a href="/survey/result/high">고위험</a>
     </div>
-    <a href="/survey/result/low">저위험</a><br>
-    <a href="/survey/result/middle">중등도 위험</a><br>
-    <a href="/survey/result/high">고위험</a>
   </div>
 </template>
+
+<style scoped>
+
+</style>
