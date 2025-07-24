@@ -27,7 +27,8 @@ onMounted(() => {
     const arr = JSON.parse(route.query.selected as string)
     items.value = arr.map((label: string) => ({
       label,
-      value: null
+      value: null,
+      disabled: label === '담배제품'
     }))
   }
   // 이전 답변 누적 배열 (없으면 빈 배열)
@@ -101,6 +102,7 @@ function handleNext() {
                         :value="opt.value"
                         v-model="item.value"
                         class="accent-blue-500"
+                        :disabled="item.disabled"
                     />
                   </td>
                 </tr>
