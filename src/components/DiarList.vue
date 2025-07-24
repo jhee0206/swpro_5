@@ -49,6 +49,7 @@ export default {
 </script>
 
 <style scoped>
+
 .diary-list-container {
   padding: 25px 20px 90px;
   font-family: 'Cafe24 Ssurround', serif;

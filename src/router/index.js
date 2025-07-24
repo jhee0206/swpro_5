@@ -6,6 +6,8 @@ import DiarList from "@/components/DiarList.vue";
 import mainWindow from "../components/mainWindow.vue";
 import MindCheckJournal from "@/components/MindCheckJournal.vue";
 import DiaryDetail from "@/components/DiaryDetail.vue";
+import JournalImage from "@/components/JournalImage.vue";
+import MyRecord from "@/components/MyRecord.vue";
 
 
 
@@ -64,8 +66,14 @@ const routes = [
         component: () => import('@/views/SelfCheck.vue')
     },*/
     {
-        path: '/support',
-        component: () => import('@/components/MindCheckJournal.vue')
+        path: '/JournalImage',
+        name: 'JournalImage',
+        component: JournalImage,
+    },
+    {
+        path: '/MyRecord', // <--- 이 라우트를 추가해주세요!
+        name: 'MyRecord', // 이 라우트의 이름 (내비게이션바에서 사용할 이름)
+        component: MyRecord, // 위에서 임포트한 MyRecord 컴포넌트
     }
 
 

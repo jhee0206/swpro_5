@@ -12,7 +12,7 @@
       <img src="/icon/list.svg" class="icon" alt="설문조사"/>
       <span class="label">챗봇</span>
     </div>
-    <div class="nav-item" @click="goTo('MindCheckJournal')">
+    <div class="nav-item" @click="goTo('MyRecord')">
       <img src="/icon/dair.svg" class="icon" alt="다이어리"/>
       <span class="label">하루톡</span>
     </div>
