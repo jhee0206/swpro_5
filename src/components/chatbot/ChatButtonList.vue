@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup>
+<!--<script setup>
 const props = defineProps({
   questions: Array,
 })
@@ -19,6 +19,23 @@ const emit = defineEmits(['select'])
 
 function onClick(questionObject) {
   emit('select', questionObject)
+}
+</script>-->
+
+<script>
+export default {
+  name: 'ChatButtonList',
+  props: {
+    questions: {
+      type: Array,
+      required: true
+    }
+  },
+  methods: {
+    onClick(questionObject) {
+      this.$emit('select', questionObject);
+    }
+  }
 }
 </script>
 

@@ -4,13 +4,13 @@
       <img src="/icon/home.svg" class="icon" alt="홈"/>
       <span class="label">홈</span>
     </div>
-    <div class="nav-item" @click="goTo('Chat')">
+    <div class="nav-item" @click="goTo('ChatbotView')">
       <img src="/icon/chat.svg" class="icon" alt="챗봇"/>
-      <span class="label">자가진단</span>
+      <span class="label">챗봇</span>
     </div>
     <div class="nav-item" @click="goTo('list')">
       <img src="/icon/list.svg" class="icon" alt="설문조사"/>
-      <span class="label">챗봇</span>
+      <span class="label">자가진단</span>
     </div>
     <div class="nav-item" @click="goTo('MyRecord')">
       <img src="/icon/dair.svg" class="icon" alt="다이어리"/>

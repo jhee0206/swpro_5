@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script setup>
+<!--<script setup>
 // [ 모듈 임포트 ]
 import { computed } from 'vue'
 import ExpandableText from './ExpandableText.vue'
@@ -36,10 +36,38 @@ const props = defineProps({
 })
 
 const roleClass = computed(() => (props.role === 'bot' ? 'left' : 'right'))
+</script>-->
+
+<script>
+import ExpandableText from './ExpandableText.vue';
+
+export default {
+  name: 'ChatMessage',
+  components: { ExpandableText },
+  props: {
+    role: {
+      type: String,
+      required: true
+    },
+    content: {
+      type: String,
+      required: true
+    },
+    highlightMode: {
+      type: String,
+      default: 'numbered'
+    }
+  },
+  computed: {
+    roleClass() {
+      return this.role === 'bot' ? 'left' : 'right';
+    }
+  }
+};
 </script>
 
-<style scoped>
 
+<style scoped>
 /*
   [ 전체 메시지 컨테이너 ]
   - 이 요소의 margin이 메시지 간의 간격을 결정.

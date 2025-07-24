@@ -8,8 +8,18 @@
   </div>
 </template>
 
-<script setup>
+<!--<script setup>
 import ChatbotWindow from '@/components/chatbot/ChatbotWindow.vue';
+</script>-->
+
+<script>
+import ChatbotWindow from '@/components/chatbot/ChatbotWindow.vue';
+
+export default {
+  components: {
+    ChatbotWindow,
+  },
+};
 </script>
 
 <style scoped>

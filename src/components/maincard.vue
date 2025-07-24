@@ -7,7 +7,7 @@
     <div class="button-grid" >
       <button class="nav-button" @click="goToNextPage('education')">카드뉴스 보기</button>
       <button class="nav-button" @click="goToNextPage('list')">자가진단 하기</button>
-      <button class="nav-button" @click="goToNextPage('chatbot')">챗봇 이용하기</button>
+      <button class="nav-button" @click="goToNextPage('ChatbotView')">챗봇 이용하기</button>
       <button class="nav-button" @click="goToNextPage('MyRecord')">하루톡 작성하기</button>
   </div>
 

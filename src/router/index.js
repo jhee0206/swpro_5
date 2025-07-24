@@ -8,7 +8,11 @@ import MindCheckJournal from "@/components/MindCheckJournal.vue";
 import DiaryDetail from "@/components/DiaryDetail.vue";
 import JournalImage from "@/components/JournalImage.vue";
 import MyRecord from "@/components/MyRecord.vue";
-
+import ChatbotWindow from "@/components/chatbot/ChatbotWindow.vue";
+import ChatbotView from "@/components/chatbot/ChatbotView.vue";
+import ChatMessage from "@/components/chatbot/ChatMessage.vue";
+import ExpandableText from "@/components/chatbot/ExpandableText.vue";
+import ChatButtonList from "@/components/chatbot/ChatButtonList.vue";
 
 
 const routes = [
@@ -74,6 +78,32 @@ const routes = [
         path: '/MyRecord', // <--- 이 라우트를 추가해주세요!
         name: 'MyRecord', // 이 라우트의 이름 (내비게이션바에서 사용할 이름)
         component: MyRecord, // 위에서 임포트한 MyRecord 컴포넌트
+    },
+    {
+        path: '/ChatbotWindow',
+        name: 'ChatbotWindow',
+        component: ChatbotWindow,
+    },
+
+    {
+        path: '/ChatMessage',
+        name: 'ChatMessage',
+        component: ChatMessage,
+    },
+    {
+        path: '/ChatbotView',
+        name: 'ChatbotView',
+        component: ChatbotView,
+    },
+    {
+        path: '/ExpandableText',
+        name: 'ExpandableText',
+        component: ExpandableText,
+    },
+    {
+        path: '/ChatButtonList',
+        name: 'ChatButtonList',
+        component: ChatButtonList,
     }
 
 
