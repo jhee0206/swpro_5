@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import ButtonComponent from "@/component/ButtonComponent.vue";
-
+// title이라는 prop(문자열) 선언
 const props = defineProps<{
-  prevLink?: string
-  nextLink?: string
+  title?: string
 }>()
-const emit = defineEmits(['prev','next'])
 </script>
 
 <template>
   <div class="mb-[32px]">
-    <p class="survey-title">ASSIST 검사</p>
+    <p class="survey-title">{{ props.title || 'ASSIST 검사' }}</p>
   </div>
 </template>
 
