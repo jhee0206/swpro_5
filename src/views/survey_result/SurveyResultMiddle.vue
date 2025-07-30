@@ -7,19 +7,19 @@ import ResultSafety from "@/component/ResultSafety.vue";
 
 const router = useRouter()
 
-function handlePrev() {
+function handleNext() {
   router.push('/')
 }
 </script>
 
 <template>
-  <div class="flex flex-col justify-between min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!-- 전체영역 -->
+  <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!-- 전체영역 -->
     <ResultFixedHeader
         step="중등도 위험"
         safety="주의"
         color="#F5AF2D"/>
-    <div class="w-full flex flex-col justify-between flex-1"> <!-- 컨텐츠 -->
-      <div class="w-full h-[200px] bg-black"> <!-- 그래프 -->
+    <div class="w-full"> <!-- 컨텐츠 -->
+      <div class="w-full h-[200px]"> <!-- 그래프 -->
 
       </div>
       <div class="py-[20px]">
@@ -34,13 +34,14 @@ function handlePrev() {
           지금 약물 대처법을 알려드릴게요.
         </p>
       </div>
-      <div class="flex justify-center pb-[65px]"> <!-- 확인버튼 -->
+      <div class="flex justify-center"> <!-- 확인버튼 -->
         <ButtonComponent
-            @next=""/> <!-- 관련 카드 뉴스로 이동 -->
+            nextLink="확인"
+            @next="handleNext"/> <!-- 관련 카드 뉴스로 이동 -->
       </div>
     </div>
-    <NavigationBar/>
   </div>
+  <NavigationBar/>
 </template>
 
 <style scoped>

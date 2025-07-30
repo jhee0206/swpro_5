@@ -61,12 +61,12 @@ function handleNext() {
             </div>
             <!-- 표 그리드 -->
             <div class="grid grid-cols-4 border border-gray-200 text-center text-[15px]">
-              <div class="py-2 bg-blue-50 border border-gray-200 col-span-2">물질의 종류</div>
-              <div class="py-2 bg-blue-50 border border-gray-200">아니오</div>
-              <div class="py-2 bg-blue-50">예</div>
+              <div class="py-[8px] bg-blue-50 border border-gray-200 col-span-2">물질의 종류</div>
+              <div class="py-[8px] bg-blue-50 border border-gray-200">아니오</div>
+              <div class="py-[8px] bg-blue-50 border border-gray-200">예</div>
               <template v-for="(item, idx) in items" :key="item.label">
-                <div class="py-2 border border-gray-200 col-span-2">{{ item.label }}</div>
-                <div class="py-2 border border-gray-200">
+                <div class="py-[8px] border border-gray-200 col-span-2">{{ item.label }}</div>
+                <div class="py-[8px] border border-gray-200">
                   <input
                       type="radio"
                       :name="`q1_${idx}`"
@@ -75,7 +75,7 @@ function handleNext() {
                       class="accent-blue-500"
                   />
                 </div>
-                <div class="py-2 border border-gray-200">
+                <div class="py-[8px] border border-gray-200">
                   <input
                       type="radio"
                       :name="`q1_${idx}`"

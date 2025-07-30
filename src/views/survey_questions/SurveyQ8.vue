@@ -57,7 +57,7 @@ function handleNext() {
                   <th
                       v-for="opt in frequencyOptions"
                       :key="opt.value"
-                      class="w-1/3 border-r border-gray-200 px-2 py-3 font-semibold">
+                      class="border border-gray-200 p-[12px]">
                     {{ opt.label }}
                   </th>
                 </tr>
@@ -67,7 +67,7 @@ function handleNext() {
                   <td
                       v-for="opt in frequencyOptions"
                       :key="opt.value + '-input'"
-                      class="border-t border-r border-gray-200 px-2 py-4">
+                      class="border-t border-r border-gray-200 p-[12px]">
                     <input
                         type="radio"
                         :value="opt.value"

@@ -27,4 +27,9 @@ const emit = defineEmits(['next'])
   padding-right: 40px;
   border-radius: 8px;
 }
+
+button.button:hover {
+  background-color: rgba(34, 96, 255, 0.7);
+  cursor: pointer;
+}
 </style>

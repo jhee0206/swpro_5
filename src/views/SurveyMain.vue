@@ -1,12 +1,19 @@
 <script setup lang="ts">
+import {useRouter} from "vue-router";
 import FixedHeader from "@/component/FixedHeader.vue";
 import NavigationBar from "@/component/NavigationBar.vue";
+import ButtonComponent from "@/component/ButtonComponent.vue";
+
+const router = useRouter()
+
+function handleNext() {
+  router.push('/survey/q1')
+}
 </script>
 
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader
-        title="SBIRT-ASSIST"/>
+    <FixedHeader/>
     <div class="w-full"> <!-- 컨텐츠 -->
       <div class="w-full border-[1px] border-[#456] rounded-[8px] p-[12px]">
         <p class="p-[12px] font-bold">설문 소개</p>
@@ -18,7 +25,9 @@ import NavigationBar from "@/component/NavigationBar.vue";
           거나, 처방된 것보다 더 자주 혹은 더 많은 용량을 사용한 적이 있다면 체크해 주시기 바랍니다. </p>
       </div>
       <div class="w-full flex justify-center pt-[32px] mb-[65px]">
-        <router-link to="/survey/q1" class="survey-start-button"><span>자가 설문 시작하기</span></router-link>
+        <ButtonComponent
+            nextLink="자가진단 시작하기"
+            @next="handleNext"/>
       </div>
     </div>
     <NavigationBar/>
@@ -30,16 +39,5 @@ import NavigationBar from "@/component/NavigationBar.vue";
   font-size: 14px;
   padding: 12px;
   color: #888;
-}
-
-.survey-start-button {
-  background-color: #2260FF;
-  color: #ffffff;
-  font-size: 16px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  border-radius: 8px;
 }
 </style>

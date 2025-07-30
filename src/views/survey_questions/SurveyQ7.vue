@@ -78,7 +78,7 @@ function handleNext() {
               <table class="min-w-full text-center text-[15px]">
                 <thead class="bg-blue-50">
                 <tr>
-                  <th class="border border-gray-200 px-2 py-2">물질의 종류</th>
+                  <th class="border border-gray-200 p-[8px]">물질의 종류</th>
                   <th v-for="opt in frequencyOptions" :key="opt.value" class="w-[15%] border border-gray-200 px-2 py-2">
                     {{ opt.label }}
                   </th>
@@ -86,11 +86,11 @@ function handleNext() {
                 </thead>
                 <tbody>
                 <tr v-for="(item, idx) in items" :key="item.label">
-                  <td class="border border-gray-200 px-2 py-2">{{ item.label }}</td>
+                  <td class="border border-gray-200 p-[8px]">{{ item.label }}</td>
                   <td
                       v-for="opt in frequencyOptions"
                       :key="opt.value"
-                      class="border border-gray-200 px-2 py-2"
+                      class="border border-gray-200 p-[8px]"
                   >
                     <input
                         type="radio"
