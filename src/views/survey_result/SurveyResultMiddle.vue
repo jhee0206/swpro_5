@@ -8,7 +8,7 @@ import ResultSafety from "@/component/ResultSafety.vue";
 const router = useRouter()
 
 function handleNext() {
-  router.push('/')
+  router.push('/SurveyMain')
 }
 </script>
 

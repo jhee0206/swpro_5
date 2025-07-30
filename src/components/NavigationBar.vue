@@ -8,7 +8,7 @@
       <img src="/icon/chat.svg" class="icon" alt="챗봇"/>
       <span class="label">챗봇</span>
     </div>
-    <div class="nav-item" @click="goTo('list')">
+    <div class="nav-item" @click="goTo('SurveyMain')">
       <img src="/icon/list.svg" class="icon" alt="설문조사"/>
       <span class="label">자가진단</span>
     </div>

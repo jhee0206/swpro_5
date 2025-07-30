@@ -31,7 +31,7 @@ import SurveyResultMiddle from "@/views/survey_result/SurveyResultMiddle.vue";
 import SurveyResultHigh from "@/views/survey_result/SurveyResultHigh.vue";
 
 const routes = [
-    { path: '/', component: SurveyMain },
+    { path: '/SurveyMain', component: SurveyMain },
     { path: '/survey/q1', component: SurveyQ1 },
     { path: '/survey/q2', component: SurveyQ2 },
     { path: '/survey/q3', component: SurveyQ3 },
