@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import ResultFixedHeader from "@/component/ResultFixedHeader.vue";
-import NavigationBar from "@/component/NavigationBar.vue";
+import NavigationBar from "@/components/NavigationBar.vue";
 import ButtonComponent from "@/component/ButtonComponent.vue";
 import ResultSafety from "@/component/ResultSafety.vue";
 

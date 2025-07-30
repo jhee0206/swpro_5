@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from "vue-router";
 import FixedHeader from "@/component/FixedHeader.vue";
-import NavigationBar from "@/component/NavigationBar.vue";
+import NavigationBar from "@/components/NavigationBar.vue";
 import ButtonComponent from "@/component/ButtonComponent.vue";
 
 const router = useRouter()
