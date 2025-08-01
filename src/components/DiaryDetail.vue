@@ -20,13 +20,21 @@ export default {
     };
   },
   mounted() {
-    // 예: 로컬스토리지에서 imageData 가져오기
+    const entryId = Number(this.$route.query.id);
+
     const diaryList = JSON.parse(localStorage.getItem('diaryList')) || [];
-    if(diaryList.length > 0){
-      // 맨 마지막 저장 이미지 예시
-      this.imageData = diaryList[diaryList.length - 1].image;
+
+    const foundEntry = diaryList.find(entry => entry.id === entryId);
+
+    if (foundEntry) {
+      this.imageData = foundEntry.image;
+    } else {
+      // 혹시 모를 오류에 대비 (예: 해당 id의 글이 없을 경우)
+      alert("일지를 찾을 수 없습니다.");
+      this.$router.push('/DiarList');
     }
   },
+
   methods: {
     goBack() {
       this.$router.push('/DiarList');

@@ -25,7 +25,7 @@
         <h2 class="checklist-title">나의 라이프스타일 체크리스트</h2>
 
         <div class="checklist-item">
-          <strong>오늘 수분 섭취량</strong>
+          <strong>1. 오늘 수분 섭취량</strong>
           <div class="radio-group">
             <label><input type="radio" name="water" value="1cup" v-model="checklist.water" /> 1컵</label>
             <label><input type="radio" name="water" value="2_4cup" v-model="checklist.water" /> 2~4컵</label>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>오늘 수면시간</strong>
+          <strong>2. 오늘 수면시간</strong>
           <div class="radio-group">
             <label><input type="radio" name="hour" value="4hour" v-model="checklist.hour" /> 4시간 이하</label>
             <label><input type="radio" name="hour" value="5_6hour" v-model="checklist.hour" /> 5~6시간</label>
@@ -47,7 +47,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>규칙적인 식사 (중복 선택 가능)</strong>
+          <strong>3. 규칙적인 식사 (중복 선택 가능)</strong>
           <div class="checkbox-group">
             <label><input type="checkbox" value="morning" v-model="checklist.meals" /> 아침</label>
             <label><input type="checkbox" value="afternoon" v-model="checklist.meals" /> 점심</label>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>하루 중 취미 생활을 30분 이상 했는가?</strong>
+          <strong>4. 하루 중 취미 생활을 30분 이상 했는가?</strong>
           <div class="radio-group">
             <label><input type="radio" name="enjoyableActivity" value="yes" v-model="checklist.enjoyableActivity" /> 그렇다</label>
             <label><input type="radio" name="enjoyableActivity" value="no" v-model="checklist.enjoyableActivity" /> 아니다</label>
@@ -65,7 +65,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>하루 중 운동을 30분 이상 했나요?</strong>
+          <strong>5. 하루 중 운동을 30분 이상 했나요?</strong>
           <div class="radio-group">
             <label><input type="radio" name="exercise" value="yes" v-model="checklist.exercise" /> 그렇다</label>
             <label><input type="radio" name="exercise" value="no" v-model="checklist.exercise" /> 아니다</label>
@@ -73,7 +73,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>하루 중 누군가와 마음을 나눈 경험이 있나요?</strong>
+          <strong>6. 하루 중 누군가와 마음을 나눈 경험이 있나요?</strong>
           <div class="radio-group">
             <label><input type="radio" name="heartSharing" value="yes" v-model="checklist.heartSharing" /> 그렇다</label>
             <label><input type="radio" name="heartSharing" value="no" v-model="checklist.heartSharing" /> 아니다</label>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>하루 중 친절을 베푼 경험이 있나요?</strong>
+          <strong>7. 하루 중 친절을 베푼 경험이 있나요?</strong>
           <div class="radio-group">
             <label><input type="radio" name="kindness" value="yes" v-model="checklist.kindness" /> 그렇다</label>
             <label><input type="radio" name="kindness" value="no" v-model="checklist.kindness" /> 아니다</label>
@@ -148,11 +148,13 @@ export default {
       if (elementToCapture) {
         setTimeout(async () => {
           try {
+            const captureHeight = elementToCapture.scrollHeight + 50;
+
             const canvas = await html2canvas(elementToCapture, {
               useCORS: true,
               scrollY: -window.scrollY,
-              height: elementToCapture.scrollHeight,
-              windowHeight: elementToCapture.scrollHeight,
+              height: captureHeight,
+              windowHeight: captureHeight,
             });
 
             const imageDataURL = canvas.toDataURL("image/png");
