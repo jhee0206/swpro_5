@@ -11,7 +11,7 @@
           :key="entry.id"
           class="diary-entry-box"
       >
-        <span class="entry-date">날짜 {{ entry.date }}</span>
+        <span class="entry-date">{{ entry.date }}</span>
         <button class="view-button" @click="viewDiary(entry)">보기</button>
       </div>
     </div>
@@ -33,7 +33,11 @@ export default {
   },
   computed: {
     sortedDailyList() {
-      return [...this.diaryList].sort((a, b) => new Date(b.date) - new Date(a.date));
+      return [...this.diaryList].sort((a, b) => {
+        const dateA = new Date(a.date.replace(/\./g, '-'));
+        const dateB = new Date(b.date.replace(/\./g, '-'));
+        return dateB - dateA;
+      });
     },
   },
   mounted() {
@@ -53,11 +57,15 @@ export default {
 .diary-list-container {
   padding: 25px 20px 90px;
   font-family: 'Cafe24 Ssurround', serif;
+  background-color: #fcf5ed;
+  min-height: 100vh;
+  box-sizing: border-box;
+  color: rgba(21, 20, 20, 0.74);
 }
 
 .diary-button-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   gap: 12px;
 }
@@ -71,11 +79,12 @@ export default {
 .top-bar h2{
   font-size: 18px;
   margin:0;
+  color: #ff8c94;
 }
 
 .sort-label {
   font-size: 14px;
-  color: #555;
+  color: #ff8c94;
 }
 
 .diary-button-list {
@@ -85,8 +94,8 @@ export default {
 }
 
 .diary-entry-box {
-  border: 1.5px solid #222;
-  border-radius: 6px;
+  border: 2px solid #ff8c94;
+  border-radius: 12px;
   padding: 12px 15px;
   display: flex;
   justify-content: space-between;
@@ -100,11 +109,12 @@ export default {
 }
 
 .view-button {
-  border: 1.5px solid #222;
+  border: 2px solid #ff8c94;
   background-color: white;
   padding: 5px 10px;
   font-size: 14px;
-  border-radius: 4px;
+  border-radius: 10px;
+  color: #ff8c94;
 }
 
 </style>

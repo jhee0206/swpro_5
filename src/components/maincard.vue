@@ -5,10 +5,10 @@
     </h1>
     <hr class="divider" />
     <div class="button-grid" >
-      <button class="nav-button" @click="goToNextPage('education')">카드뉴스 보기</button>
-      <button class="nav-button" @click="goToNextPage('SurveyMain')">자가진단 하기</button>
-      <button class="nav-button" @click="goToNextPage('ChatbotView')">챗봇 이용하기</button>
-      <button class="nav-button" @click="goToNextPage('MyRecord')">하루톡 작성하기</button>
+      <button class="nav-button" @click="goToNextPage('education')">카드뉴스</button>
+      <button class="nav-button" @click="goToNextPage('SurveyMain')">자가진단</button>
+      <button class="nav-button" @click="goToNextPage('ChatbotView')">챗봇</button>
+      <button class="nav-button" @click="goToNextPage('MyRecord')">하루톡</button>
   </div>
 
     <hr class="divider" />
@@ -74,7 +74,7 @@ export default {
   background-color: white;
   color: rgba(90, 114, 170, 0.81);
   padding: 30px 10px;
-  border: 1px solid black;
+  border: 1.5px solid #2260FF;
   border-radius: 12px;
   font-size: 16px;
   font-weight: bold;

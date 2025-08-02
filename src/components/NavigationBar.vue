@@ -37,7 +37,7 @@ export default {
   left: 0;
   right: 0;
   height: 65px;
-  background-color: rgb(181, 185, 202);
+  background-color: #ffaeb2;
   justify-content:space-between;
   display: flex;
   padding: 0 25px;
