@@ -177,11 +177,15 @@ const showChatbotBtn = computed(() => {
         나의 약물 사용습관 위험도 확인하기
       </button>
     </div>
-    <div v-if="showImage" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-60">
-      <div class="bg-white rounded-lg p-4 shadow-lg flex flex-col items-center">
+    <div v-if="showImage" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+      <div class="bg-white rounded-lg p-4 shadow-lg flex flex-col items-center px-[12px]">
         <p>표를 통해 현재 자신의 상태를 확인해보세요</p>
         <img
             src="/public/habit-risk-check.png"
+            alt="위험도 안내"
+            class="max-w-[400px] rounded px-[16px]"/>
+        <img
+            src="/public/risk-meaning.png"
             alt="위험도 안내"
             class="max-w-[400px] rounded"/>
         <ButtonComponent
