@@ -41,7 +41,10 @@ function handlePrev() {
 
 // 다음 버튼 클릭 시 모든 항목 체크 여부 등 유효성 검사
 function handleNext() {
-  const allChecked = items.value.every(item => item.value !== null)
+  // disabled가 아닌 항목만 확인
+  const allChecked = items.value
+      .filter(item => !item.disabled)
+      .every(item => item.value !== null)
   if (!allChecked) {
     alert('모든 항목에 답변해 주세요!')
     return
