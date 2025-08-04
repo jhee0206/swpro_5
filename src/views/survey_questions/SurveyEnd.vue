@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
-import { useRoute } from "vue-router"
+import {useRoute, useRouter} from "vue-router"
 import ResultSafety from "@/component/ResultSafety.vue";
 import NavigationBar from "@/component/NavigationBar.vue";
 import ButtonComponent from "@/component/ButtonComponent.vue";
 
 const route = useRoute()
+const router = useRouter();
 
 const QUESTION_RANGE = [2,3,4,5,6,7]
 
@@ -31,6 +32,15 @@ function handleShowImage() {
 
 function handleCloseImage() {
   showImage.value = false
+}
+
+// '카드뉴스 보기'
+function handleCardnews() {
+  router.push('') // '카드뉴스'로 이동
+}
+
+function handleChatbot() {
+  router.push('') // '챗봇'으로 이동
 }
 
 // 답변 데이터
@@ -90,15 +100,45 @@ const riskMent = computed(() => {
 // 저중고 위험 안내문 세부사항
 const riskMentDetail = computed(() => {
   const strings = []
-  if (riskGroups.value['저위험'].length)
-    strings.push(`${riskGroups.value['저위험'].join(', ')}은(는) 저위험 단계에 해당해요. \n
-    주기적인 자가진단을 권장하며 자기보호를 위한 상황별 대응법이 중요합니다.`)
-  if (riskGroups.value['중등도 위험'].length)
-    strings.push(`${riskGroups.value['중등도 위험'].join(', ')}은(는) 중등도 위험 단계에 해당해요. \n 물질 사용에 대한 위험 신호를 일부 보입니다. 지금은 큰 문제가 아니더라도, 습관이 누적되면 중독으로 변할 수 있어요.`)
-  if (riskGroups.value['고위험'].length)
-    strings.push(`${riskGroups.value['고위험'].join(', ')}은(는) 고위험 단게에 해당해요. \n 물질 사용 문제가 심각한 수준일 수 있어요. 전문가와의 상담을 통해 빠르게 조치를 받는 것이 중요합니다.`)
-  return strings.length ? strings.join('\n\n') : ''
+
+  // riskReport에서 각 라벨별 total 점수를 확인하여 0점인 경우 제외
+  const filteredRiskReport = riskReport.value.filter(item => item.total > 0);
+
+  const lowRiskLabels = filteredRiskReport.filter(i => i.risk === '저위험').map(i => i.label);
+  if (lowRiskLabels.length)
+    strings.push(`${lowRiskLabels.join(', ')}은(는) 저위험 단계에 해당해요. \n주기적인 자가진단을 권장하며 자기보호를 위한 상황별 대응법이 중요합니다.`);
+
+  const moderateRiskLabels = filteredRiskReport.filter(i => i.risk === '중등도 위험').map(i => i.label);
+  if (moderateRiskLabels.length)
+    strings.push(`${moderateRiskLabels.join(', ')}은(는) 중등도 위험 단계에 해당해요. \n물질 사용에 대한 위험 신호를 일부 보입니다. 지금은 큰 문제가 아니더라도, 습관이 누적되면 중독으로 변할 수 있어요.`);
+
+  const highRiskLabels = filteredRiskReport.filter(i => i.risk === '고위험').map(i => i.label);
+  if (highRiskLabels.length)
+    strings.push(`${highRiskLabels.join(', ')}은(는) 고위험 단게에 해당해요. \n물질 사용 문제가 심각한 수준일 수 있어요. 전문가와의 상담을 통해 빠르게 조치를 받는 것이 중요합니다.`);
+
+  return strings.length ? strings.join('\n\n') : '';
 })
+
+const showChatbotBtn = computed(() => {
+  // 1. 점수 0점 이상인 항목만 필터링
+  const filteredRiskReport = riskReport.value.filter(item => item.total > 0);
+
+  // 2. 위험군별 그룹화 (점수 0 제외)
+  const filteredRiskGroups = { '저위험': [], '중등도 위험': [], '고위험': [] };
+  filteredRiskReport.forEach(item => {
+    filteredRiskGroups[item.risk].push(item.label);
+  });
+
+  // 3. 챗봇 버튼 노출 조건 (점수 0인 제품은 무시)
+  const isOneLowOrModerate =
+      filteredRiskGroups['저위험'].includes('담배제품') ||
+      filteredRiskGroups['중등도 위험'].includes('담배제품') ||
+      filteredRiskGroups['저위험'].includes('알코올 음료') ||
+      filteredRiskGroups['중등도 위험'].includes('알코올 음료');
+  const hasHighRisk = filteredRiskGroups['고위험'].length > 0;
+
+  return isOneLowOrModerate || hasHighRisk;
+});
 </script>
 
 <template>
@@ -152,14 +192,19 @@ const riskMentDetail = computed(() => {
     </div>
     <div class="py-[32px]"> <!-- 저중고 위험 안내문 -->
       <div class="whitespace-pre-line">{{ riskMent }}</div>
-      <div class="whitespace-pre-line">{{ riskMentDetail }}</div>
+      <div class="whitespace-pre-line border border-[2px] p-[4px] border-[#2260FF]">{{ riskMentDetail }}</div>
       <div><br>앱에서 도움을 받을 수 있는 경로를 안내해드릴게요.</div>
     </div>
-    <div class="mb-[65px]"> <!-- '확인'버튼 -->
+    <div class="flex justify-center mb-[65px]"> <!-- '확인'버튼 -->
       <ButtonComponent
-      class="flex justify-center p-[12px]"
+      class="p-[4px]"
       nextLink="카드뉴스 보기"
       @next="handleCardnews"/>
+      <ButtonComponent
+          v-if="showChatbotBtn"
+          class="p-[4px]"
+          nextLink="챗봇 이동"
+          @next="handleChatbot"/>
     </div>
   </div>
   <NavigationBar/>
