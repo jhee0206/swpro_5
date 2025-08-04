@@ -65,11 +65,45 @@ const riskReport = computed(() => {
     }
   })
 })
+
+// 위험군별 그룹화
+const riskGroups = computed(() => {
+  const groups = { 저위험: [], '중등도 위험': [], 고위험: [] }
+  riskReport.value.forEach(item => {
+    groups[item.risk]?.push(item.label)
+  })
+  return groups
+})
+
+// 저중고 위험 안내문
+const riskMent = computed(() => {
+  const strings = []
+  if (riskGroups.value['저위험'].length)
+    strings.push(`${riskGroups.value['저위험'].join(', ')}은(는) 저위험`)
+  if (riskGroups.value['중등도 위험'].length)
+    strings.push(`${riskGroups.value['중등도 위험'].join(', ')}은(는) 중등도 위험`)
+  if (riskGroups.value['고위험'].length)
+    strings.push(`${riskGroups.value['고위험'].join(', ')}은(는) 고위험`)
+  return strings.length ? strings.join('이며, ') + '단계에 해당해요! \n\n' : ''
+})
+
+// 저중고 위험 안내문 세부사항
+const riskMentDetail = computed(() => {
+  const strings = []
+  if (riskGroups.value['저위험'].length)
+    strings.push(`${riskGroups.value['저위험'].join(', ')}은(는) 저위험 단계에 해당해요. \n
+    주기적인 자가진단을 권장하며 자기보호를 위한 상황별 대응법이 중요합니다.`)
+  if (riskGroups.value['중등도 위험'].length)
+    strings.push(`${riskGroups.value['중등도 위험'].join(', ')}은(는) 중등도 위험 단계에 해당해요. \n 물질 사용에 대한 위험 신호를 일부 보입니다. 지금은 큰 문제가 아니더라도, 습관이 누적되면 중독으로 변할 수 있어요.`)
+  if (riskGroups.value['고위험'].length)
+    strings.push(`${riskGroups.value['고위험'].join(', ')}은(는) 고위험 단게에 해당해요. \n 물질 사용 문제가 심각한 수준일 수 있어요. 전문가와의 상담을 통해 빠르게 조치를 받는 것이 중요합니다.`)
+  return strings.length ? strings.join('\n\n') : ''
+})
 </script>
 
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역-->
-    <div class="mb-[32px]"> <!--헤더 영역-->
+    <div> <!--헤더 영역-->
       <p class="survey-title">여러분의 점수를 확인해보세요.</p>
     </div>
     <div> <!--결과표-->
@@ -96,9 +130,9 @@ const riskReport = computed(() => {
       </table>
     </div> <!--결과표-->
     <div>
-      <ResultSafety class="pt-[32px]"/>
+      <ResultSafety class="pt-[16px]"/>
     </div>
-    <div class="flex justify-center border-b-[2px] border-[#2260FF] py-[32px]">
+    <div class="flex justify-center border-b-[2px] border-[#2260FF] pt-[16px] pb-[32px]">
       <button @click="handleShowImage" class="habit-check">
         나의 약물 사용습관 위험도 확인하기
       </button>
@@ -115,6 +149,17 @@ const riskReport = computed(() => {
           nextLink="닫기"
           @next="handleCloseImage"/>
       </div>
+    </div>
+    <div class="py-[32px]"> <!-- 저중고 위험 안내문 -->
+      <div class="whitespace-pre-line">{{ riskMent }}</div>
+      <div class="whitespace-pre-line">{{ riskMentDetail }}</div>
+      <div><br>앱에서 도움을 받을 수 있는 경로를 안내해드릴게요.</div>
+    </div>
+    <div class="mb-[65px]"> <!-- '확인'버튼 -->
+      <ButtonComponent
+      class="flex justify-center p-[12px]"
+      nextLink="카드뉴스 보기"
+      @next="handleCardnews"/>
     </div>
   </div>
   <NavigationBar/>
@@ -139,5 +184,10 @@ const riskReport = computed(() => {
   padding-bottom: 12px;
   padding-left: 16px;
   padding-right: 16px;
+}
+
+.habit-check:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
 </style>
