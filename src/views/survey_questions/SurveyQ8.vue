@@ -85,7 +85,7 @@ function handleNext() {
     </div>
     <div class="flex justify-end pt-[12px] mb-[65px]"> <!-- 다음버튼 -->
       <ButtonComponent
-          nextLink="다음"
+          nextLink="결과 확인하기"
           @next="handleNext"
       />
     </div>
