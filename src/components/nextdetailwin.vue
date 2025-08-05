@@ -10,7 +10,7 @@
         <img :src="card.image" :alt="`card-${index}`" class="card-image" />
       </button>
       <Button_com
-          :customStyle="{ marginTop: 'auto', alignSelf: 'flex-end', padding: '20px 20px'}"
+          :customStyle="{ marginTop: 'auto', alignSelf: 'flex-end', marginBottom: '50px', padding: '15px 15px' }"
           label="이전으로"
           @click="GoBack"
       />

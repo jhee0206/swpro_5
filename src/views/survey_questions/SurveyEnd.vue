@@ -2,7 +2,7 @@
 import { computed, ref } from "vue"
 import {useRoute, useRouter} from "vue-router"
 import ResultSafety from "@/component/ResultSafety.vue";
-import NavigationBar from "@/component/NavigationBar.vue";
+import NavigationBar from "@/components/NavigationBar.vue";
 import ButtonComponent from "@/component/ButtonComponent.vue";
 
 const route = useRoute()
