@@ -40,7 +40,7 @@ export default {
     return {
       messages: [],
       idCounter: 0,
-      currentCategory: null, // <<< [수정 1] 사용자의 카테고리 선택을 기억할 상태 변수 추가
+      currentCategory: null, // <<< 사용자의 카테고리 선택을 기억할 상태 변수 추가
     };
   },
   computed: {
@@ -144,8 +144,8 @@ export default {
 
       switch (action) {
         case 'select_category': {
-          this.currentCategory = key; // <<< [수정 2] 사용자가 선택한 카테고리(key)를 저장합니다.
-          const nextQuestions = key === 'addiction_center' // <<< [수정 3] 'addiction_seoul'이 아닌 정확한 key 'addiction_center'로 확인합니다.
+          this.currentCategory = key;
+          const nextQuestions = key === 'addiction_center'
               ? seoulAddictionCenters.buttons
               : nationwideDrugCenters.provinces;
           const message = '안내를 원하시는 권역을 선택해주세요.'; // 메시지를 좀 더 범용적으로 변경
@@ -156,7 +156,6 @@ export default {
 
         case 'select_province':
         case 'select_counseling_province': {
-          // <<< [수정 4] 'nationwideDrugCenters'로 하드코딩된 부분을 동적으로 변경합니다.
           let subRegionsSource, dataSource;
 
           if (action === 'select_counseling_province') {
@@ -213,7 +212,7 @@ export default {
 </script>
 
 <style scoped>
-/* 스타일은 변경되지 않았습니다. */
+
 .chatbot-window {
   display: flex;
   flex-direction: column;

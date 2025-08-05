@@ -1,7 +1,6 @@
 <!-- src/views/ChatbotView.vue -->
 <template>
   <div>
-    <!-- 수정된 제목 영역 -->
     <div class="title-container">
       <!-- 뒤로가기 화살표 버튼 -->
       <div class="back-button" @click="goToCardNewsMain">
@@ -49,13 +48,12 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* ✨ 수정: 파란색 줄을 title-container의 border-bottom으로 변경하여 자연스럽게 연결 */
   border-bottom: 3px solid transparent;
   border-image: linear-gradient(to right, #007bff, #87cefa);
   border-image-slice: 1;
 }
 
-/* ✨ 수정: 제목 텍스트 스타일 */
+/* 제목 텍스트 스타일 */
 .title-container p {
   margin: 0;
   font-size: 22px; /* 글씨 크기 키움 */
