@@ -4,9 +4,9 @@ export default {
     return {
       score : true,
       subscribe : 2677,
-      }
-    },
-  };
+    }
+  },
+};
 </script>
 
 <template>

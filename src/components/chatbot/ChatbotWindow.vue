@@ -1,6 +1,8 @@
+<!-- src/components/chatbot/ChatbotWindow.vue -->
 <template>
   <div class="chatbot-window">
     <div class="chat-history" ref="chatHistoryRef">
+      <!-- 메시지 목록 -->
       <template v-for="msg in messages" :key="msg.id">
         <ChatMessage
             :role="msg.role"
@@ -9,165 +11,17 @@
             :image-url="msg.imageUrl"
         />
       </template>
-    </div>
-    <div class="button-area" v-if="latestQuestions.length > 0">
-      <ChatButtonList
-          :questions="latestQuestions"
-          @select="handleSelect"
-      />
+
+      <!-- 버튼 목록을 채팅 기록 안으로 이동 -->
+      <div class="button-area" v-if="latestQuestions.length > 0">
+        <ChatButtonList
+            :questions="latestQuestions"
+            @select="handleSelect"
+        />
+      </div>
     </div>
   </div>
 </template>
-
-<!--<script setup>
-// --- Vue Core & Components ---
-import { ref, onMounted, nextTick, computed } from 'vue';
-import ChatMessage from '@/components/chatbot/ChatMessage.vue';
-import ChatButtonList from '@/components/chatbot/ChatButtonList.vue';
-
-// --- Services & Data ---
-import { getBotAnswer } from '@/services/chatbotService.js';
-import { questionList } from '@/constants/questionList.js';
-import { rehabCategories, seoulAddictionCenters, nationwideDrugCenters } from '@/constants/rehabData.js';
-import { counselingProvinces, counselingSubRegions, counselingCenterData } from '@/constants/counselingData.js';
-
-// --- State Management ---
-const messages = ref([]);
-const chatHistoryRef = ref(null);
-let idCounter = 0;
-
-const latestQuestions = computed(() => {
-  const lastMessageWithQuestions = [...messages.value]
-      .reverse()
-      .find(msg => msg.questions && msg.questions.length > 0);
-  return lastMessageWithQuestions ? lastMessageWithQuestions.questions : [];
-});
-
-// --- Helper Functions ---
-const scrollToBottom = async () => {
-  await nextTick();
-  if (chatHistoryRef.value) {
-    chatHistoryRef.value.scrollTop = chatHistoryRef.value.scrollHeight;
-  }
-};
-
-const addMessage = (role, content, options = {}) => {
-  messages.value.push({
-    id: idCounter++,
-    role,
-    content,
-    ...options
-  });
-  scrollToBottom();
-};
-
-async function displayFinalCard(centerData, defaultMessage) {
-  if (centerData) {
-    const cardContent =
-        `${centerData.name}\n\n` +
-        `[주소] ${centerData.address}\n\n` +
-        `[연락처] ${centerData.contact}\n`;
-    addMessage('bot', cardContent, { imageUrl: centerData.imageUrl });
-  } else {
-    addMessage('bot', defaultMessage);
-  }
-
-  addMessage('bot', '다른 궁금한 점이 있으신가요?', { questions: questionList });
-}
-
-function getParticle(word) {
-  if (typeof word !== 'string' || word.length === 0) {
-    return '가';
-  }
-  const pureWord = word.replace(/<[^>]*>?/g, '');
-  const lastChar = pureWord.charCodeAt(pureWord.length - 1);
-  if (lastChar < 0xAC00 || lastChar > 0xD7A3) {
-    return '가';
-  }
-  const hasJongseong = (lastChar - 0xAC00) % 28 > 0;
-  return hasJongseong ? '이' : '가';
-}
-
-// --- Lifecycle Hook ---
-onMounted(() => {
-  addMessage(
-      'bot',
-      '안녕하세요 챗봇입니다!\n어떻게 도와드릴까요?',
-      { questions: questionList }
-  );
-});
-
-// --- Main Event Handler ---
-async function handleSelect(selectedItem) {
-  if (!selectedItem || !selectedItem.label) {
-    console.error('handleSelect: 잘못된 selectedItem 객체입니다.', selectedItem);
-    return;
-  }
-
-  const userQueryText = selectedItem.label;
-  const particle = getParticle(userQueryText);
-  addMessage('user', `"${userQueryText}"${particle} 궁금해요`);
-
-  const { action, key, label, source } = selectedItem;
-
-  // 1. 초기 질문 처리
-  if (!action) {
-    if (key === '재활 센터') {
-      addMessage('bot', '어떤 기관을 안내해 드릴까요?', { questions: rehabCategories });
-    } else if (key === '치료 기관') {
-      addMessage('bot', '안내를 원하시는 권역을 선택해주세요.', { questions: counselingProvinces });
-    } else {
-      const rawAnswer = getBotAnswer(key);
-      const highlightMode = key === '신고 방법' ? 'subheadings_only' : 'numbered';
-      addMessage('bot', rawAnswer, { questions: questionList, highlightMode: highlightMode });
-    }
-    return;
-  }
-
-  // 2. 흐름 처리
-  switch (action) {
-    case 'select_category': {
-      const nextQuestions = key === 'addiction_seoul' ? seoulAddictionCenters.buttons : nationwideDrugCenters.provinces;
-      const message = key === 'addiction_seoul'
-          ? '서울시 중독관리통합센터 안내입니다. 원하시는 지역구를 선택해주세요.'
-          : '전국 마약퇴치 운동센터 안내입니다. 원하시는 도(道)를 선택해주세요.';
-      addMessage('bot', message, { questions: nextQuestions });
-      break;
-    }
-
-    case 'select_province':
-    case 'select_counseling_province': {
-      const subRegions = action === 'select_province' ? nationwideDrugCenters.subRegions[label] : counselingSubRegions[label];
-
-      if (Array.isArray(subRegions) && subRegions.length === 1) {
-        const singleRegion = subRegions[0];
-        const centerData = action === 'select_province'
-            ? nationwideDrugCenters.data[singleRegion.label]
-            : counselingCenterData[singleRegion.label];
-        const defaultMsg = action === 'select_province'
-            ? '해당 지역의 재활기관 정보가 아직 등록되지 않았습니다.'
-            : '해당 지역의 치료기관 정보가 아직 등록되지 않았습니다.';
-        await displayFinalCard(centerData, defaultMsg);
-      } else {
-        addMessage('bot', `${label}의 하위 지역을 선택해주세요.`, { questions: subRegions || [] });
-      }
-      break;
-    }
-
-    case 'show_final_info':
-    case 'show_counseling_info': {
-      const centerData = source === 'seoul_addiction'
-          ? seoulAddictionCenters.data[label]
-          : nationwideDrugCenters.data[label] || counselingCenterData[label];
-      const defaultMsg = action === 'show_final_info'
-          ? '해당 지역의 재활기관 정보가 아직 등록되지 않았습니다.'
-          : '해당 지역의 치료기관 정보가 아직 등록되지 않았습니다.';
-      await displayFinalCard(centerData, defaultMsg);
-      break;
-    }
-  }
-}
-</script>-->
 
 <script>
 import ChatMessage from '@/components/chatbot/ChatMessage.vue';
@@ -186,11 +40,11 @@ export default {
     return {
       messages: [],
       idCounter: 0,
+      currentCategory: null, // <<< 사용자의 카테고리 선택을 기억할 상태 변수 추가
     };
   },
   computed: {
     latestQuestions() {
-      // 최신 질문 있는 메시지 찾아서 질문 반환
       for (let i = this.messages.length - 1; i >= 0; i--) {
         const msg = this.messages[i];
         if (msg.questions && msg.questions.length > 0) {
@@ -202,6 +56,7 @@ export default {
   },
   mounted() {
     this.addMessage('bot', '안녕하세요 챗봇입니다!\n무엇을 도와드릴까요?', { questions: questionList });
+    this.resetLastButtonScroll();
   },
   methods: {
     scrollToBottom() {
@@ -221,17 +76,24 @@ export default {
       });
       this.scrollToBottom();
     },
-    async displayFinalCard(centerData, defaultMessage) {
-      if (centerData) {
-        const cardContent =
-            `${centerData.name}\n\n` +
-            `[주소] ${centerData.address}\n\n` +
-            `[연락처] ${centerData.contact}\n`;
-        this.addMessage('bot', cardContent, { imageUrl: centerData.imageUrl });
+    async displayFinalCard(centersData, defaultMessage) {
+      if (centersData && Array.isArray(centersData) && centersData.length > 0) {
+        centersData.forEach(center => {
+          let cardContent =
+              `${center.name}\n\n` +
+              `[주소] : ${center.address}\n\n` +
+              `[연락처] : ${center.contact}`;
+
+          if (center.website) {
+            cardContent += `\n\n[홈페이지] : ${center.website}`;
+          }
+          this.addMessage('bot', cardContent, {});
+        });
       } else {
         this.addMessage('bot', defaultMessage);
       }
       this.addMessage('bot', '다른 궁금한 점이 있으신가요?', { questions: questionList });
+      this.resetLastButtonScroll();
     },
     getParticle(word) {
       if (typeof word !== 'string' || word.length === 0) {
@@ -244,6 +106,16 @@ export default {
       }
       const hasJongseong = (lastChar - 0xac00) % 28 > 0;
       return hasJongseong ? '이' : '가';
+    },
+    async resetLastButtonScroll() {
+      await this.$nextTick();
+      const allButtonContainers = this.$el.querySelectorAll('.button-list-container');
+      if (allButtonContainers.length > 0) {
+        const lastButtonContainer = allButtonContainers[allButtonContainers.length - 1];
+        if (lastButtonContainer) {
+          lastButtonContainer.scrollLeft = 0;
+        }
+      }
     },
     async handleSelect(selectedItem) {
       if (!selectedItem || !selectedItem.label) {
@@ -266,45 +138,71 @@ export default {
           const highlightMode = key === '신고 방법' ? 'subheadings_only' : 'numbered';
           this.addMessage('bot', rawAnswer, { questions: questionList, highlightMode });
         }
+        this.resetLastButtonScroll();
         return;
       }
 
       switch (action) {
         case 'select_category': {
-          const nextQuestions = key === 'addiction_seoul' ? seoulAddictionCenters.buttons : nationwideDrugCenters.provinces;
-          const message = key === 'addiction_seoul'
-              ? '서울시 중독관리통합센터 안내입니다. 원하시는 지역구를 선택해주세요.'
-              : '전국 마약퇴치 운동센터 안내입니다. 원하시는 도(道)를 선택해주세요.';
+          this.currentCategory = key;
+          const nextQuestions = key === 'addiction_center'
+              ? seoulAddictionCenters.buttons
+              : nationwideDrugCenters.provinces;
+          const message = '안내를 원하시는 권역을 선택해주세요.'; // 메시지를 좀 더 범용적으로 변경
           this.addMessage('bot', message, { questions: nextQuestions });
+          this.resetLastButtonScroll();
           break;
         }
+
         case 'select_province':
         case 'select_counseling_province': {
-          const subRegions = action === 'select_province' ? nationwideDrugCenters.subRegions[label] : counselingSubRegions[label];
+          let subRegionsSource, dataSource;
 
-          if (Array.isArray(subRegions) && subRegions.length === 1) {
-            const singleRegion = subRegions[0];
-            const centerData = action === 'select_province'
-                ? nationwideDrugCenters.data[singleRegion.label]
-                : counselingCenterData[singleRegion.label];
-            const defaultMsg = action === 'select_province'
-                ? '해당 지역의 재활기관 정보가 아직 등록되지 않았습니다.'
-                : '해당 지역의 치료기관 정보가 아직 등록되지 않았습니다.';
-            await this.displayFinalCard(centerData, defaultMsg);
+          if (action === 'select_counseling_province') {
+            subRegionsSource = counselingSubRegions;
+            dataSource = counselingCenterData;
+          } else { // 'select_province'일 경우
+            if (this.currentCategory === 'addiction_center') {
+              // 중독관리센터를 선택했을 경우, seoulAddictionCenters 데이터를 사용
+              subRegionsSource = seoulAddictionCenters.subRegions;
+              dataSource = seoulAddictionCenters.data;
+            } else {
+              // 그 외 (한걸음센터 등)의 경우, nationwideDrugCenters 데이터를 사용
+              subRegionsSource = nationwideDrugCenters.subRegions;
+              dataSource = nationwideDrugCenters.data;
+            }
+          }
+
+          const subRegions = subRegionsSource[label];
+
+          if (subRegions) {
+            this.addMessage('bot', `${label}의 하위 지역을 선택해주세요.`, { questions: subRegions });
+            this.resetLastButtonScroll();
           } else {
-            this.addMessage('bot', `${label}의 하위 지역을 선택해주세요.`, { questions: subRegions || [] });
+            const centersData = dataSource[label] || [];
+            const defaultMsg = '해당 지역의 정보가 아직 등록되지 않았습니다.';
+            await this.displayFinalCard(centersData, defaultMsg);
           }
           break;
         }
+
         case 'show_final_info':
         case 'show_counseling_info': {
-          const centerData = source === 'seoul_addiction'
-              ? seoulAddictionCenters.data[label]
-              : nationwideDrugCenters.data[label] || counselingCenterData[label];
-          const defaultMsg = action === 'show_final_info'
-              ? '해당 지역의 재활기관 정보가 아직 등록되지 않았습니다.'
-              : '해당 지역의 치료기관 정보가 아직 등록되지 않았습니다.';
-          await this.displayFinalCard(centerData, defaultMsg);
+          let centersData = [];
+          let defaultMsg = '';
+
+          if (action === 'show_counseling_info') {
+            centersData = counselingCenterData[label] || [];
+            defaultMsg = '해당 지역의 치료기관 정보가 아직 등록되지 않았습니다.';
+          } else {
+            // <<< [수정 5] 'seoul_addiction'이 아닌 정확한 source 'addiction_center'로 확인합니다.
+            centersData = (source === 'addiction_center'
+                ? seoulAddictionCenters.data[label]
+                : nationwideDrugCenters.data[label]) || [];
+            defaultMsg = '해당 지역의 재활기관 정보가 아직 등록되지 않았습니다.';
+          }
+
+          await this.displayFinalCard(centersData, defaultMsg);
           break;
         }
       }
@@ -314,6 +212,7 @@ export default {
 </script>
 
 <style scoped>
+
 .chatbot-window {
   display: flex;
   flex-direction: column;
@@ -331,9 +230,11 @@ export default {
   padding: 15px;
 }
 .button-area {
-  flex-shrink: 0;
-  padding: 12px;
-  border-top: 1px solid #e0e0e0;
-  background-color: #f9f9f9;
+  padding-top: 12px;
+}
+:deep(.chat-message.bot .message-bubble) {
+  max-width: 350px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 </style>
