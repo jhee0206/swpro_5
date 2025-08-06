@@ -20,6 +20,7 @@
         />
       </div>
     </div>
+    <NavigationBar />
   </div>
 </template>
 
@@ -30,9 +31,11 @@ import { getBotAnswer } from '@/services/chatbotService.js';
 import { questionList } from '@/constants/questionList.js';
 import { rehabCategories, seoulAddictionCenters, nationwideDrugCenters } from '@/constants/rehabData.js';
 import { counselingProvinces, counselingSubRegions, counselingCenterData } from '@/constants/counselingData.js';
+import NavigationBar from "@/components/NavigationBar.vue";
 
 export default {
   components: {
+    NavigationBar,
     ChatMessage,
     ChatButtonList,
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="headline">카드뉴스를 선택하세요!</h1>
+    <h1 class="headline">카드뉴스와 함께하는 중독 예방!</h1>
     <div class ="card-grid">
       <button
           v-for="(card, index) in cardList"

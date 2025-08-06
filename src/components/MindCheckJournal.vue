@@ -16,7 +16,7 @@
               ref="myAutoGrowTextarea"
               @input="adjustTextareaHeight"
               style="width: 100%; resize: vertical; white-space: pre-wrap; word-wrap: break-word;"
-              placeholder="최대 20자까지 입력할 수 있습니다."
+              placeholder="오늘은 행복한 날이예요!"
           ></textarea>
         </p>
       </div>
@@ -25,7 +25,18 @@
         <h2 class="checklist-title">나의 라이프스타일 체크리스트</h2>
 
         <div class="checklist-item">
-          <strong>1. 오늘 수분 섭취량</strong>
+          <strong>1. 오늘의 기분</strong>
+          <div class="radio-group">
+            <label><input type="radio" name="water" value="best" v-model="checklist.water" /> 아주 좋아요</label>
+            <label><input type="radio" name="water" value="good" v-model="checklist.water" /> 좋아요</label>
+            <label><input type="radio" name="water" value="soso" v-model="checklist.water" /> 그저그래요</label>
+            <label><input type="radio" name="water" value="bad" v-model="checklist.water" /> 나빠요</label>
+            <label><input type="radio" name="water" value="vlevle" v-model="checklist.water" /> 매우 나빠요</label>
+          </div>
+        </div>
+
+        <div class="checklist-item">
+          <strong>2. 오늘 수분 섭취량</strong>
           <div class="radio-group">
             <label><input type="radio" name="water" value="1cup" v-model="checklist.water" /> 1컵</label>
             <label><input type="radio" name="water" value="2_4cup" v-model="checklist.water" /> 2~4컵</label>
@@ -36,7 +47,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>2. 오늘 수면시간</strong>
+          <strong>3. 오늘 수면시간</strong>
           <div class="radio-group">
             <label><input type="radio" name="hour" value="4hour" v-model="checklist.hour" /> 4시간 이하</label>
             <label><input type="radio" name="hour" value="5_6hour" v-model="checklist.hour" /> 5~6시간</label>
@@ -47,7 +58,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>3. 규칙적인 식사 (중복 선택 가능)</strong>
+          <strong>4. 규칙적인 식사 (중복 선택 가능)</strong>
           <div class="checkbox-group">
             <label><input type="checkbox" value="morning" v-model="checklist.meals" /> 아침</label>
             <label><input type="checkbox" value="afternoon" v-model="checklist.meals" /> 점심</label>
@@ -57,7 +68,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>4. 하루 중 취미 생활을 30분 이상 했는가?</strong>
+          <strong>5. 하루 중 취미 생활을 30분 이상 했는가?</strong>
           <div class="radio-group">
             <label><input type="radio" name="enjoyableActivity" value="yes" v-model="checklist.enjoyableActivity" /> 그렇다</label>
             <label><input type="radio" name="enjoyableActivity" value="no" v-model="checklist.enjoyableActivity" /> 아니다</label>
@@ -65,7 +76,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>5. 하루 중 운동을 30분 이상 했나요?</strong>
+          <strong>6. 하루 중 운동을 30분 이상 했나요?</strong>
           <div class="radio-group">
             <label><input type="radio" name="exercise" value="yes" v-model="checklist.exercise" /> 그렇다</label>
             <label><input type="radio" name="exercise" value="no" v-model="checklist.exercise" /> 아니다</label>
@@ -73,7 +84,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>6. 하루 중 누군가와 마음을 나눈 경험이 있나요?</strong>
+          <strong>7. 하루 중 누군가와 마음을 나눈 경험이 있나요?</strong>
           <div class="radio-group">
             <label><input type="radio" name="heartSharing" value="yes" v-model="checklist.heartSharing" /> 그렇다</label>
             <label><input type="radio" name="heartSharing" value="no" v-model="checklist.heartSharing" /> 아니다</label>
@@ -81,7 +92,7 @@
         </div>
 
         <div class="checklist-item">
-          <strong>7. 하루 중 친절을 베푼 경험이 있나요?</strong>
+          <strong>8. 하루 중 친절을 베푼 경험이 있나요?</strong>
           <div class="radio-group">
             <label><input type="radio" name="kindness" value="yes" v-model="checklist.kindness" /> 그렇다</label>
             <label><input type="radio" name="kindness" value="no" v-model="checklist.kindness" /> 아니다</label>
