@@ -7,6 +7,8 @@
           :text="content"
           :max-length="80"
           :highlight-mode="highlightMode"
+          @navigate="$emit('navigate')"
+
       />
     </div>
   </div>
@@ -46,15 +48,12 @@ export default {
   margin: 12px 0;
   align-items: flex-end;
 }
-
 .chat-message-wrapper.right {
   justify-content: flex-end;
 }
-
 .chat-message-wrapper.left {
   justify-content: flex-start;
 }
-
 .chat-bubble {
   position: relative;
   padding: 10px 12px;
@@ -66,21 +65,14 @@ export default {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   margin-bottom: 2px;
 }
-
-/* --- '나'의 말풍선 (오른쪽) --- */
 .chat-bubble.right {
   background-color: #B2DFDB;
   color: #000;
 }
-
-/* --- '챗봇'의 말풍선 (왼쪽) --- */
 .chat-bubble.left {
   background-color: #E5E5EA;
   color: #000;
 }
-
-
-
 strong {
   font-weight: 600;
   margin-right: 4px;
