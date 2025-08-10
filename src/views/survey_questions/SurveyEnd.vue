@@ -36,11 +36,11 @@ function handleCloseImage() {
 
 // '카드뉴스 보기'
 function handleCardnews() {
-  router.push('') // '카드뉴스'로 이동
+  router.push({ name: 'NextDetailWindow' }) // '카드뉴스'로 이동
 }
 
 function handleChatbot() {
-  router.push('') // '챗봇'으로 이동
+  router.push({ name: 'ChatbotView' }) // '챗봇'으로 이동
 }
 
 // 답변 데이터

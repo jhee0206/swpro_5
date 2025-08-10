@@ -128,10 +128,9 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   padding: 15px;
-  padding-bottom: 80px; // 하단 바에 버튼이 가려져 새로 추가.
+  padding-bottom: 80px;
 }
-
-/* 질문 버튼 목록이 있는 영역의 위쪽 여백을 설정함. */
+/* 질문 버튼 목록이 있는 영역의 위쪽 여백을 설정함.*/
 .button-area {
   padding-top: 12px;
 }
