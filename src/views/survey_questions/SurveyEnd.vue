@@ -144,7 +144,7 @@ const showChatbotBtn = computed(() => {
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역-->
     <div> <!--헤더 영역-->
-      <p class="survey-title">여러분의 점수를 확인해보세요.</p>
+      <p class="survey-title">자신의 점수를 확인해보세요.</p>
     </div>
     <div> <!--결과표-->
       <table class="min-w-full text-center">
