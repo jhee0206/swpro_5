@@ -15,7 +15,7 @@ const emit = defineEmits(['prev'])
           class="button"
           v-if="prevLink"
           @click="$emit('prev')">
-        {{ prevLink || '이전으로' }}
+        <span class="arrow">&larr;</span>
       </button>
     </div>
     <p class="survey-title">{{ props.title || 'ASSIST 검사' }}</p>
@@ -32,5 +32,11 @@ const emit = defineEmits(['prev'])
   border-bottom-color: #2260FF;
   padding-top: 32px;
   padding-bottom: 32px;
+}
+
+.arrow {
+  font-size: 32px;
+  color: #333;
+  transition: color 0.2s;
 }
 </style>
