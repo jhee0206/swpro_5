@@ -1,10 +1,8 @@
 <!-- src/components/chatbot/ChatbotWindow.vue -->
 <template>
-
   <div class="chatbot-window">
-    <!-- 메시지들이 스크롤되는 대화 내용 영역 -->
     <div class="chat-history" ref="chatHistoryRef">
-      <!-- 메시지 배열(messages)을 반복하며 ChatMessage 컴포넌트로 하나씩 표시함 -->
+      <!-- 메시지 목록 -->
       <template v-for="msg in messages" :key="msg.id">
         <ChatMessage
             :role="msg.role"
@@ -15,7 +13,7 @@
         />
       </template>
 
-      <!-- 사용자가 선택할 수 있는 버튼 목록 -->
+      <!-- 버튼 목록을 채팅 기록 안으로 이동 -->
       <div class="button-area" v-if="latestQuestions.length > 0">
         <ChatButtonList
             :questions="latestQuestions"
@@ -23,13 +21,11 @@
         />
       </div>
     </div>
-    <!-- 앱의 하단 네비게이션 바 -->
     <NavigationBar />
   </div>
 </template>
 
-<script> // 챗봇의 모든 데이터와 기능(로직)을 관리함.
-
+<script>
 import ChatMessage from '@/components/chatbot/ChatMessage.vue';
 import ChatButtonList from '@/components/chatbot/ChatButtonList.vue';
 import { getBotAnswer } from '@/services/chatbotService.js';
@@ -39,70 +35,188 @@ import { counselingProvinces, counselingSubRegions, counselingCenterData } from 
 import NavigationBar from "@/components/NavigationBar.vue";
 
 export default {
-  // 이 컴포넌트 안에서 사용할 다른 컴포넌트들을 등록함.
   components: {
     NavigationBar,
     ChatMessage,
     ChatButtonList,
   },
-
-  // 챗봇의 상태(대화 기록, 사용자 선택 등)를 저장하는 데이터.
   data() {
     return {
       messages: [],
       idCounter: 0,
-      currentCategory: null,
+      currentCategory: null, // <<< 사용자의 카테고리 선택을 기억할 상태 변수 추가
     };
   },
-
-  // data를 기반으로 실시간으로 계산되는 값.
   computed: {
-    // 대화 내용 중에서 가장 마지막에 있는 질문 버튼 목록을 찾아냄.
     latestQuestions() {
-      // ...
+      for (let i = this.messages.length - 1; i >= 0; i--) {
+        const msg = this.messages[i];
+        if (msg.questions && msg.questions.length > 0) {
+          return msg.questions;
+        }
+      }
+      return [];
     },
   },
-
-  // 컴포넌트가 화면에 처음 나타났을 때 실행되는 초기화 로직.
   mounted() {
     this.addMessage('bot', '안녕하세요 챗봇입니다!\n무엇을 도와드릴까요?', { questions: questionList });
     this.resetLastButtonScroll();
   },
-
-  // 컴포넌트의 주요 기능들을 정의하는 함수(메소드)들.
   methods: {
-    // '자가진단' 링크를 클릭하면 해당 페이지로 이동시킴.
     goToSurveyPage() {
+      console.log('ChatbotWindow에서 자가진단 페이지로 이동합니다.');
       this.$router.push('SurveyMain');
     },
-
-    // 새 메시지가 추가될 때마다 화면 스크롤을 맨 아래로 내림.
     scrollToBottom() {
+      this.$nextTick(() => {
+        const el = this.$refs.chatHistoryRef;
+        if (el) {
+          el.scrollTop = el.scrollHeight;
+        }
+      });
     },
-
-    // 대화 배열(messages)에 새로운 메시지를 추가하는 함수.
     addMessage(role, content, options = {}) {
+      this.messages.push({
+        id: this.idCounter++,
+        role,
+        content,
+        questions: options.questions || [],
+        imageUrl: options.imageUrl || null,
+        highlightMode: options.highlightMode || 'numbered',      });
+      this.scrollToBottom();
     },
-
-    // 최종 결과(기관 정보)를 보기 좋은 카드 형태로 만들어 출력하는 함수.
     async displayFinalCard(centersData, defaultMessage) {
+      if (centersData && Array.isArray(centersData) && centersData.length > 0) {
+        centersData.forEach(center => {
+          let cardContent = `<strong>${center.name}</strong>\n\n` +
+              `[주소] : ${center.address}\n\n` +
+              // 연락처를 tel: 링크로 만듭니다.
+              `[연락처] : <a href="tel:${center.contact}" class="info-link">${center.contact}</a>`;
 
+          if (center.website) {
+// 웹사이트를 클릭 가능한 링크로 만듭니다. 새 창에서 열리도록 target="_blank"를 추가합니다.
+            cardContent += `\n\n[홈페이지] : <a href="${center.website}" target="_blank" rel="noopener noreferrer" class="info-link">${center.website}</a>`;
+          }
+
+          this.addMessage('bot', cardContent, {});
+        });
+      } else {
+        this.addMessage('bot', defaultMessage);
+      }
+      this.addMessage('bot', '다른 궁금한 점이 있으신가요?', { questions: questionList });
+      this.resetLastButtonScroll();
     },
-
-    // 단어 뒤에 붙는 조사 '이/가'를 문법에 맞게 선택해주는 유틸리티 함수.
     getParticle(word) {
+      if (typeof word !== 'string' || word.length === 0) {
+        return '가';
+      }
+      const pureWord = word.replace(/<[^>]*>?/g, '');
+      const lastChar = pureWord.charCodeAt(pureWord.length - 1);
+      if (lastChar < 0xac00 || lastChar > 0xd7a3) {
+        return '가';
+      }
+      const hasJongseong = (lastChar - 0xac00) % 28 > 0;
+      return hasJongseong ? '이' : '가';
     },
-
-    // 가로로 스크롤되는 버튼 목록의 스크롤 위치를 맨 처음으로 되돌림.
     async resetLastButtonScroll() {
+      await this.$nextTick();
+      const allButtonContainers = this.$el.querySelectorAll('.button-list-container');
+      if (allButtonContainers.length > 0) {
+        const lastButtonContainer = allButtonContainers[allButtonContainers.length - 1];
+        if (lastButtonContainer) {
+          lastButtonContainer.scrollLeft = 0;
+        }
+      }
     },
-
-    // 사용자가 버튼을 클릭했을 때(@select), 그 선택에 따라 다음 행동을 결정함.
     async handleSelect(selectedItem) {
-      // 사용자의 선택을 채팅창에 표시하고,
-      // 선택한 버튼의 정보(action, key 등)를 바탕으로 switch 문을 통해 분기 처리.
-      // 각 case에 따라 다음 질문을 보여주거나, 답변을 찾거나, 최종 정보를 표시함.
+      if (!selectedItem || !selectedItem.label) {
+        console.error('handleSelect: 잘못된 selectedItem 객체입니다.', selectedItem);
+        return;
+      }
+      const userQueryText = selectedItem.label;
+      const particle = this.getParticle(userQueryText);
+      this.addMessage('user', `"${userQueryText}"${particle} 궁금해요`);
+
       const { action, key, label, source } = selectedItem;
+
+      if (!action) {
+        if (key === '재활 센터') {
+          this.addMessage('bot', '어떤 기관을 안내해 드릴까요?', { questions: rehabCategories });
+        } else if (key === '치료 기관') {
+          this.addMessage('bot', '안내를 원하시는 권역을 선택해주세요.', { questions: counselingProvinces });
+        } else {
+          const rawAnswer = getBotAnswer(key);
+          const highlightMode = key === '신고 방법' ? 'subheadings_only' : 'numbered';
+          this.addMessage('bot', rawAnswer, { questions: questionList, highlightMode });
+        }
+        this.resetLastButtonScroll();
+        return;
+      }
+
+      switch (action) {
+        case 'select_category': {
+          this.currentCategory = key;
+          const nextQuestions = key === 'addiction_center'
+              ? seoulAddictionCenters.buttons
+              : nationwideDrugCenters.provinces;
+          const message = '안내를 원하시는 권역을 선택해주세요.'; // 메시지를 좀 더 범용적으로 변경
+          this.addMessage('bot', message, { questions: nextQuestions });
+          this.resetLastButtonScroll();
+          break;
+        }
+
+        case 'select_province':
+        case 'select_counseling_province': {
+          let subRegionsSource, dataSource;
+
+          if (action === 'select_counseling_province') {
+            subRegionsSource = counselingSubRegions;
+            dataSource = counselingCenterData;
+          } else { // 'select_province'일 경우
+            if (this.currentCategory === 'addiction_center') {
+// 중독관리센터를 선택했을 경우, seoulAddictionCenters 데이터를 사용
+              subRegionsSource = seoulAddictionCenters.subRegions;
+              dataSource = seoulAddictionCenters.data;
+            } else {
+// 그 외 (한걸음센터 등)의 경우, nationwideDrugCenters 데이터를 사용
+              subRegionsSource = nationwideDrugCenters.subRegions;
+              dataSource = nationwideDrugCenters.data;
+            }
+          }
+
+          const subRegions = subRegionsSource[label];
+
+          if (subRegions) {
+            this.addMessage('bot', `${label}의 하위 지역을 선택해주세요.`, { questions: subRegions });
+            this.resetLastButtonScroll();
+          } else {
+            const centersData = dataSource[label] || [];
+            const defaultMsg = '해당 지역의 정보가 아직 등록되지 않았습니다.';
+            await this.displayFinalCard(centersData, defaultMsg);
+          }
+          break;
+        }
+
+        case 'show_final_info':
+        case 'show_counseling_info': {
+          let centersData = [];
+          let defaultMsg = '';
+
+          if (action === 'show_counseling_info') {
+            centersData = counselingCenterData[label] || [];
+            defaultMsg = '해당 지역의 치료기관 정보가 아직 등록되지 않았습니다.';
+          } else {
+// <<< [수정 5] 'seoul_addiction'이 아닌 정확한 source 'addiction_center'로 확인합니다.
+            centersData = (source === 'addiction_center'
+                ? seoulAddictionCenters.data[label]
+                : nationwideDrugCenters.data[label]) || [];
+            defaultMsg = '해당 지역의 재활기관 정보가 아직 등록되지 않았습니다.';
+          }
+
+          await this.displayFinalCard(centersData, defaultMsg);
+          break;
+        }
+      }
     }
   }
 };
@@ -110,7 +224,6 @@ export default {
 
 <style scoped>
 
-/* 챗봇 창 전체의 크기와 기본 레이아웃을 정의. */
 .chatbot-window {
   display: flex;
   flex-direction: column;
@@ -121,22 +234,16 @@ export default {
   border-radius: 8px;
   overflow: hidden;
 }
-
-/* 메시지들이 보이는 스크롤 영역의 디자인을 정의. */
 .chat-history {
   flex-grow: 1;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 15px;
-  padding-bottom: 80px; // 하단 바에 버튼이 가려져 새로 추가.
+  padding-bottom: 80px;
 }
-
-/* 질문 버튼 목록이 있는 영역의 위쪽 여백을 설정함. */
 .button-area {
   padding-top: 12px;
 }
-
-/* 자식 컴포넌트(ChatMessage) 내부의 스타일을 직접 수정하기 위해 사용함. */
 :deep(.chat-message.bot .message-bubble) {
   max-width: 350px;
   word-wrap: break-word;

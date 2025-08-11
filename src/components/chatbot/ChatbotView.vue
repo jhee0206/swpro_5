@@ -26,7 +26,7 @@ export default {
   },
 
   methods: {
-    // 뒤로가기 버튼을 누르면 'CardNewsMain' 페이지로 이동시키는 함수.
+// 뒤로가기 버튼을 누르면 'CardNewsMain' 페이지로 이동시키는 함수.
     goToCardNewsMain() {
       this.$router.push({ name: 'CardNewsMain' });
     },
