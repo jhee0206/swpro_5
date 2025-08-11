@@ -88,15 +88,6 @@ function handleNext() {
             </div>
           </div>
         </div>
-        <div class="bg-blue-50 text-[#777] border border-gray-200 p-[12px]"> <!-- 안내사항 -->
-          <div> <!-- 안내사항1 -->
-            <p>. 만약 모든 답변이 <span>'아니오'</span>일 경우<span>-> 면담 중단</span></p>
-            <p class="text-[11px]">(이 경우, 학교에 다녔던 시기에도 하지 않았는지 확인한다.)</p>
-          </div>
-          <div class="flex"> <!-- 안내사항2 -->
-            <p>. 만약 한가지라도 답변이 <span>'예'</span>일 경우<span>-> Q2로 이동</span></p>
-          </div>
-        </div>
       </div>
     </div>
     <div class="flex justify-end pt-[12px] mb-[65px]"> <!-- 다음버튼 -->

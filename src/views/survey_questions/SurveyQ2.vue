@@ -119,14 +119,6 @@ function handleNext() {
             </div>
           </div>
         </div>
-        <div class="bg-blue-50 text-[#777] border border-gray-200 p-[12px]"> <!-- 안내사항 -->
-          <div> <!-- 안내사항1 -->
-            <p>. 만약 모든 답변이 <span>'전혀없음'</span>일 경우<span>-> Q6로 이동</span></p>
-          </div>
-          <div class="flex"> <!-- 안내사항2 -->
-            <p>. 만약 답변이 <span>'전혀없음'</span>에 해당 되지 않을 경우<span>-> Q3로 이동</span></p>
-          </div>
-        </div>
       </div>
     </div>
     <div class="flex justify-end pt-[12px] mb-[65px]"> <!-- 다음버튼 -->
