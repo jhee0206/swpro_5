@@ -21,7 +21,7 @@ const items = ref([
 ])
 
 function handlePrev() {
-  router.push('/')
+  router.push({ name: "SurveyMain" })
 }
 function handleNext() {
   // 1. 모든 문항에 체크했는지 검사
@@ -49,7 +49,9 @@ function handleNext() {
 
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader/>
+    <FixedHeader
+        prevLink="이전으로"
+        @prev="handlePrev"/>
     <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
       <div> <!-- 세부 질문 -->
         <div> <!-- 질문지 -->

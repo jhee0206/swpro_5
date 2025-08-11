@@ -21,7 +21,7 @@ onMounted(() => {
 })
 
 function handlePrev() {
-  router.push('/')
+  router.push({ name: "SurveyMain" })
 }
 
 // 다음 버튼 클릭 시 모든 항목 체크 여부 등 유효성 검사
@@ -41,7 +41,9 @@ function handleNext() {
 
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader/>
+    <FixedHeader
+        prevLink="이전으로"
+        @prev="handlePrev"/>
     <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
       <div> <!-- 세부 질문 -->
         <div> <!-- 질문지 -->
