@@ -9,11 +9,18 @@ const router = useRouter()
 function handleNext() {
   router.push('/survey/q1')
 }
+
+function handlePrev() {
+  router.push({ name: 'CardNewsMain' })
+}
 </script>
 
 <template>
   <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader/>
+    <FixedHeader
+      prevLink="이전으로"
+      @prev="handlePrev"
+    />
     <div class="w-full"> <!-- 컨텐츠 -->
       <div class="w-full border-[1px] border-[#456] rounded-[8px] p-[12px]">
         <p class="p-[12px] font-bold">설문 소개</p>

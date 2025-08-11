@@ -2,11 +2,22 @@
 // title이라는 prop(문자열) 선언
 const props = defineProps<{
   title?: string
+  prevLink?: string
 }>()
+
+const emit = defineEmits(['prev'])
 </script>
 
 <template>
   <div class="mb-[32px]">
+    <div>
+      <button
+          class="button"
+          v-if="prevLink"
+          @click="$emit('prev')">
+        {{ prevLink || '이전으로' }}
+      </button>
+    </div>
     <p class="survey-title">{{ props.title || 'ASSIST 검사' }}</p>
   </div>
 </template>
