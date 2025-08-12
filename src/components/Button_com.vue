@@ -26,7 +26,7 @@ export default {
       return {
         padding: '5px 15px',
         fontSize: '18px',
-        backgroundColor: 'rgba(23,85,243,0.95)',
+        backgroundColor: '#2260FF',
         color: 'white',
         border: 'none',
         borderRadius: '8px',
