@@ -1,32 +1,23 @@
 <!-- components/ExpandableText.vue -->
 <template>
-  <span>
-    <span class="text-content" v-html="displayTextWithBr"></span>
-    <div v-if ="isTooLong" class="button-wrapper">
-      <button v-if="isTooLong" @click="toggleExpansion" class="expand-button">
-        {{ buttonText }}
-      </button>
-    </div>
-  </span>
+<span>
+<!-- @click 이벤트 핸들러는 그대로 유지합니다. -->
+<span class="text-content" v-html="displayTextWithBr" @click="handleContentClick"></span>
+<div v-if="isTooLong" class="button-wrapper">
+<button @click="toggleExpansion" class="expand-button">
+{{ buttonText }}
+</button>
+</div>
+</span>
 </template>
-
 
 <script>
 export default {
   name: 'ExpandableText',
   props: {
-    text: {
-      type: String,
-      required: true
-    },
-    maxLength: {
-      type: Number,
-      default: 80
-    },
-    highlightMode: {
-      type: String,
-      default: 'numbered'
-    }
+    text: { type: String, required: true },
+    maxLength: { type: Number, default: 80 },
+    highlightMode: { type: String, default: 'numbered' }
   },
   data() {
     return {
@@ -64,11 +55,17 @@ export default {
   methods: {
     toggleExpansion() {
       this.isExpanded = !this.isExpanded;
+    },
+    handleContentClick(event) {
+// 클릭된 요소가 'app-link' 클래스를 가지고 있는지 확인
+      if (event.target.classList.contains('app-link')) {
+// 페이지 이동 대신, 'navigate'라는 이름의 이벤트를 부모에게 보냄.
+        this.$emit('navigate');
+      }
     }
   }
 };
 </script>
-
 
 <style scoped>
 .text-content {
@@ -76,10 +73,20 @@ export default {
   overflow-wrap: break-word;
 }
 .expand-button {
-  background: none; border: none; color: #007bff; cursor: pointer;
-  padding: 0; margin-left: 5px; font-size: 15px; font-weight: 600;
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 5px;
+  font-size: 15px;
+  font-weight: 600;
 }
 .expand-button:hover {
   text-decoration: underline;
+}
+
+.button-wrapper {
+  margin-top: 12px;
 }
 </style>

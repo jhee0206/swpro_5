@@ -1,17 +1,16 @@
 <!-- src/views/ChatbotView.vue -->
 <template>
+
   <div>
+    <!-- 페이지 상단 제목과 뒤로가기 버튼 -->
     <div class="title-container">
-      <!-- 뒤로가기 화살표 버튼 -->
       <div class="back-button" @click="goToCardNewsMain">
         <span class="arrow">&larr;</span>
       </div>
-
-      <!-- 제목 텍스트 -->
       <p>챗봇에게 물어보세요!</p>
     </div>
 
-    <!-- 챗봇 창 컴포넌트 -->
+    <!-- 실제 대화가 이루어지는 챗봇 창 -->
     <div>
       <ChatbotWindow />
     </div>
@@ -22,29 +21,26 @@
 import ChatbotWindow from '@/components/chatbot/ChatbotWindow.vue';
 
 export default {
-  name: 'ChatbotView',
   components: {
     ChatbotWindow,
   },
+
   methods: {
+// 뒤로가기 버튼을 누르면 'CardNewsMain' 페이지로 이동시키는 함수.
     goToCardNewsMain() {
-      if (this.$router) {
-        this.$router.push({ name: 'CardNewsMain' });
-      } else {
-        console.error('Vue Router is not configured.');
-      }
+      this.$router.push({ name: 'CardNewsMain' });
     },
   },
 };
 </script>
 
 <style scoped>
+
+/* 제목 영역의 전체적인 레이아웃과 디자인을 정의. */
 .title-container {
   width: 100%;
   box-sizing: border-box;
   padding: 20px 16px;
-  color: black;
-  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,15 +49,15 @@ export default {
   border-image-slice: 1;
 }
 
-/* 제목 텍스트 스타일 */
+/* "챗봇에게 물어보세요!" 제목 텍스트의 글씨 크기, 굵기, 색상을 지정. */
 .title-container p {
   margin: 0;
-  font-size: 22px; /* 글씨 크기 키움 */
-  font-weight: 600; /* 굵은 글씨 */
-  color: #2c3e50; /* 약간 톤 다운된 색상 */
+  font-size: 22px;
+  font-weight: 600;
+  color: #2c3e50;
 }
 
-/* 화살표 버튼 스타일 */
+/* 뒤로가기 버튼과 화살표의 모양, 동작을 정의. */
 .back-button {
   background-color: transparent;
   border: none;
@@ -70,14 +66,12 @@ export default {
   display: flex;
   align-items: center;
 }
-
 .arrow {
   font-size: 32px;
   font-weight: bold;
   color: #333;
   transition: color 0.2s;
 }
-
 .back-button:hover .arrow {
   color: #0056b3;
 }

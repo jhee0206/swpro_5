@@ -9,6 +9,7 @@
             :content="msg.content"
             :highlight-mode="msg.highlightMode"
             :image-url="msg.imageUrl"
+            @navigate="goToSurveyPage"
         />
       </template>
 
@@ -62,6 +63,10 @@ export default {
     this.resetLastButtonScroll();
   },
   methods: {
+    goToSurveyPage() {
+      console.log('ChatbotWindow에서 자가진단 페이지로 이동합니다.');
+      this.$router.push('SurveyMain');
+    },
     scrollToBottom() {
       this.$nextTick(() => {
         const el = this.$refs.chatHistoryRef;
@@ -75,21 +80,24 @@ export default {
         id: this.idCounter++,
         role,
         content,
-        ...options,
-      });
+        questions: options.questions || [],
+        imageUrl: options.imageUrl || null,
+        highlightMode: options.highlightMode || 'numbered',      });
       this.scrollToBottom();
     },
     async displayFinalCard(centersData, defaultMessage) {
       if (centersData && Array.isArray(centersData) && centersData.length > 0) {
         centersData.forEach(center => {
-          let cardContent =
-              `${center.name}\n\n` +
+          let cardContent = `<strong>${center.name}</strong>\n\n` +
               `[주소] : ${center.address}\n\n` +
-              `[연락처] : ${center.contact}`;
+              // 연락처를 tel: 링크로 만듭니다.
+              `[연락처] : <a href="tel:${center.contact}" class="info-link">${center.contact}</a>`;
 
           if (center.website) {
-            cardContent += `\n\n[홈페이지] : ${center.website}`;
+// 웹사이트를 클릭 가능한 링크로 만듭니다. 새 창에서 열리도록 target="_blank"를 추가합니다.
+            cardContent += `\n\n[홈페이지] : <a href="${center.website}" target="_blank" rel="noopener noreferrer" class="info-link">${center.website}</a>`;
           }
+
           this.addMessage('bot', cardContent, {});
         });
       } else {
@@ -166,11 +174,11 @@ export default {
             dataSource = counselingCenterData;
           } else { // 'select_province'일 경우
             if (this.currentCategory === 'addiction_center') {
-              // 중독관리센터를 선택했을 경우, seoulAddictionCenters 데이터를 사용
+// 중독관리센터를 선택했을 경우, seoulAddictionCenters 데이터를 사용
               subRegionsSource = seoulAddictionCenters.subRegions;
               dataSource = seoulAddictionCenters.data;
             } else {
-              // 그 외 (한걸음센터 등)의 경우, nationwideDrugCenters 데이터를 사용
+// 그 외 (한걸음센터 등)의 경우, nationwideDrugCenters 데이터를 사용
               subRegionsSource = nationwideDrugCenters.subRegions;
               dataSource = nationwideDrugCenters.data;
             }
@@ -198,7 +206,7 @@ export default {
             centersData = counselingCenterData[label] || [];
             defaultMsg = '해당 지역의 치료기관 정보가 아직 등록되지 않았습니다.';
           } else {
-            // <<< [수정 5] 'seoul_addiction'이 아닌 정확한 source 'addiction_center'로 확인합니다.
+// <<< [수정 5] 'seoul_addiction'이 아닌 정확한 source 'addiction_center'로 확인합니다.
             centersData = (source === 'addiction_center'
                 ? seoulAddictionCenters.data[label]
                 : nationwideDrugCenters.data[label]) || [];
@@ -231,6 +239,7 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   padding: 15px;
+  padding-bottom: 80px;
 }
 .button-area {
   padding-top: 12px;

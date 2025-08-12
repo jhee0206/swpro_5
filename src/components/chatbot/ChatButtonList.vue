@@ -42,8 +42,8 @@ export default {
   display: none; /* Chrome, Safari, Opera */
 }
 .button-list-container {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 

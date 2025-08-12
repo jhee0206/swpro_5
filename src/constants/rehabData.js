@@ -16,7 +16,7 @@ export const rehabCategories = [
 
 /**
  * 중독관리통합지원센터(전국) 데이터
- * import 에러 해결을 위해 변수명을 원래 이름으로 복원하고 export 합니다.
+ * import 에러 해결을 위해 변수명을 원래 이름으로 복원하고 export 함.
  */
 export const seoulAddictionCenters = {
     buttons: [
