@@ -28,11 +28,11 @@
         <div class="checklist-item">
           <strong>1. 오늘의 기분</strong>
           <div class="radio-group">
-            <label><input type="radio" name="water" value="best" v-model="checklist.water" /> 아주 좋아요</label>
-            <label><input type="radio" name="water" value="good" v-model="checklist.water" /> 좋아요</label>
-            <label><input type="radio" name="water" value="soso" v-model="checklist.water" /> 그저그래요</label>
-            <label><input type="radio" name="water" value="bad" v-model="checklist.water" /> 나빠요</label>
-            <label><input type="radio" name="water" value="vlevle" v-model="checklist.water" /> 매우 나빠요</label>
+            <label><input type="radio" name="mood" value="best" v-model="checklist.mood" /> <span class="radio-circle"></span>매우 좋아요</label>
+            <label><input type="radio" name="mood" value="good" v-model="checklist.mood" /><span class="radio-circle"></span> 좋아요</label>
+            <label><input type="radio" name="mood" value="soso" v-model="checklist.mood" /><span class="radio-circle"></span>그저그래요</label>
+            <label><input type="radio" name="mood" value="bad" v-model="checklist.mood" /><span class="radio-circle"> </span>나빠요</label>
+            <label><input type="radio" name="mood" value="vlevle" v-model="checklist.mood" /> <span class="radio-circle"></span>매우 나빠요</label>
           </div>
         </div>
 
@@ -124,6 +124,7 @@ export default {
       entryMood: "",
       entryPhrase: "",
       checklist: {
+        mood: "",
         water: "",
         hour: "",
         meals: [], // checkbox용 배열로 변경
@@ -157,7 +158,7 @@ export default {
     },
     saveJournal: async function () {
       const elementToCapture = document.getElementById("journal-content-to-capture");
-
+      //this.entryDate = "2025.09.23";
       if (elementToCapture) {
         setTimeout(async () => {
           try {
