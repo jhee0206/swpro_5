@@ -1,30 +1,23 @@
 <template>
   <div class="detail-container">
-    <div class="image-list">
+    <BackButton :to="'/NextDetailWindow'"/>
+    <div class="image-list" ref="imageList">
       <img
-        v-for="(img,index) in getImageList"
-        :key="index"
-        :src="getImagePath(img)"
-        class="card-news"
-        />
+          v-for="(img,index) in getImageList"
+          :key="index"
+          :src="getImagePath(img)"
+          class="card-news"
+      />
     </div>
-    <Button_com
-        :customStyle="{ marginTop: 'auto', alignSelf: 'flex-end', padding: '15px 15px'}"
-        label="이전으로"
-        @click="goBackToCardSelection"
-    />
-    <!--<button class="arrow-button_reverse" @click="goBackToCardSelection">
-      이전으로
-    </button>-->
   </div>
 </template>
 
 <script>
-import Button_com from "@/components/Button_com.vue";
+import BackButton from "@/components/BackButton.vue";
 
 export default {
   name: 'CardNewsDetail',
-  components: {Button_com},
+  components: {BackButton},
   data() {
     return {
       type: this.$route.query.type,
@@ -36,7 +29,7 @@ export default {
           '마약 한번이면 중독004.png','마약 한번이면 중독005.png','마약 한번이면 중독006.png',
           '마약 한번이면 중독007.png','마약 한번이면 중독008.png'],
         sub2: ['작은 방심001.png','작은 방심 002.png','작은 방심003.png','작은 방심004.png','작은 방심 005.png',
-          '작은 방심 006.png','작은 방심007.png','작은 방심008.png','작은 방심009.png','작은 방심010.png',],
+          '작은 방심 006.png','작은 방심007.png','작은 방심008.png','작은 방심009.png','작은 방심010.png'],
         sub3: ['건강을 지켜라 001.png','건강을 지켜라002.png','건강을 지켜라 003.png','건강을 지켜라004.png',
           '건강을 지켜라005.png','건강을 지켜라006.png','건강을 지켜라 007.png'],
         sub4: ['얼마나001.png','얼마나 002.png','얼마나 003.png','얼마나004.png','얼마나 005.png',
@@ -61,15 +54,36 @@ export default {
       return this.imageMap[this.type] || [];
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      const images = this.$refs.imageList.querySelectorAll('img');
+      let loadedCount = 0;
+
+      images.forEach(img => {
+        if (img.complete) {
+          loadedCount++;
+        } else {
+          img.onload = () => {
+            loadedCount++;
+            if (loadedCount === images.length) {
+              this.scrollToFirst();
+            }
+          };
+        }
+      });
+
+      if (loadedCount === images.length) {
+        this.scrollToFirst();
+      }
+    });
+  },
   methods: {
     getImagePath(filename) {
       return `/${this.type}/${filename}`;
     },
-    goBackToCardSelection() {
-      if(this.type === 'main'){
-        this.$router.push('/CardNewsMain');
-      }else{
-        this.$router.push('/NextDetailWindow');
+    scrollToFirst() {
+      if (this.$refs.imageList) {
+        this.$refs.imageList.scrollLeft = 0;
       }
     }
   }
@@ -86,16 +100,30 @@ export default {
 
 .image-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  height: 100vh;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
+  justify-content: flex-start;
 }
 
 .card-news {
+  flex: 0 0 100%;
   max-width: 100%;
   height: auto;
   display: block;
+  scroll-snap-align: start;
 }
 
+.arrow{
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 28px;
+  color: #333333;
+  z-index: 100;
+}
 </style>

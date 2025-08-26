@@ -4,6 +4,10 @@
       <img src="/icon/home.svg" class="icon" alt="홈"/>
       <span class="label">홈</span>
     </div>
+      <div class="nav-item" @click="goTo('NextDetailWindow')">
+        <!--<img src="/icon/placeholder.svg" class="icon" alt="카드뉴스"/>-->
+        <span class="label">카드뉴스</span>
+      </div>
     <div class="nav-item" @click="goTo('ChatbotView')">
       <img src="/icon/chat.svg" class="icon" alt="챗봇"/>
       <span class="label">챗봇</span>
@@ -37,7 +41,7 @@ export default {
   left: 0;
   right: 0;
   height: 65px;
-  background-color: #ffaeb2;
+  background-color: rgba(127, 135, 156, 0.13);
   justify-content:space-between;
   display: flex;
   padding: 0 25px;
@@ -61,6 +65,6 @@ export default {
 
 .label {
   font-size: 11px;
-  color: #ffffff;
+  color: #000000;
 }
 </style>

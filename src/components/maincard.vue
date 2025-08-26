@@ -1,17 +1,11 @@
 <template>
   <div class="container">
     <h1 class="headline">
-      중독은 어제로, 행복은 오늘로
+      로고!
     </h1>
-    <hr class="divider" />
     <div class="button-grid" >
-      <button class="nav-button" @click="goToNextPage('education')">카드뉴스</button>
-      <button class="nav-button" @click="goToNextPage('SurveyMain')">자가진단</button>
-      <button class="nav-button" @click="goToNextPage('ChatbotView')">챗봇</button>
-      <button class="nav-button" @click="goToNextPage('MyRecord')">하루톡</button>
+      <button class="nav-button" @click="goToNextPage('education')">슬로건 자리</button>
   </div>
-
-    <hr class="divider" />
 
     <div class="info-mes">
     <p class="info-text">
@@ -52,25 +46,18 @@ export default {
 .headline{
   font-size:24px;
   font-weight:bold;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   line-height: 1.5;
 }
-.divider {
-  width: 100%;
-  margin: 20px auto;
-  border: none;
-  height: 1px;
-  background-color: #2260FF;
-}
+
 
 .button-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  padding: 20px;
+  padding: 0 20px;
+  margin-bottom: 20px;
 }
 
 .nav-button {
+  width: 100%;
   background-color: white;
   color: rgba(90, 114, 170, 0.81);
   padding: 30px 10px;

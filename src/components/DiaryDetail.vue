@@ -2,18 +2,14 @@
   <div class="image-wrapper">
     <img :src="imageData" alt="캡처된 일기 이미지" class="captured-image" />
   </div>
-  <Button_com
-      :customStyle="{ marginTop: 'auto', alignSelf: 'flex-end', padding: '10px 10px'}"
-      label="이전으로"
-      @click="goBack"
-  />
+  <BackButton :to="'/DiarList'"/>
 </template>
 
 <script>
-import Button_com from "@/components/Button_com.vue";
+import BackButton from "@/components/BackButton.vue";
 
 export default {
-  components: {Button_com},
+  components: {BackButton},
   data() {
     return {
       imageData: null,
@@ -31,12 +27,6 @@ export default {
     } else {
       // 혹시 모를 오류에 대비 (예: 해당 id의 글이 없을 경우)
       alert("일지를 찾을 수 없습니다.");
-      this.$router.push('/DiarList');
-    }
-  },
-
-  methods: {
-    goBack() {
       this.$router.push('/DiarList');
     }
   }

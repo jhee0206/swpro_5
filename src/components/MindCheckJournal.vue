@@ -157,6 +157,10 @@ export default {
       });
     },
     saveJournal: async function () {
+      const waterBad = ["1cup", "2_4cup", "11cup"];
+      const hourBad = ["4hour", "5_6hour", "10hour"];
+      const exerciseBad = ["no"];
+
       const elementToCapture = document.getElementById("journal-content-to-capture");
       //this.entryDate = "2025.09.23";
       if (elementToCapture) {
@@ -188,7 +192,15 @@ export default {
             localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
 
             alert("일지 저장 완료!");
-            this.$router.push("/DiarList");
+            if (
+                waterBad.includes(this.checklist.water) ||
+                hourBad.includes(this.checklist.hour) ||
+                exerciseBad.includes(this.checklist.exercise)
+            ) {
+              this.$router.push("/Cheerup");
+            } else {
+              this.$router.push("/DiarList");
+            }
           } catch (error) {
             console.error("이미지 캡처 및 저장 중 오류 발생:", error);
             alert("일지 저장 중 오류가 발생했습니다.");

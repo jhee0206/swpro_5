@@ -1,13 +1,7 @@
 <template>
-  <header class="header">
-    <div class="top-section">
-      <div class="back-button" @click="goToMyRecord">
-        <span class="arrow">&larr;</span>
-      </div>
-    </div>
-  </header>
+      <BackButton :to="'/MyRecord'"/>
   <div class="content">
-    <h2>마음 체크 일지</h2>
+    <h2><br>마음 체크 일지</h2>
     <p>
       <strong>"나의 하루를 한 문장으로 표현해주세요."</strong><br>
       하루를 돌아보며, 지금의 감정이나 생각을 짧은 문장으로 남겨보세요.
@@ -50,11 +44,16 @@
     <button class="action-button" @click="goToDiaryList">내가 쓴 일지</button>
     <button class="action-button" @click="goToMindCheckJournal">새 일지 쓰기</button>
   </div>
+  <NavigationBar />
 </template>
 
 <script>
+import NavigationBar from "@/components/NavigationBar.vue";
+import BackButton from "@/components/BackButton.vue";
+
 export default {
   name: 'JournalImage',
+  components: {BackButton, NavigationBar},
   data() {
     return {
       activeContent: null // 현재 열려 있는 항목 ID
@@ -109,7 +108,7 @@ export default {
   margin: 20px auto 40px;
   justify-content: center;
   align-items: center;
-  padding-bottom: 40px;
+  padding-bottom: 70px;
 }
 .action-button {
   width: 150px;

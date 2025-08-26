@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <BackButton :to="'/CardNewsMain'"/>
-    <h1 class="headline"><br>오늘은 어떤 카드뉴스가<br> 궁금하세요? </h1>
+    <BackButton :to="'/DiarList'"/>
+    <h1 class="headline"><br>...영역이 부족하시네요. <br><br>아래의 카드뉴스를 확인해 봅시다!</h1>
     <div class ="card-grid">
       <button
           v-for="(card, index) in cardList"
@@ -27,16 +27,9 @@ export default {
   data(){
     return{
       cardList:[
-        { type: "sub0", image: "/sub0/sns속 마약 유혹 001.png" },
-        { type: "sub1", image: "/sub1/마약 한번이면 중독001.png" },
-        { type: "sub2", image: "/sub2/작은 방심001.png" },
-        { type: "sub3", image: "/sub3/건강을 지켜라 001.png" },
-        { type: "sub4", image: "/sub4/얼마나001.png" },
-        { type: "sub5", image: "/sub5/어떻게 치료하지001.png" },
-        { type: "sub6", image: "/sub6/유형 및 처벌001.png" },
-        { type: "sub7", image: "/sub7/탈마약중독001.png" },
-        { type: "sub8", image: "/sub8/이게마약 001.png"},
-        { type: "sub9", image: "/sub9/마약 경로와 예방법001.png" }
+        { type: "cheer01", image: "/cheer01/운동할결심01.png" },
+        { type: "cheer02", image: "/cheer02/올바른물섭취01.jpg" },
+        { type: "cheer03", image: "/cheer03/건강한수면습관01.png" }
       ],
     };
   },
@@ -44,7 +37,7 @@ export default {
     goToDetail(type) {
       this.$router.push({ path: '/detail', query: { type } });
     },
-    }
+  }
 };
 </script>
 

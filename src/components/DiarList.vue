@@ -1,5 +1,6 @@
 <template>
   <div class="diary-list-container">
+    <BackButton :to="'/CardNewsMain'"/>
     <div class="top-bar">
       <h2>내가 쓴 일지</h2>
       <span class="sort-label">최신순</span>
@@ -22,10 +23,11 @@
 <script>
 
 import NavigationBar from "@/components/NavigationBar.vue";
+import BackButton from "@/components/BackButton.vue";
 
 export default {
   name: 'DiaryList',
-  components: {NavigationBar},
+  components: {BackButton, NavigationBar},
   data() {
     return {
       diaryList: [],
@@ -69,16 +71,21 @@ export default {
   justify-content: center;
   gap: 12px;
 }
-.top-bar{
+.top-bar {
+  position: relative; /* h2 중앙 위치 기준 */
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* 최신순 span은 오른쪽 */
   align-items: center;
-  margin-bottom:25px;
+  margin-bottom: 25px;
 }
 
-.top-bar h2{
+/* 중앙 텍스트 */
+.top-bar h2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 18px;
-  margin:0;
+  margin: 0;
   color: #ff8c94;
 }
 

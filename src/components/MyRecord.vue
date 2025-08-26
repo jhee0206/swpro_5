@@ -2,9 +2,7 @@
   <div class="my-record-container">
     <header class="header">
       <div class="top-section">
-        <div class="back-button" @click="goToCardNewsMain">
-          <span class="arrow">&larr;</span>
-        </div>
+        <BackButton :to="'/CardNewsMain'"/>
       </div>
 
       <div class="title-section">
@@ -80,10 +78,11 @@
 import NavigationBar from "@/components/NavigationBar.vue";
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import BackButton from "@/components/BackButton.vue";
 
 export default {
   name: "MyRecord",
-  components: { NavigationBar },
+  components: {BackButton, NavigationBar },
   setup() {
     const router = useRouter();
     const activeContent = ref(null); // 현재 활성화된 콘텐츠의 ID를 저장합니다.
@@ -145,7 +144,6 @@ export default {
   border-bottom: 1px solid #eee;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   z-index: 10;
-  padding-bottom: 20px;
 }
 
 /* 상단 구역 (뒤로가기 버튼) */
@@ -157,18 +155,13 @@ export default {
   align-items: center;
 }
 
-.back-button {
-  font-size: 28px;
-  cursor: pointer;
-  color: #333;
-  padding: 5px;
-}
 
 /* 제목 구역 (나의 기록) */
 .title-section {
   width: 100%;
   text-align: center;
   padding-top: 20px;
+  margin-bottom: 20px;
 }
 
 .page-title {

@@ -29,6 +29,8 @@ import SurveyEnd from "@/views/survey_questions/SurveyEnd.vue";
 import SurveyResultLow from "@/views/survey_result/SurveyResultLow.vue";
 import SurveyResultMiddle from "@/views/survey_result/SurveyResultMiddle.vue";
 import SurveyResultHigh from "@/views/survey_result/SurveyResultHigh.vue";
+import Cheerup from "@/components/Cheerup.vue";
+import CheerupDetail from "@/components/Cheerup_detail.vue";
 
 const routes = [
     { path: '/SurveyMain', component: SurveyMain, name: "SurveyMain" },
@@ -89,14 +91,6 @@ const routes = [
         path: '/education',
         component: () => import('@/components/nextdetailwin.vue')
     },
-    /*{
-        path: '/news',
-        component: () => import('@/views/NewsPage.vue')
-    },*/
-    /*{
-        path: '/check',
-        component: () => import('@/views/SelfCheck.vue')
-    },*/
     {
         path: '/JournalImage',
         name: 'JournalImage',
@@ -132,8 +126,17 @@ const routes = [
         path: '/ChatButtonList',
         name: 'ChatButtonList',
         component: ChatButtonList,
+    },
+    {
+        path:'/Cheerup',
+        name:'Cheerup',
+        component: Cheerup,
+    },
+    {
+        path: '/CheerupDetail',
+        name:'Cheerup_detail',
+        component: CheerupDetail,
     }
-
 
 ];
 

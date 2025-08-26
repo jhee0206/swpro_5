@@ -4,10 +4,8 @@
   <div>
     <!-- 페이지 상단 제목과 뒤로가기 버튼 -->
     <div class="title-container">
-      <div class="back-button" @click="goToCardNewsMain">
-        <span class="arrow">&larr;</span>
-      </div>
-      <p>챗봇에게 물어보세요!</p>
+      <BackButton :to="'/CardNewsMain'"/>
+      <p class="chatbot-title">챗봇에게 물어보세요!</p>
     </div>
 
     <!-- 실제 대화가 이루어지는 챗봇 창 -->
@@ -19,9 +17,11 @@
 
 <script>
 import ChatbotWindow from '@/components/chatbot/ChatbotWindow.vue';
+import BackButton from "@/components/BackButton.vue";
 
 export default {
   components: {
+    BackButton,
     ChatbotWindow,
   },
 
@@ -40,13 +40,14 @@ export default {
 .title-container {
   width: 100%;
   box-sizing: border-box;
-  padding: 20px 16px;
+  padding: 20px 16px 40px 16px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: center; /* 수직 가운데 */
   border-bottom: 3px solid transparent;
   border-image: linear-gradient(to right, #007bff, #87cefa);
   border-image-slice: 1;
+  justify-content: flex-start; /* 왼쪽 정렬 기준으로 변경 */
+  position: relative;
 }
 
 /* "챗봇에게 물어보세요!" 제목 텍스트의 글씨 크기, 굵기, 색상을 지정. */
@@ -57,22 +58,15 @@ export default {
   color: #2c3e50;
 }
 
-/* 뒤로가기 버튼과 화살표의 모양, 동작을 정의. */
-.back-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
+.chatbot-title {
+  position: absolute;
+  top: 26px;      /* 화살표와 동일한 top 값 */
+  right: 16px;    /* 오른쪽 패딩 */
+  font-size: 30px;
+  font-weight: 800;
+  color: #2c3e50;
+  margin: 0;
+  line-height: 1;
 }
-.arrow {
-  font-size: 32px;
-  font-weight: bold;
-  color: #333;
-  transition: color 0.2s;
-}
-.back-button:hover .arrow {
-  color: #0056b3;
-}
+
 </style>
