@@ -6,6 +6,10 @@
       <span class="sort-label">최신순</span>
     </div>
 
+    <div v-if="showPopup" class="popup-message">
+      {{ popupMessage }}
+    </div>
+
     <div class="diary-button-list">
       <div
           v-for="(entry) in sortedDailyList"
@@ -31,6 +35,8 @@ export default {
   data() {
     return {
       diaryList: [],
+      showPopup: false,
+      popupMessage: "",
     };
   },
   computed: {
@@ -45,10 +51,47 @@ export default {
   mounted() {
     const stored = localStorage.getItem('diaryList');
     this.diaryList = stored ? JSON.parse(stored) : [];
+
+    this.checkMilestonePopup();
   },
+  watch: {
+    diaryList(newList, oldList) {
+      if (newList.length > oldList.length) {
+        this.checkMilestonePopup();
+      }
+    },
+    $route(to, from) {
+      const stored = JSON.parse(localStorage.getItem('diaryList')) ||[];
+      if(stored.length !== this.diaryList.length) {
+        this.diaryList = stored;
+        this.checkMilestonePopup();
+      }
+    }
+  },
+
   methods: {
     viewDiary(entry) {
-      this.$router.push({path: '/diarydetail', query: {id: entry.id}})
+      this.$router.push({path: '/diarydetail', query: {id: entry.id}});
+    },
+
+    checkMilestonePopup() {
+      const count = this.diaryList.length;
+
+      const messages = {
+        3: "스스로 건강을 챙기려는 노력이 이미 시작됐네요. 이렇게 기록하는 게 변화를 향한 중요한 첫걸음이에요!",
+        7: "벌써 7번이나 기록했어요! 스스로 건강을 지키려는 마음이 꾸준히 이어지고 있다는 증거예요.",
+        14: "14번째 기록까지 해내셨어요. 스스로 선택하고 실천한 결과가 이렇게 쌓여가고 있네요.",
+        30: "30번째 기록을 달성했군요! 지금까지 보여준 꾸준함이 앞으로도 건강을 지켜주는 큰 힘이 될 거예요."
+      };
+
+      if (messages[count]) {
+        this.popupMessage = messages[count];
+        this.showPopup = true;
+
+        setTimeout(() => {
+          this.showPopup = false;
+        }, 5000);
+      }
     }
   }
 }
@@ -123,5 +166,21 @@ export default {
   border-radius: 10px;
   color: #ff8c94;
 }
+
+.popup-message {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff8c94;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  z-index: 999;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
 
 </style>

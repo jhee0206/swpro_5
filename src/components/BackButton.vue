@@ -6,7 +6,10 @@
 export default {
   name: "BackButton",
   props: {
-    to: { type: String, required: true }
+    to: {
+      type: [String, Object],
+      required: true
+    }
   },
   methods: {
     handleClick() {
@@ -26,5 +29,4 @@ export default {
   z-index: 100;
   cursor: pointer;
 }
-
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <BackButton :to="'/DiarList'"/>
-    <h1 class="headline"><br>...영역이 부족하시네요. <br><br>아래의 카드뉴스를 확인해 봅시다!</h1>
+    <h1 class="headline"><br>{{ headlineMessage }} <br><br>아래의 카드뉴스를 확인해 봅시다!</h1>
     <div class ="card-grid">
       <button
           v-for="(card, index) in cardList"
@@ -33,10 +33,27 @@ export default {
       ],
     };
   },
+  computed: {
+    headlineMessage(){
+      const latestDiary = JSON.parse(localStorage.getItem("diaryList"))?.slice(-1)[0];
+      if(!latestDiary) return "영역이 부족하시네요.";
+
+      const {water, hour, exercise} = latestDiary.checklist;
+      const message = [];
+
+      if(["1cup", "2_4cup", "11cup"].includes(water)) message.push("수분");
+      if (["4hour", "5_6hour", "10hour"].includes(hour)) message.push("수면");
+      if (exercise === "no") message.push("운동");
+
+      return message.join(", ")+" 영역이 부족하시네요. "
+    }
+  },
+
   methods:{
     goToDetail(type) {
-      this.$router.push({ path: '/detail', query: { type } });
-    },
+      this.$router.push({ name: 'Cheerup_detail', params: { type } });
+    }
+
   }
 };
 </script>

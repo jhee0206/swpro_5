@@ -1,6 +1,6 @@
 <template>
   <div class="detail-container">
-    <BackButton :to="'/Cheerup'"/>
+    <BackButton :to="{ name: 'Cheerup' }"/>
     <div class="image-list" ref="imageList">
       <img
           v-for="(img,index) in getImageList"
@@ -18,9 +18,14 @@ import BackButton from "@/components/BackButton.vue";
 export default {
   name: 'Cheerup_detail',
   components: {BackButton},
+  props: {
+    type: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      type: this.$route.query.type,
       imageMap: {
         cheer01: ['운동할결심01.png','운동할결심02.png','운동할결심03.png',
           '운동할결심04.png','운동할결심05.png','운동할결심06.png','운동할결심07.png'],
@@ -34,6 +39,7 @@ export default {
   },
   computed: {
     getImageList() {
+      console.log("1234")
       return this.imageMap[this.type] || [];
     }
   },
@@ -62,7 +68,7 @@ export default {
   },
   methods: {
     getImagePath(filename) {
-      return `/${this.type}/${filename}`;
+      return `${import.meta.env.BASE_URL}${this.type}/${filename}`;
     },
     scrollToFirst() {
       if (this.$refs.imageList) {

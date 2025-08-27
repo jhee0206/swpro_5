@@ -128,15 +128,18 @@ const routes = [
         component: ChatButtonList,
     },
     {
-        path:'/Cheerup',
-        name:'Cheerup',
-        component: Cheerup,
+        path: '/Cheerup',
+        name: 'Cheerup',
+        component: () => import('@/components/Cheerup.vue')
     },
+
     {
-        path: '/CheerupDetail',
-        name:'Cheerup_detail',
-        component: CheerupDetail,
+        path: '/Cheerup_detail/:type',
+        name: 'Cheerup_detail',
+        component: () => import('@/components/Cheerup_detail.vue'),
+        props: true
     }
+
 
 ];
 
