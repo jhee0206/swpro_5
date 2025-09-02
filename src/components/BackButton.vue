@@ -1,5 +1,10 @@
 <template>
-  <span class="arrow" @click="handleClick">&larr;</span>
+  <img
+      src="/icon/back.svg"
+      alt="뒤로가기"
+      class="arrow"
+      @click="handleClick"/>
+  <!--<span class="arrow" @click="handleClick">&larr;</span>-->
 </template>
 
 <script>

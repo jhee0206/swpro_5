@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <BackButton :to="'/CardNewsMain'"/>
+    <header class="header">
     <h1 class="headline"><br>오늘은 어떤 카드뉴스가<br> 궁금하세요? </h1>
+    </header>
     <div class ="card-grid">
       <button
           v-for="(card, index) in cardList"
@@ -51,11 +52,30 @@ export default {
 <style scoped>
 .container {
   text-align: center;
-  padding: 30px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  font-family: 'Pretendard', serif;
+}
+
+.header{
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 20px;
+}
+
+.header::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #eee;
+  margin-top: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .headline {
@@ -65,11 +85,13 @@ export default {
   line-height: 1.5;
 }
 
+
 .card-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
+  padding-bottom: 80px;
 }
 
 .card-button {
@@ -77,9 +99,9 @@ export default {
   height: 150px;
   background-color: #ddd;
   border-radius: 12px;
+  border: 0.5px solid #C2C2C2;
   overflow: hidden;
   padding: 0;
-  border: none;
 }
 
 .card-image {

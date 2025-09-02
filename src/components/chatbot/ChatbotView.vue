@@ -4,7 +4,6 @@
   <div>
     <!-- 페이지 상단 제목과 뒤로가기 버튼 -->
     <div class="title-container">
-      <BackButton :to="'/CardNewsMain'"/>
       <p class="chatbot-title">챗봇에게 물어보세요!</p>
     </div>
 
@@ -40,14 +39,14 @@ export default {
 .title-container {
   width: 100%;
   box-sizing: border-box;
-  padding: 20px 16px 40px 16px;
+  padding: 20px 16px 50px 16px;
   display: flex;
   align-items: center; /* 수직 가운데 */
   border-bottom: 3px solid transparent;
-  border-image: linear-gradient(to right, #007bff, #87cefa);
-  border-image-slice: 1;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   justify-content: flex-start; /* 왼쪽 정렬 기준으로 변경 */
   position: relative;
+  font-family: 'Pretendard', serif;
 }
 
 /* "챗봇에게 물어보세요!" 제목 텍스트의 글씨 크기, 굵기, 색상을 지정. */
@@ -55,7 +54,7 @@ export default {
   margin: 0;
   font-size: 22px;
   font-weight: 600;
-  color: #2c3e50;
+  text-align: center;
 }
 
 .chatbot-title {
@@ -64,7 +63,7 @@ export default {
   right: 16px;    /* 오른쪽 패딩 */
   font-size: 30px;
   font-weight: 800;
-  color: #2c3e50;
+  color: #040404;
   margin: 0;
   line-height: 1;
 }

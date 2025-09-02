@@ -233,6 +233,7 @@ export default {
   border: none;
   border-radius: 8px;
   overflow: hidden;
+  font-family: 'Pretendard', serif;
 }
 .chat-history {
   flex-grow: 1;

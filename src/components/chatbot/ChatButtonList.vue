@@ -1,10 +1,9 @@
-<!-- src/components/chatbot/ChatButtonList.vue -->
 <template>
   <div class="button-list-container">
     <button
         v-for="question in questions"
         :key="question.key || question.label"
-        class="chat-button"
+        :class="['chat-button', { active: isActive(question) }]"
         @click="handleSelect(question)"
     >
       {{ question.label }}
@@ -21,9 +20,18 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      activeKey: null, // 현재 활성화된 버튼
+    };
+  },
   methods: {
     handleSelect(question) {
+      this.activeKey = question.key || question.label; // 활성화 표시
       this.$emit('select', question);
+    },
+    isActive(question) {
+      return this.activeKey === (question.key || question.label);
     },
   },
 };
@@ -34,37 +42,40 @@ export default {
   display: flex;
   gap: 10px;
   padding: 8px 2px;
-  overflow-x: auto; /* 내용이 넘칠 경우 가로 스크롤을 활성화합니다. */
+  overflow-x: auto;
+  font-family: 'Pretendard', serif;
 }
-
 
 .button-list-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 .button-list-container {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-
 
 .chat-button {
   border-radius: 25px;
-  background-color: #cceeff;
+  background-color: #DEDEDE; /* 비활성 상태 */
   color: #000000;
-  border: 1px solid #aaddff;
+  border: 1px solid #C2C2C2;
   padding: 4px 20px;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  flex-shrink: 0; /* 버튼이 컨테이너 크기에 맞춰 줄어들지 않도록 설정. */
-  white-space: nowrap; /* 버튼 내의 텍스트가 줄바꿈되지 않도록. */
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.chat-button.active {
+  background-color: #23ADB4; /* 활성 상태 */
+  color: #FFFFFF;
+  border-color: #23ADB4;
 }
 
 .chat-button:hover {
-  background-color: #b8e2f5;
-  border-color: #a0d0f0;
   transform: translateY(-1px);
 }
 

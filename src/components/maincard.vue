@@ -3,6 +3,7 @@
     <h1 class="headline">
       <img src="@/assets/logo2.svg" alt="로고2" class="logo2" />
     </h1>
+    <div class="logo-underline-shadow"></div>
 
     <!-- Swiper -->
     <Swiper
@@ -14,10 +15,13 @@
         <img src="@/assets/mainlog.svg" alt="슬로건1" class="slogan-logo" />
       </SwiperSlide>
       <SwiperSlide>
-        <img src="@/assets/mainlog2.svg" alt="슬로건2" class="slogan-logo" />
+        <img src="@/assets/mainlog2.svg" alt="슬로건2" class="slogan-logo" @click="goSurvey" />
       </SwiperSlide>
     </Swiper>
 
+    <div class="ajeroinfo">
+      '어제로' 소개
+    </div>
     <div class="info-mes">
       <p class="info-text">
         <strong>‘어제로’(Addiction Zero)</strong>는 중독에서 벗어나 건강한 일상으로 돌아가자는 의미를 담고 있습니다.<br /><br />
@@ -38,12 +42,20 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import {useRouter} from "vue-router";
 
 export default {
   name: "CardNewsMain",
   components: { NavigationBar, Swiper, SwiperSlide },
   setup() {
-    return { Pagination };
+
+    const router = useRouter();
+
+    const goSurvey = () => {
+      router.push({name: "SurveyMain"});
+    };
+
+    return { Pagination, goSurvey };
   }
 };
 </script>
@@ -51,52 +63,77 @@ export default {
 <style scoped>
 .container {
   text-align: center;
-  padding: 30px 20px;
-  font-family: 'Cafe24 Ssurround', serif;
+  padding: 30px 5vw 60px;
+  font-family: 'Pretendard', serif;
   touch-action: none;
 }
 
 .headline {
-  font-size: 24px;
+  font-size: 5vw;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 5vw;
   line-height: 1.5;
 }
 
+.logo-underline-shadow {
+  position: relative;
+  width: 100vw;
+  height: 1px;
+  margin: 1vw 0 2vw 0;
+  background-color: #eee;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
 /* 슬라이드 */
 .slogan-swiper {
-  width: 355px;
-  height: 249.5px;
-  margin: 0 auto 20px auto; /* 중앙 정렬 */
+  width: 90vw;
+  max-width: 393px;
+  height: auto;
+  margin: 0 auto 5vw auto;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
 }
 
+.slogan-logo {
+  width: 100%;
+  height: auto;
+}
 
+.ajeroinfo{
+  font-size: 5vw;
+  font-weight: bold;
+  margin-top: 2vw;
+  text-align: left;
+  width: 90%;
+  max-width: 393px;
+}
 
 .info-mes {
   max-height: 40vh;
-  padding: 20px;
-  margin: 20px 0;
+  padding: 4vw;
+  margin: 2vw 0;
   border-radius: 12px;
   box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
   overflow-y: auto;
   text-align: left;
+  background-color: #fcfcfc;
 }
 
 .info-text {
-  font-size: 14px;
+  font-size: 3.5vw;
   line-height: 1.6;
   color: #333;
   white-space: pre-line;
 }
 
 .logo2{
-  width: 184.56px;
-  height: 44.25px;
-  top:70px;
-  left:104px;
+  width: 45vw;    /* 화면 크기에 맞춰 조정 */
+  max-width: 184px;
+  height: auto;
   margin: 0 auto;
 }
 </style>

@@ -1,31 +1,39 @@
 <template>
   <nav class="bottom-nav">
-    <div class ="nav-item" @click="goTo('CardNewsMain')">
-      <img src="/icon/home.svg" class="icon" alt="홈"/>
-      <span class="label">홈</span>
-    </div>
-      <div class="nav-item" @click="goTo('NextDetailWindow')">
-        <!--<img src="/icon/placeholder.svg" class="icon" alt="카드뉴스"/>-->
-        <span class="label">카드뉴스</span>
-      </div>
-    <div class="nav-item" @click="goTo('ChatbotView')">
-      <img src="/icon/chat.svg" class="icon" alt="챗봇"/>
-      <span class="label">챗봇</span>
-    </div>
-    <div class="nav-item" @click="goTo('SurveyMain')">
-      <img src="/icon/list.svg" class="icon" alt="설문조사"/>
-      <span class="label">자가진단</span>
-    </div>
-    <div class="nav-item" @click="goTo('MyRecord')">
-      <img src="/icon/dair.svg" class="icon" alt="다이어리"/>
-      <span class="label">하루톡</span>
+    <div class="nav-item"
+         v-for="item in navItems"
+         :key="item.name"
+         @click="goTo(item.route)">
+      <img
+          :src="currentRoute === item.route ? item.activeIcon : item.icon"
+        class="icon"
+        :alt="item.label" />
+      <span class="label" :class="{active:currentRoute === item.route}">
+        {{ item.name }}
+      </span>
     </div>
   </nav>
 </template>
 
 <script>
 export default {
-  name:'NavigationBar',
+  name: "NavigationBar",
+  data(){
+    return{
+      navItems: [
+        { name:'홈', label:'홈', route:'CardNewsMain', icon:'/icon/home_n.svg', activeIcon:'/icon/home_y.svg' },
+        { name:'카드뉴스', label:'카드뉴스', route:'NextDetailWindow', icon:'/icon/card_n.svg', activeIcon:'/icon/card_y.svg' },
+        { name:'챗봇', label:'챗봇', route:'ChatbotView', icon:'/icon/chat_n.svg', activeIcon:'/icon/chat_y.svg' },
+        { name:'assist', label:'자가진단', route:'SurveyMain', icon:'/icon/assist_n.svg', activeIcon:'/icon/assist_y.svg' },
+        { name:'하루톡', label:'하루톡', route:'MyRecord', icon:'/icon/diar_n.svg', activeIcon:'/icon/diar_y.svg' }
+      ]
+    }
+  },
+  computed:{
+    currentRoute(){
+      return this.$route.name;
+    }
+  },
   methods:{
     goTo(route){
       this.$router.push({name:route});
@@ -41,7 +49,7 @@ export default {
   left: 0;
   right: 0;
   height: 65px;
-  background-color: rgba(127, 135, 156, 0.13);
+  background-color: rgb(255, 255, 255);
   justify-content:space-between;
   display: flex;
   padding: 0 25px;
@@ -54,7 +62,7 @@ export default {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-family: 'Cafe24 Ssurround', serif;
+  font-family: 'Pretendard', serif;
 }
 
 .icon {
@@ -65,6 +73,11 @@ export default {
 
 .label {
   font-size: 11px;
-  color: #000000;
+  color: #C2C2C2;
+}
+
+/* 활성화된 버튼 글자 색 */
+.label.active {
+  color: #23ADB4;
 }
 </style>
