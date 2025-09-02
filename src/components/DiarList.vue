@@ -172,14 +172,14 @@ export default {
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #ff8c94;
-  color: white;
-  padding: 15px 20px;
+  background-color: #ffffff;
+  color: black;
+  padding: 30px 40px;
   border-radius: 12px;
-  font-size: 16px;
+  font-size: 20px;
   z-index: 999;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.2);
 }
 
 

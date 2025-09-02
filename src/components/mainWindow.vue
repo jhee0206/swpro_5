@@ -1,12 +1,7 @@
 <template>
   <div class="container">
     <div class="content">
-      <!--<img src="/logo.png" alt="로고" class="logo_v.svg" />-->
-      <h1 class="title">
-        Addiction - ZERO<br/><br/>
-        중독은 어제로,<br/>
-        행복은 오늘로
-      </h1>
+      <img src="@/assets/logo.svg" alt="로고" class="logo" />
     </div>
   </div>
 </template>
@@ -35,22 +30,16 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #fff;
+  background: linear-gradient(to bottom, #2DE6B3, #3EC0C6);
   overflow: hidden;
   touch-action: none;
 }
 
 .logo {
-  width: 200px;
-  height: 200px;
-  margin-bottom: 1rem;
+  width: 127.5px;
+  height: 146px;
+  top:336px;
+  left:133px;
 }
 
-.title {
-  font-size: 1.8rem;
-  color: #2260FF;
-  font-weight: bold;
-  line-height: 1.5;
-  text-align: center;
-}
 </style>
