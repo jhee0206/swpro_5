@@ -1,10 +1,14 @@
 <template>
   <div class="diary-list-container">
-    <BackButton :to="'/CardNewsMain'"/>
-    <div class="top-bar">
-      <h2>내가 쓴 일지</h2>
-      <span class="sort-label">최신순</span>
-    </div>
+    <header class="header">
+      <div class="top-section">
+        <BackButton :to="'/CardNewsMain'"/>
+      </div>
+
+      <div class="title-section">
+        <h1 class="page-title"> 내가 쓴 일지 </h1>
+      </div>
+    </header>
 
     <div v-if="showPopup" class="popup-message">
       {{ popupMessage }}
@@ -17,7 +21,7 @@
           class="diary-entry-box"
       >
         <span class="entry-date">{{ entry.date }}</span>
-        <button class="view-button" @click="viewDiary(entry)">보기</button>
+        <button class="view-button" @click="viewDiary(entry)">></button>
       </div>
     </div>
   </div>
@@ -100,41 +104,57 @@ export default {
 <style scoped>
 
 .diary-list-container {
-  padding: 25px 20px 90px;
-  font-family: 'Cafe24 Ssurround', serif;
-  background-color: #fcf5ed;
+  max-width: 450px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
   min-height: 100vh;
-  box-sizing: border-box;
-  color: rgba(21, 20, 20, 0.74);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: calc(65px + 70px);
+  font-family: 'Pretendard', serif;
 }
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.top-section {
+  width: 100%;
+  padding: 15px 20px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.title-section {
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
 
 .diary-button-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 12px;
-}
-.top-bar {
-  position: relative; /* h2 중앙 위치 기준 */
-  display: flex;
-  justify-content: flex-end; /* 최신순 span은 오른쪽 */
-  align-items: center;
-  margin-bottom: 25px;
-}
-
-/* 중앙 텍스트 */
-.top-bar h2 {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 18px;
-  margin: 0;
-  color: #ff8c94;
-}
-
-.sort-label {
-  font-size: 14px;
-  color: #ff8c94;
+  margin-top: 20px;
 }
 
 .diary-button-list {
@@ -144,14 +164,16 @@ export default {
 }
 
 .diary-entry-box {
-  border: 2px solid #ff8c94;
   border-radius: 12px;
-  padding: 12px 15px;
+  padding: 20px 20px;
+  margin: 0 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 15px;
   background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid #D9D9D9;
 }
 
 .entry-date {
@@ -159,12 +181,9 @@ export default {
 }
 
 .view-button {
-  border: 2px solid #ff8c94;
-  background-color: white;
-  padding: 5px 10px;
-  font-size: 14px;
-  border-radius: 10px;
-  color: #ff8c94;
+  padding: 5px 3px;
+  font-size: 20px;
+  color: #555555;
 }
 
 .popup-message {
@@ -184,3 +203,7 @@ export default {
 
 
 </style>
+<script setup lang="ts">
+</script>
+<script setup lang="ts">
+</script>

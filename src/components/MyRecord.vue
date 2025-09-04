@@ -11,10 +11,17 @@
     </header>
 
     <div class="content">
-      <p>물질 중독 재활은 중독으로부터 회복하여 건강하고 생산적인 삶을 되찾도록 돕는 데 매우 중요합니다.<br><br>
-        재활은 재발을 방지하기 위한 교육, 상담, 치료 등 다양한 프로그램을 포함하며, 국가 차원의 노력뿐만 아니라 개인의 의지,
-        전문적인 치료, 그리고 사회적 지지가 함께할 때 그 효과가 극대화됩니다.<br><br>
+      <div class="intro-card">
+        <p>
+          물질 중독 재활은 중독으로부터 회복하여 건강하고 생산적인 삶을 되찾도록 돕는 데 매우 중요합니다.
+        </p>
+        <p>
+          재활은 재발을 방지하기 위한 교육, 상담, 치료 등 다양한 프로그램을 포함하며, 국가 차원의 노력뿐만 아니라 개인의 의지,
+          전문적인 치료, 그리고 사회적 지지가 함께할 때 그 효과가 극대화됩니다.
+        </p>
+      </div>
 
+      <p>
         개인이 예방할 수 있는 다양한 방법들 중, 이곳에서는 오늘의 나를 기록하고 점검해보며 전인적인 건강을
         관리할 수 있도록 돕습니다. 오늘 하루 동안의 행동을 체크해보고, 나 자신에 대한 기록을 써내려가며 회복의
         시간을 가져보는 것은 어떨까요?<br><br>
@@ -23,9 +30,25 @@
         체크리스트가 포함되어 있습니다.<br>
 
         중독을 극복하고 건강한 삶을 회복하기 위한 <strong>‘라이프 스타일 체크리스트’</strong>는 신체적,
-        정신적, 사회적 건강을 균형 있게 돌볼 수 있도록 합니다.</p>
+        정신적, 사회적 건강을 균형 있게 돌볼 수 있도록 합니다.
+      </p>
 
-      <h3 class="title-h3" @click="toggleContent('content1')">1. 성인 하루 권장 물 섭취량을 알아볼까요?</h3>
+      <!--그람자 선 추가-->
+      <div class="section-divider"></div>
+
+      <div class="check-info">
+        <p><strong>하루를 지키는 건강 체크 </strong><br></p>
+        *오늘의 나를 위한 간단한 체크리스트!*
+        </div>
+
+      <div
+        class="collapsible-box"
+        :class="{ 'is-active': activeContent ==='content1'}"
+        @click="toggleContent('content1')">
+        <img src="/haruincon/water.svg" alt="물" class="box-icon" />
+      <span class="box-title">1. 성인 하루 권장 물 섭취량은?</span>
+        <span class="box-arrow" :class="{ 'rotate': activeContent === 'content1' }">▼</span>
+        </div>
       <div class="collapsible-content" :class="{ 'is-active': activeContent === 'content1' }">
         <p><strong>한국영양학회</strong>에서 제시하는 1일 수분 섭취 기준은 아래와 같으며,
           연령대와 성별에 따라 권장량이 다릅니다.</p>
@@ -43,7 +66,14 @@
           또한 수분 섭취 기준은 개인의 활동량, 기온, 건강 상태 등에 따라 달라질 수 있습니다. </p>
       </div>
 
-      <h3 class="title-h3" @click="toggleContent('content2')">2. 하루 적정 수면시간에 대해 알아볼까요?</h3>
+      <div
+          class="collapsible-box"
+          :class="{ 'is-active': activeContent ==='content2'}"
+          @click="toggleContent('content2')">
+        <img src="/haruincon/sleep.svg" alt="수면" class="box-icon" />
+      <span class="box-title">2. 하루 적정 수면시간은?</span>
+        <span class="box-arrow" :class="{ 'rotate': activeContent === 'content2' }">▼</span>
+      </div>
       <div class="collapsible-content" :class="{ 'is-active': activeContent === 'content2' }">
         <p><strong>대한수면학회</strong>에 따르면, 일반적으로 일상 생활을 잘 유지하기 위하여
           <strong>하루 6~8시간 정도의 수면을 취하는 것이 좋다</strong>고 합니다.
@@ -53,7 +83,14 @@
           시간 동안 수면을 취한다고 하더라도 그 이상의 효과를 얻지는 못하는 것으로 알려져 있습니다.</p>
       </div>
 
-      <h3 class="title-h3" @click="toggleContent('content3')">3. 하루 적정 운동시간에 대해 알아볼까요?</h3>
+      <div
+          class="collapsible-box"
+          :class="{ 'is-active': activeContent ==='content3'}"
+          @click="toggleContent('content3')">
+        <img src="/haruincon/work.svg" alt="운동" class="box-icon" />
+      <span class="box-title">3. 하루 적정 운동시간은?</span>
+        <span class="box-arrow" :class="{ 'rotate': activeContent === 'content3' }">▼</span>
+      </div>
       <div class="collapsible-content" :class="{ 'is-active': activeContent === 'content3' }">
         <p><strong>미국 심장학회(AHA)</strong>는 건강 증진을 위해 성인 기준 <strong>하루 30분 이상의
           중등도 운동</strong>, 또는 주당 150분 이상의 중등도 운동, 또는 주당 75분 이상의 격렬한 운동을 권장합니다.<br><br>
@@ -66,8 +103,8 @@
       </div>
     </div>
 
-    <div class="fixed-bottom-button-area">
-      <button class="action-button" @click="handleClickButton">하루톡 &rarr;</button>
+    <div class="floating-button" @click="handleClickButton">
+      <img src="/haruincon/flo.svg" alt="Flo Icon" class="floating-icon" />
     </div>
 
     <NavigationBar />
@@ -82,6 +119,11 @@ import BackButton from "@/components/BackButton.vue";
 
 export default {
   name: "MyRecord",
+  computed: {
+    content() {
+      return content
+    }
+  },
   components: {BackButton, NavigationBar },
   setup() {
     const router = useRouter();
@@ -133,9 +175,32 @@ export default {
   flex-direction: column;
   position: relative;
   padding-bottom: calc(65px + 70px);
+  font-family: 'Pretendard', serif;
 }
 
-/* 헤더 - flex-direction: column으로 내부 구역들을 세로로 정렬 */
+.intro-card {
+  background:#f0f0f0;
+  border-radius: 10px;
+  padding: 5px 15px;
+  border:1px solid #e5e5e5;
+  margin-bottom: 20px;
+  color: #555555;
+  font-size: 14px;
+}
+
+.intro-card p {
+  margin: 6px 0;   /* 위아래 여백 최소화 */
+  line-height: 1.6;
+}
+.check-info{
+  margin-top: 20px;
+}
+
+.check-info p {
+  line-height: 1.6; /* 필요하면 줄 간격도 조절 */
+  color: #444;       /* 기존과 동일하게 색상 유지 */
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -164,9 +229,42 @@ export default {
   margin-bottom: 20px;
 }
 
+.collapsible-box{
+  display: flex;
+  align-items: center;
+  border:1px solid #555555;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 12px 0;
+}
+
+.collapsible-content{
+  display: flex;
+  align-items: center;
+  border:1px solid #555555;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 12px 0;
+}
+
+.collapsible-box.is-active {
+  border-color: #23ADB4;
+}
+
+.box-icon{
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+}
+
+.box-title{
+  flex: 1;
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+}
 .page-title {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  font-size: 32px;
+  font-size: 22px;
   font-weight: bold;
   color: #333;
   margin: 0;
@@ -174,11 +272,11 @@ export default {
 
 /* 내용 부분 - 스크롤이 발생하는 핵심 영역 */
 .content {
-  padding: 20px;
+  padding: 12px;
   flex-grow: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 20px;
+  font-size: 14px;
 }
 
 /* 본문 단락 스타일 (p 태그) */
@@ -187,7 +285,7 @@ export default {
   line-height: 1.6;
   color: #444;
   margin-bottom: 15px;
-  word-break: keep-all;
+  word-break: break-all;
   text-align: justify;
 }
 
@@ -202,18 +300,13 @@ export default {
   text-underline-offset: 2px;
 }
 
-/* h3 태그 스타일 (1., 2., 3. 등) */
-.title-h3 {
-  font-size: 22px;
-  font-weight: bold;
-  color: #2c3e50;
-  margin-top: 30px;
-  margin-bottom: 15px;
-  text-align: left;
-  cursor: pointer; /* 클릭 가능하도록 손가락 모양 커서 추가 */
-  text-decoration: underline;
-  text-decoration-thickness : 1px;
+.section-divider {
+  border-bottom: 5px solid #F0F0F0;
+  width: calc(100% + 24px); /* 좌우 padding(12px씩) 무시 */
+  margin-left: -12px;
 }
+
+
 
 /* div (물 섭취량 데이터) */
 .collapsible-content div {
@@ -249,17 +342,27 @@ export default {
   height: 70px;
 }
 
-.action-button {
-  width: 50%;
-  max-width: 300px;
-  padding: 15px 0;
-  background-color: #2260FF;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
+.floating-button {
+  position: fixed;
+  bottom: 70px;
+  right: 10px;
+  width: 73px;
+  height: 73px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #2DE6B3, #3EC0C6); /* 레이어드 그라데이션 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.floating-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.floating-icon {
+  width: 40px;   /* 버튼 안 아이콘 크기 */
+  height: 40px;
 }
 
 /* 접었다 펴기 기능 관련 CSS */
