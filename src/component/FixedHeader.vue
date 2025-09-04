@@ -9,34 +9,20 @@ const emit = defineEmits(['prev'])
 </script>
 
 <template>
-  <div class="mb-[32px]">
-    <div>
-      <button
-          class="button"
-          v-if="prevLink"
-          @click="$emit('prev')">
-        <span class="arrow">&larr;</span>
-      </button>
-    </div>
+  <div>
     <p class="survey-title">{{ props.title || 'ASSIST 검사' }}</p>
   </div>
 </template>
 
 <style scoped>
 .survey-title {
-  font-size: 30px;
+  font-size: 22px;
+  line-height: 30px;
   font-weight: bold;
   text-align: center;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: #2260FF;
-  padding-top: 32px;
-  padding-bottom: 32px;
-}
-
-.arrow {
-  font-size: 32px;
-  color: #333;
-  transition: color 0.2s;
+  box-shadow: 0px 1px 6.8px 1px rgba(130, 130, 130, 0.25);
+  padding-top: 30px;
+  padding-bottom: 21.5px;
+  font-family: 'Pretendard', serif;
 }
 </style>
