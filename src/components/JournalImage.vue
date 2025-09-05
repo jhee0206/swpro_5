@@ -110,7 +110,7 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
-  padding-bottom: calc(65px + 70px);
+  padding-bottom: 70px;
   font-family: 'Pretendard', serif;
 }
 
@@ -150,7 +150,7 @@ export default {
   background-color: #F8F9F9;
   border-radius: 10px;
   padding: 15px 20px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   border-bottom: 1px solid #e0e0e0;
   font-family: 'Pretendard', serif;
 }
@@ -197,22 +197,20 @@ export default {
   padding-bottom: 0;
 }
 .action-button {
-  width: 150px;
+  width: 157px;
+  height: 58px;
   padding: 15px 10px;
-  background-color: #FFF;
-  color: #000000;
+  background-color: #258FB3;
+  color: #FFFFFF;
   border: none;
   border-radius: 8px;
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
+  font-family: 'Pretendard', serif;
 }
-.action-button:hover {
-  background-color: #258FB3;
-  color: white;
-}
+
 .content {
   padding: 20px;
   flex-grow: 1;

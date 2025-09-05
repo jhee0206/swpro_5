@@ -1,6 +1,9 @@
 <template>
   <div class="detail-container">
     <BackButton :to="{ name: 'Cheerup' }"/>
+
+    <img src="/icon/cardmove_l.svg" class="next left" @click="scrollLeft" />
+
     <div class="image-list" ref="imageList">
       <img
           v-for="(img,index) in getImageList"
@@ -9,6 +12,9 @@
           class="card-news"
       />
     </div>
+
+    <img src="/icon/cardmove_r.png" class="next right" @click="scrollRight" />
+
   </div>
 </template>
 
@@ -74,6 +80,22 @@ export default {
       if (this.$refs.imageList) {
         this.$refs.imageList.scrollLeft = 0;
       }
+    },
+    scrollLeft() {
+      if(this.$refs.imageList) {
+        this.$refs.imageList.scrollBy({
+          left: -this.$refs.imageList.clientWidth,
+          behavior: 'smooth',
+        });
+      }
+    },
+    scrollRight() {
+      if(this.$refs.imageList) {
+        this.$refs.imageList.scrollBy({
+          left: this.$refs.imageList.clientWidth,
+          behavior: 'smooth',
+        })
+      }
     }
   }
 };
@@ -105,6 +127,25 @@ export default {
   height: auto;
   display: block;
   scroll-snap-align: start;
+}
+
+
+.next{
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 40px; /* 아이콘 크기 조정 */
+  height: 40px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.next.left {
+  left: 10px;
+}
+
+.next.right {
+  right: 10px;
 }
 
 </style>

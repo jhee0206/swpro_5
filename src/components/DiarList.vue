@@ -43,15 +43,25 @@ export default {
       popupMessage: "",
     };
   },
-  computed: {
-    sortedDailyList() {
-      return [...this.diaryList].sort((a, b) => {
-        const dateA = new Date(a.date.replace(/\./g, '-'));
-        const dateB = new Date(b.date.replace(/\./g, '-'));
-        return dateB - dateA;
-      });
-    },
-  },
+  //computed: {
+   // sortedDailyList() {
+
+      computed: {
+        sortedDailyList() {
+          return [...this.diaryList].sort((a, b) => {
+            const dateA = new Date(a.date.replace(/\./g, '-')).getTime();
+            const dateB = new Date(b.date.replace(/\./g, '-')).getTime();
+            return dateB - dateA; // 이제 number 타입끼리 연산이므로 오류 없음
+          });
+        },
+      },
+      //return [...this.diaryList].sort((a, b) => {
+        //const dateA = new Date(a.date.replace(/\./g, '-'));
+        //const dateB = new Date(b.date.replace(/\./g, '-'));
+        //return dateB - dateA;
+      //});
+    //},
+  //},
   mounted() {
     const stored = localStorage.getItem('diaryList');
     this.diaryList = stored ? JSON.parse(stored) : [];
@@ -164,8 +174,9 @@ export default {
 }
 
 .diary-entry-box {
+  position: relative;
   border-radius: 12px;
-  padding: 20px 20px;
+  padding: 20px 20px 20px 16px;
   margin: 0 8px;
   display: flex;
   justify-content: space-between;
@@ -175,6 +186,18 @@ export default {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   border: 1px solid #D9D9D9;
 }
+
+.diary-entry-box::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  background-color: #23ADB4;
+  border-radius: 12px 0 0 12px;
+}
+
 
 .entry-date {
   font-weight: bold;

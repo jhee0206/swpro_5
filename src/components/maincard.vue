@@ -1,62 +1,62 @@
 <template>
-<div class="container">
-<h1 class="headline">
-  <img src="@/assets/logo2.svg" alt="로고2" class="logo2" />
-</h1>
-<div class="logo-underline-shadow"></div>
+  <div class="container">
+    <h1 class="headline">
+      <img src="@/assets/logo2.svg" alt="로고2" class="logo2" />
+    </h1>
+    <div class="logo-underline-shadow"></div>
 
-<!-- Swiper -->
-<Swiper
-    :modules="[Pagination]"
-    :pagination="{ clickable: true }"
-    class="slogan-swiper"
->
-  <SwiperSlide>
-    <img src="@/assets/mainlog.svg" alt="슬로건1" class="slogan-logo" />
-  </SwiperSlide>
-  <SwiperSlide>
-    <img src="@/assets/mainlog2.svg" alt="슬로건2" class="slogan-logo" @click="goSurvey" />
-  </SwiperSlide>
-</Swiper>
+    <!-- Swiper -->
+    <Swiper
+        :modules="[Pagination]"
+        :pagination="{ clickable: true }"
+        class="slogan-swiper"
+    >
+      <SwiperSlide>
+        <img src="@/assets/mainlog.svg" alt="슬로건1" class="slogan-logo" />
+      </SwiperSlide>
+      <SwiperSlide>
+        <img src="@/assets/mainlog2.svg" alt="슬로건2" class="slogan-logo" @click="goSurvey" />
+      </SwiperSlide>
+    </Swiper>
 
-<div class="ajeroinfo">
-  '어제로' 소개
-</div>
+    <div class="ajeroinfo">
+      '어제로' 소개
+    </div>
 
-  <div class="content">
+    <div class="content">
 
-    <div class="diar-why">
-      <div class="diar-item">
-        <div class="diar-number">1</div>
-        <div class="diar-text">
-          <p><strong>어제로는 무엇인가요?</strong><br></p>
-         '어제로(Addiction Zero)'는 중독에서 벗어나 건강한 일상으로 돌아가자는
-          의미를 담은 디지털 중독 예방 플랫폼입니다.
+      <div class="diar-why">
+        <div class="diar-item">
+          <div class="diar-number">1</div>
+          <div class="diar-text">
+            <p><strong>어제로는 무엇인가요?</strong><br></p>
+            '어제로(Addiction Zero)'는 중독에서 벗어나 건강한 일상으로 돌아가자는
+            의미를 담은 디지털 중독 예방 플랫폼입니다.
+          </div>
         </div>
-      </div>
 
-      <div class="diar-item">
-        <div class="diar-number">2</div>
-        <div class="diar-text">
-          <p><strong>제공하는 기능은 무엇인가요?</strong><br></p>
-          서울시는 ASSIST 기반 상담 체계를 대학에 보급하고 있으며,
-          어제로는 이를 바탕으로<br> 자가진단, 교육, 하루톡, 챗봇 기능을 제공합니다.
+        <div class="diar-item">
+          <div class="diar-number">2</div>
+          <div class="diar-text">
+            <p><strong>제공하는 기능은 무엇인가요?</strong><br></p>
+            서울시는 ASSIST 기반 상담 체계를 대학에 보급하고 있으며,
+            어제로는 이를 바탕으로 자가진단, 교육, 하루톡, 챗봇 기능을 제공합니다.
+          </div>
         </div>
-      </div>
 
-      <div class="diar-item">
-        <div class="diar-number">3</div>
-        <div class="diar-text">
-          <p><strong>앞으로의 '어제로'</strong><br></p>
-          앞으로는 대학 상담센터와 연계해 실제 상담 도구 및 조기 개입 솔루션으로 확장할 예정입니다.
-          <br><strong>예방의 시작, 어제로에서 만나보세요.</strong>
+        <div class="diar-item">
+          <div class="diar-number">3</div>
+          <div class="diar-text">
+            <p><strong>앞으로의 '어제로'</strong><br></p>
+            앞으로는 대학 상담센터와 연계해 실제 상담 도구 및 조기 개입 솔루션으로 확장할 예정입니다.
+            <br><strong>예방의 시작, 어제로에서 만나보세요.</strong>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  </div>
 
-  <NavigationBar />
-</div>
+    <NavigationBar />
+  </div>
 </template>
 
 <script>
