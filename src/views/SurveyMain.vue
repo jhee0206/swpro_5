@@ -20,8 +20,8 @@ function handleNext() {
 <template>
   <FixedHeader/>
   <div class="wrapper"> <!-- 콘텐츠 영역 -->
-    <div class="flex flex-justify pt-[20px] pb-[12px]"> <!-- 검사 전 꼭 확인해주세요! -->
-      <div><img src="/survey/survey_check_circle.svg"/></div>
+    <div class="flex flex-justify items-center pt-[2%] pb-[2%]"> <!-- 검사 전 꼭 확인해주세요! -->
+      <img src="/survey/survey_check_circle.svg"/>
       <p class="p-[5px]"></p>
       <p class="test-check"> 검사 전 꼭 확인 해주세요! </p>
     </div>
@@ -50,8 +50,8 @@ function handleNext() {
             <div><img class="image" src="/public/survey/survey_img2.svg"/></div>
             <div class="dividing-line"></div>
             <div class="text">
-              <p>검사문항에는, 최근 3개월 또는 일생 동안 알코올, 담배 제제, 약물 사용 경험을 질문합니다.</p>
-              <p class="text-[#23ADB4]">'사용'이란 흡연, 복용, 코흡입, 주사 등 모든 투여 경로를 포함합니다.</p>
+              <p>검사문항에는, 최근 3개월 또는 일생 동안 알코올, 담배 제제, 약물 사용 경험을 질문합니다.</p><br>
+              <p class="text-[#23ADB4]">'사용'이란 흡연, 복용, 코흡입, 주사 등 <br>모든 투여 경로를 포함합니다.</p>
             </div>
           </div>
         </swiper-slide>
@@ -60,17 +60,17 @@ function handleNext() {
             <div><p class="text-title">검사 시 유의사항은 무엇인가요?</p></div>
             <div><img class="image" src="/public/survey/survey_img3.svg"/></div>
             <div class="dividing-line"></div>
-            <div class="text">
-              <p>의사의 처방에 따라 <br> 정해진 용도로 사용한 약물은 제외됩니다.</p>
+            <div class="text-3pg">
+              <p>의사의 처방에 따라 정해진 용도로 사용한 약물은 제외됩니다.</p><br>
               <p>아래와 같은 경우는 체크해 주세요:</p>
               <div class="flex align-item">
-                <svg class="pr-[5px]" width="25" height="25" viewBox="-4 -4 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="20" height="20" viewBox="-4 -4 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M9.79068 0.204959C9.92471 0.336234 10 0.514257 10 0.69988C10 0.885503 9.92471 1.06353 9.79068 1.1948L4.07129 6.79504C3.93722 6.92628 3.75541 7 3.56584 7C3.37626 7 3.19445 6.92628 3.06038 6.79504L0.200688 3.99492C0.0704584 3.86289 -0.00160187 3.68607 2.7026e-05 3.50252C0.00165592 3.31897 0.0768437 3.1434 0.209396 3.01361C0.341949 2.88382 0.521261 2.81019 0.708712 2.8086C0.896163 2.807 1.07675 2.87756 1.21159 3.00508L3.56584 5.31028L8.77978 0.204959C8.91385 0.073724 9.09566 0 9.28523 0C9.4748 0 9.65661 0.073724 9.79068 0.204959Z" fill="#23ADB4"/>
                 </svg>
                 <p class="text-[#23ADB4]">처방 목적 외에 사용한 경우</p>
               </div>
               <div class="flex align-item">
-                <svg class="pr-[5px]" width="25" height="25" viewBox="-4 -4 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="20" height="20" viewBox="-4 -4 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M9.79068 0.204959C9.92471 0.336234 10 0.514257 10 0.69988C10 0.885503 9.92471 1.06353 9.79068 1.1948L4.07129 6.79504C3.93722 6.92628 3.75541 7 3.56584 7C3.37626 7 3.19445 6.92628 3.06038 6.79504L0.200688 3.99492C0.0704584 3.86289 -0.00160187 3.68607 2.7026e-05 3.50252C0.00165592 3.31897 0.0768437 3.1434 0.209396 3.01361C0.341949 2.88382 0.521261 2.81019 0.708712 2.8086C0.896163 2.807 1.07675 2.87756 1.21159 3.00508L3.56584 5.31028L8.77978 0.204959C8.91385 0.073724 9.09566 0 9.28523 0C9.4748 0 9.65661 0.073724 9.79068 0.204959Z" fill="#23ADB4"/>
                 </svg>
                 <p class="text-[#23ADB4]">정해진 용량보다 더 자주 또는 많이 사용한 경우</p>
@@ -79,7 +79,6 @@ function handleNext() {
           </div>
         </swiper-slide>
       </swiper>
-
     </div>
     <div> <!-- 검사하러 가기 버튼 -->
       <GoToSurveyButton
@@ -113,13 +112,12 @@ function handleNext() {
   flex-direction: row;
   overflow-x: auto;       /* 가로스크롤 생성 */
   gap: 16px;              /* 항목간 간격 */
-  padding: 12px 0;
   scroll-snap-type: x mandatory;  /* 스냅 효과 */
 }
 
 .item {
   min-width: 100%;       /* 각 아이템의 고정 너비 */
-  height: 55vh;
+  height: 58vh;          /* 각 아이템의 고정 높이 */
   background: #FFFFFF;
   border-radius: 12px;
   display: flex;
@@ -147,7 +145,7 @@ function handleNext() {
 .text {
   font-size: 14px;
   line-height: 22px;
-  font-weight: 100;
+  font-weight: normal;
   color: #555555;
   padding-top: 2vh;
   padding-left: 5vh;
@@ -155,8 +153,19 @@ function handleNext() {
 }
 
 .text-span {
-  font-weight: 200;
+  font-weight: bold;
   color: #292929;
+}
+
+.text-3pg {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: normal;
+  color: #555555;
+  padding-top: 2vh;
+  padding-left: 5vh;
+  padding-right: 5vh;
+  text-align: left;
 }
 
 .image {
