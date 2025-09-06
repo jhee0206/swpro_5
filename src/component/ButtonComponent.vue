@@ -18,7 +18,7 @@ const emit = defineEmits(['next'])
 
 <style scoped>
 .button {
-  background-color: #2260FF;
+  background-color: #258FB3;
   color: #FFFFFF;
   font-size: 16px;
   padding-top: 8px;
@@ -29,7 +29,7 @@ const emit = defineEmits(['next'])
 }
 
 button.button:hover {
-  background-color: rgba(34, 96, 255, 0.7);
+  background-color: rgba(37, 143, 179, 0.7);
   cursor: pointer;
 }
 </style>
