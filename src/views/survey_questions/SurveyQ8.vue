@@ -40,47 +40,45 @@ function handleNext() {
 </script>
 
 <template>
-  <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader
-        prevLink="이전으로"
-        @prev="handlePrev"/>
-    <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
-      <div> <!-- 세부 질문 -->
-        <div> <!-- 질문지 -->
-          <div class="w-full">
-            <div class="question-title"> <!-- 질문 제목 -->
-              <p>Q8. 주사로 약물을 사용한 적이 있습니까?
-                <span>(의학적 사용은 제외)</span></p>
-            </div>
-            <div> <!-- 표 그리드 -->
-              <table class="w-full table-fixed border border-gray-300 text-center text-[15px]">
-                <thead class="bg-blue-50">
-                <tr>
-                  <th
-                      v-for="opt in frequencyOptions"
-                      :key="opt.value"
-                      class="border border-gray-200 p-[12px]">
-                    {{ opt.label }}
-                  </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td
-                      v-for="opt in frequencyOptions"
-                      :key="opt.value + '-input'"
-                      class="border-t border-r border-gray-200 p-[12px]">
-                    <input
-                        type="radio"
-                        :value="opt.value"
-                        v-model="value"
-                        class="accent-blue-500 scale-110"
-                        :aria-label="opt.label"/>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
+  <FixedHeader
+      prevLink="이전으로"
+      @prev="handlePrev"/>
+  <div class="wrapper"> <!--컨텐츠 영역-->
+    <div> <!-- 세부 질문 -->
+      <div> <!-- 질문지 -->
+        <div class="w-full">
+          <div class="question-title"> <!-- 질문 제목 -->
+            <p>Q8. 주사로 약물을 사용한 적이 있습니까?
+              <span>(의학적 사용은 제외)</span></p>
+          </div>
+          <div> <!-- 표 그리드 -->
+            <table class="w-full table-fixed border border-gray-300 text-center text-[15px] bg-[#FFFFFF] rounded-[12px] overflow-hidden">
+              <thead class="bg-blue-50">
+              <tr>
+                <th
+                    v-for="opt in frequencyOptions"
+                    :key="opt.value"
+                    class="border border-gray-200 p-[12px] bg-[#258FB3] text-[#FFFFFF]">
+                  {{ opt.label }}
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td
+                    v-for="opt in frequencyOptions"
+                    :key="opt.value + '-input'"
+                    class="border-t border-r border-gray-200 p-[12px]">
+                  <input
+                      type="radio"
+                      :value="opt.value"
+                      v-model="value"
+                      class="accent-blue-500 scale-110"
+                      :aria-label="opt.label"/>
+                </td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -97,4 +95,13 @@ function handleNext() {
 
 <style scoped>
   @import "/src/assert/main.css";
+
+  .wrapper {
+    width: 100vw;
+    height: 90vh;
+    padding-left: 18px;
+    padding-right: 18px;
+    background-color: #F8F8F8;
+    font-family: 'Pretendard', serif;
+  }
 </style>

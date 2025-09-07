@@ -70,50 +70,48 @@ function handleNext() {
 </script>
 
 <template>
-  <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader
-        prevLink="이전으로"
-        @prev="handlePrev"/>
-    <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
-      <div> <!-- 세부 질문 -->
-        <div> <!-- 질문지 -->
-          <div class="w-full">
-            <!-- 질문 제목 -->
-            <div class="question-title">
-              <p>Q5. 지난 3개월 동안, 물질 사용으로 인해 해야 할 일을 하지 못한 적이 얼마나 자주 있었습니까?</p>
-            </div>
-            <!-- 표 그리드 -->
-            <div class="overflow-x-auto">
-              <table class="min-w-full text-center text-[15px]">
-                <thead class="bg-blue-50">
-                <tr>
-                  <th class="border border-gray-200 p-[8px]">물질의 종류</th>
-                  <th v-for="opt in frequencyOptions" :key="opt.value" class="w-[11%] border border-gray-200 px-2 py-2">
-                    {{ opt.label }}
-                  </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(item, idx) in items" :key="item.label">
-                  <td class="border border-gray-200 p-[8px]">{{ item.label }}</td>
-                  <td
-                      v-for="opt in frequencyOptions"
-                      :key="opt.value"
-                      class="border border-gray-200 p-[8px]"
-                  >
-                    <input
-                        type="radio"
-                        :name="`freq_${idx}`"
-                        :value="opt.value"
-                        v-model="item.value"
-                        class="accent-blue-500"
-                        :disabled="item.disabled"
-                    />
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
+  <FixedHeader
+      prevLink="이전으로"
+      @prev="handlePrev"/>
+  <div class="wrapper"> <!--컨텐츠 영역-->
+    <div> <!-- 세부 질문 -->
+      <div> <!-- 질문지 -->
+        <div class="w-full">
+          <!-- 질문 제목 -->
+          <div class="question-title">
+            <p>Q5. 지난 3개월 동안, 물질 사용으로 인해 해야 할 일을 하지 못한 적이 얼마나 자주 있었습니까?</p>
+          </div>
+          <!-- 표 그리드 -->
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-center text-[15px] bg-[#FFFFFF] rounded-[12px] overflow-hidden">
+              <thead class="bg-blue-50">
+              <tr>
+                <th class="border border-gray-200 p-[8px] bg-[#258FB3] text-[#FFFFFF]">물질의 종류</th>
+                <th v-for="opt in frequencyOptions" :key="opt.value" class="w-[11%] border border-gray-200 px-2 py-2 bg-[#258FB3] text-[#FFFFFF]">
+                  {{ opt.label }}
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="(item, idx) in items" :key="item.label">
+                <td class="border border-gray-200 p-[8px]">{{ item.label }}</td>
+                <td
+                    v-for="opt in frequencyOptions"
+                    :key="opt.value"
+                    class="border border-gray-200 p-[8px]"
+                >
+                  <input
+                      type="radio"
+                      :name="`freq_${idx}`"
+                      :value="opt.value"
+                      v-model="item.value"
+                      class="accent-blue-500"
+                      :disabled="item.disabled"
+                  />
+                </td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -130,4 +128,13 @@ function handleNext() {
 
 <style scoped>
 @import "/src/assert/main.css";
+
+.wrapper {
+  width: 100vw;
+  height: 90vh;
+  padding-left: 18px;
+  padding-right: 18px;
+  background-color: #F8F8F8;
+  font-family: 'Pretendard', serif;
+}
 </style>

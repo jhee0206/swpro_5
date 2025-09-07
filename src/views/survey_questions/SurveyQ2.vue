@@ -75,26 +75,25 @@ function handleNext() {
 </script>
 
 <template>
-  <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader
-        prevLink="이전으로"
-        @prev="handlePrev"/>
-    <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
+  <FixedHeader
+      prevLink="이전으로"
+      @prev="handlePrev"/>
+  <div class="wrapper"> <!--컨텐츠 영역-->
       <div> <!-- 세부 질문 -->
         <div> <!-- 질문지 -->
           <div class="w-full">
             <!-- 질문 제목 -->
             <div class="question-title">
               <p>Q2. 지난 3개월 동안, 앞서 언급한 물질들을 얼마나 자주 사용했습니까?
-                <span>(사용한 적이 있는 모든 약물 기록)</span></p>
+                <span class="font-normal">(사용한 적이 있는 모든 약물 기록)</span></p>
             </div>
             <!-- 표 그리드 -->
             <div class="overflow-x-auto">
-              <table class="min-w-full text-center text-[15px]">
+              <table class="min-w-full text-center text-[15px] bg-[#FFFFFF] rounded-[12px] overflow-hidden">
                 <thead class="bg-blue-50">
                 <tr>
-                  <th class="border border-gray-200 p-[8px]">물질의 종류</th>
-                  <th v-for="opt in frequencyOptions" :key="opt.value" class="w-[11%] border border-gray-200 px-2 py-2">
+                  <th class="border border-gray-200 p-[8px] bg-[#258FB3] text-[#FFFFFF]">물질의 종류</th>
+                  <th v-for="opt in frequencyOptions" :key="opt.value" class="w-[11%] border border-gray-200 px-2 py-2 bg-[#258FB3] text-[#FFFFFF]">
                     {{ opt.label }}
                   </th>
                 </tr>
@@ -122,7 +121,6 @@ function handleNext() {
           </div>
         </div>
       </div>
-    </div>
     <div class="flex justify-end pt-[12px] mb-[65px]"> <!-- 다음버튼 -->
       <ButtonComponent
           nextLink="다음"
@@ -135,4 +133,13 @@ function handleNext() {
 
 <style scoped>
   @import "/src/assert/main.css";
+
+  .wrapper {
+    width: 100vw;
+    height: 90vh;
+    padding-left: 18px;
+    padding-right: 18px;
+    background-color: #F8F8F8;
+    font-family: 'Pretendard', serif;
+  }
 </style>
