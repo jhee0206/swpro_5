@@ -4,88 +4,91 @@
      (단, body 태그에 직접 적용되는 스타일은 전역 CSS 파일이나 상위 컴포넌트에서 관리하는 것이 좋습니다.)
    */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
-@font-face {
-    font-family: 'Cafe24Ssurround';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 /* body 태그에 대한 전역 스타일 설정 */
 /* Vue 앱의 최상위 App.vue 등에 적용하거나, 이 컴포넌트가 최상위 컴포넌트라면 여기에 두셔도 무방합니다. */
-#app {
-    font-family: 'Cafe24Ssurround', sans-serif;
-    background-color: #fcf5ed;
-    min-height: 100vh;
-    margin: 0px;
-    padding: 10px;
-    box-sizing: border-box;
-}
 
 /* 캡처 대상인 'journal-content-to-capture'에도 동일한 배경색을 적용합니다. */
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff') format('woff');
+    font-weight: 100;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraLight.woff') format('woff');
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff') format('woff');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff') format('woff');
+    font-weight: 900;
+    font-display: swap;
+}
+
+.my-text {
+    font-family: 'Pretendard', sans-serif; /* 'Pretendard' 폰트를 먼저 사용하고, 없으면 기본 sans-serif 폰트 사용 */
+    font-weight: 200; /* 원하는 굵기를 설정 */
+}
+
 #journal-content-to-capture {
-    background-color: #fcf5ed;
+    background-color: #fff;
 }
 
 /* h1 태그 (제목) 스타일 */
-h1 {
-    text-align: center;
-    color: #ff8c94;
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    font-weight: bolder;
+h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555555;
 }
-
-/* 헤더 섹션 (날짜, 제목, 기분, 문구 입력 부분) 스타일 */
-.header-section {
-    background-color: #fcf5ed;
-    border-radius: 10px;
-    padding: 3px 25px;
-    margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid #ff8c94;
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
-}
-
-/* 헤더 섹션 내 p 태그 스타일 */
-.header-section p {
-    margin: 10px 0;
-    color: #555;
-    font-size: 0.8em;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-/* 헤더 섹션 내 strong 태그 (항목 이름) 스타일 */
-.header-section p strong {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    color: #ff8c94;
-    font-weight: 500;
-    flex-shrink: 0;
-}
-
-/* 헤더 섹션 내 input[type="text"] 스타일 */
-.header-section textarea {
-    border: none;
-    border-bottom: 1px solid #ccc;
-    color: #545454;
-    padding: 3px 0;
-    font-size: 1.2em;
-    width: calc(100% - 100px);
-    flex-grow: 1;
-    outline: none;
-    background-color: transparent;
-    resize: none;             /* 사용자가 크기 조절 못하게 함 */
-    overflow: hidden;         /* 스크롤바 숨기기 */
-    min-height: 45px;         /* (필수) 초기 1줄 + 패딩/보더를 고려한 최소 높이 */
-    line-height: 1.5em;
+.h2-text {
+    margin-left: 15px;
 }
 
 /* 라이프스타일 체크리스트 섹션 스타일 */
@@ -100,7 +103,7 @@ h1 {
 
 /* 체크리스트 제목 스타일 */
 .checklist-title {
-    color: #ff8c94;
+    color: #292929;
     font-size: 1.0em;
     margin-bottom: 25px;
     font-weight: 500;
@@ -109,128 +112,6 @@ h1 {
 /* 각 체크리스트 항목 스타일 */
 .checklist-item {
     margin-bottom: 20px;
-}
-
-/* 체크리스트 항목의 strong 태그 (질문) 스타일 */
-.checklist-item strong {
-    display: block;
-    margin-bottom: 10px;
-    color: #ff8c94;
-    font-size: 0.9em;
-    font-weight: 500;
-    width: 100%;
-}
-
-/* 라디오 버튼 그룹 스타일 */
-.radio-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-/* 라디오 버튼의 각 라벨 스타일 (텍스트와 함께 정렬) */
-.radio-group label {
-    display: flex;
-    align-items: center; /* 세로 중앙 정렬 */
-    cursor: pointer;
-    color: #ff8c94; /* 텍스트 색상 */
-    font-size: 0.8em;
-    white-space: nowrap;
-    gap: 8px; /* 라디오 버튼과 텍스트 사이 간격 */
-}
-
-/* 기본 라디오 버튼 숨기기 */
-.radio-group input[type="radio"] {
-    display: none;
-}
-
-/* 라디오 버튼의 동그라미 역할을 할 span 스타일 */
-.radio-circle {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    position: relative;
-    margin-right: 8px; /* 텍스트와의 간격 */
-    vertical-align: middle;
-    background-color: white; /* 이 부분을 추가하거나 수정 */
-}
-
-/* 선택되었을 때 동그라미의 배경색을 핑크색으로 변경 */
-.radio-group input[type="radio"]:checked + .radio-circle {
-    background-color: #ff8c94;
-    border-color: #ff8c94;
-}
-
-/* 선택되었을 때 동그라미 안에 흰색 점 추가 */
-.radio-group input[type="radio"]:checked + .radio-circle::after {
-    content: '';
-    display: block;
-    width: 8px;
-    height: 8px;
-    background-color: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* 체크박스 그룹 스타일 (기존과 동일) */
-.checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px; /* 라벨 사이 간격 */
-}
-
-/* 체크박스의 각 라벨 스타일 */
-.checkbox-group label {
-    display: flex;
-    align-items: center; /* 세로 중앙 정렬 */
-    cursor: pointer;
-    color: #ff8c94; /* 텍스트 색상 */
-    font-size: 0.8em;
-    white-space: nowrap;
-    gap: 8px; /* 체크박스와 텍스트 사이 간격 */
-}
-
-/* 기본 체크박스 숨기기 */
-.checkbox-group input[type="checkbox"] {
-    display: none;
-}
-
-/* 체크박스의 사각형 역할을 할 span 스타일 */
-.checkbox-box {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    position: relative;
-    margin-right: 8px;
-    vertical-align: middle;
-    background-color: white; /* 이 부분을 추가하거나 수정 */
-}
-
-/* 선택되었을 때 사각형의 배경색을 핑크색으로 변경 */
-.checkbox-group input[type="checkbox"]:checked + .checkbox-box {
-    background-color: #ff8c94;
-    border-color: #ff8c94;
-}
-
-/* 선택되었을 때 사각형 안에 체크 표시(✓) 추가 */
-.checkbox-group input[type="checkbox"]:checked + .checkbox-box::after {
-    content: '✓';
-    display: block;
-    color: white;
-    font-size: 1.2em;
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    line-height: 1;
 }
 
 /* 자유 텍스트 입력 영역 스타일 */
@@ -255,20 +136,230 @@ h1 {
     box-sizing: border-box;
     font-family: 'Noto Sans KR', sans-serif;
 }
-.button-item {
-    font-family: 'Cafe24Ssurround', serif;
-    padding: 15px 25px;
-    margin-top: 7px;
-    margin-bottom: 70px;
-    font-size: 0.8em;
-    background-color: #faf3eb;
-    border-color: #ffb4b8;
+.rating-container {
+    display: flex;
+    flex-wrap: wrap; /* 버튼이 넘치면 다음 줄로 넘어갑니다. */
+    gap: 10px; /* 버튼 사이의 간격 */
+    justify-content: flex-start; /* 버튼을 왼쪽부터 정렬합니다. */
+    margin-top: 10px;
+    margin-left: 20px;
+}
+/* 라디오 버튼 컴포넌트의 전체 스타일 (버튼 모양) */
+.rating-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #DEDEDE; /* 버튼 테두리 색상: 누르기 전 */
+    border-radius: 20px;
+    padding: 3px 9px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 0 1 auto;
+    background-color: #fff; /* 버튼 배경색 (흰색 유지) */
+}
+
+/* 라디오 버튼이 선택됐을 때 전체 버튼의 스타일 변경 */
+.rating-option:has(input[type="radio"]:checked) {
+    border-color: #008080; /* 선택된 버튼의 테두리 색상 */
+    background-color: #fff; /* 선택된 버튼의 배경색 (흰색으로 유지) */
+}
+
+.header {
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+    position: relative;
+    display: flex; /* flexbox 사용 */
+    justify-content: center; /* 제목을 가운데로 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    height: 60px; /* 헤더 높이 지정 */
+}
+/* 제목 구역 (오늘의 일지) */
+.title-section {
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.page-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+/* 내용 부분 - 스크롤이 발생하는 핵심 영역 */
+.content {
+    padding: 12px;
+    flex-grow: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 14px;
+    padding-bottom: 80px;
+}
+
+/* 본문 단락 스타일 (p 태그) */
+.content p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 15px;
+    word-break: break-all;
+    text-align: justify;
+}
+
+/* 강조 텍스트 */
+.content strong {
+    font-weight: bold;
+    color: #333;
+}
+.intro-card {
+    width: 95%;
+    background:#fff;
+    border-radius: 10px;
+    padding: 5px 15px;
+    border: 1.5px solid #70B9BD;
+    margin-bottom: 20px;
+    color: #555555;
+    box-shadow: 0 0 10px #ccc;
+    margin-left: auto;
+    margin-right: auto;
+}
+.intro-card p {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 0;
+}
+.intro-card strong {
+    display: block;
+    padding-top: 6px;
+}
+.textarea-style{
+    width: 95%;
+    font-size: 14px;
+    color:#9C9C9C;
+    resize: vertical;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: center;
+    background: #F3F3F3;
     border-radius: 5px;
-    color: #ff8c94;
+    padding-top: 9px; /* 위쪽 여백 */
+    padding-bottom: 9px; /* 아래쪽 여백 */
+    margin-bottom: 6px;
+}
+textarea {
+    margin-top: 10px; /* 위쪽 여백을 0으로 설정 */
+}
+.check-list{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.check-list strong {
+    margin-left: 15px;
+    color: #555555;
+    font-size: 14px;
 
 }
-.flex-center-x {
-    display: flex;
-    justify-content: center; /* 가로축(메인 축)을 따라 아이템을 중앙 정렬 */
-    /* 필요에 따라 높이 설정: height: 100px; */
+.check-list span {
+    color: #555555;
+    font-size: 11px;
+}
+/* 숨겨진 라디오 버튼 */
+.custom-radio input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+/* 커스텀 동그라미 스타일 (누르기 전) */
+.custom-radio span::before {
+    content: ''; /* 빈 가상 요소로 동그라미만 만듭니다. */
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%; /* 동그라미 모양 */
+    border: 2px solid #DEDEDE; /* 누르기 전 동그라미 테두리 색상 */
+    margin-right: 8px; /* 텍스트와의 간격 */
+    vertical-align: middle;
+    box-sizing: border-box; /* 패딩, 보더 포함하여 크기 계산 */
+    transition: all 0.3s ease;
+}
+
+/* 선택된 상태의 동그라미 스타일 */
+.custom-radio input[type="radio"]:checked + span::before {
+    content: '\2713'; /* 유니코드 체크 마크 (✓) */
+    font-family: 'Pretendard', sans-serif; /* 체크 마크를 표시할 폰트 */
+    font-size: 11px; /* 체크 마크 크기 */
+    line-height: 12px; /* 체크 마크 세로 정렬 */
+    text-align: center; /* 체크 마크 가로 정렬 */
+
+    border-color: #23ADB4; /* 선택됐을 때의 동그라미 테두리 색상 */
+    background-color: #23ADB4; /* 동그라미 배경색 (흰색으로 유지) */
+    color: #fff; /* 체크 마크 색상 */
+}
+
+/* 선택된 라디오 버튼의 텍스트 색상 변경 */
+.custom-radio input[type="radio"]:checked + span {
+    color: #555;
+}
+
+/* 숨겨진 실제 체크박스 */
+.custom-checkbox-btn input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0; /* 크기를 0으로 만들어 공간 차지 않게 함 */
+    height: 0;
+}
+
+/* 커스텀 체크박스 (동그라미) 스타일 - 기본 상태 */
+.custom-checkbox-btn span.btn-text::before {
+    content: ''; /* 가상 요소를 생성 */
+    display: inline-block;
+    width: 16px; /* 동그라미 크기 */
+    height: 16px;
+    border-radius: 50%; /* 동그라미 모양 */
+    border: 2px solid #DEDEDE; /* 누르기 전 테두리 색상 */
+    margin-right: 8px; /* 텍스트와의 간격 */
+    vertical-align: middle;
+    box-sizing: border-box; /* 패딩, 보더 포함하여 크기 계산 */
+    transition: all 0.3s ease;
+}
+
+/* 체크박스가 선택되었을 때의 동그라미 스타일 */
+.custom-checkbox-btn input[type="checkbox"]:checked + span.btn-text::before {
+    content: '\2713'; /* 유니코드 체크 마크 (✓) */
+    font-family: 'Pretendard', sans-serif; /* 체크 마크를 표시할 폰트 */
+    font-size: 11px; /* 체크 마크 크기 */
+    line-height: 12px; /* 체크 마크 세로 정렬 */
+    text-align: center; /* 체크 마크 가로 정렬 */
+
+    border-color: #23ADB4; /* 선택됐을 때의 동그라미 테두리 색상 */
+    background-color: #23ADB4; /* 동그라미 배경색 (채워짐) */
+    color: #fff; /* 체크 마크 색상 */
+}
+
+/* 선택된 체크박스의 텍스트 색상 변경 */
+.custom-checkbox-btn input[type="checkbox"]:checked + span.btn-text {
+    color: #555; /* 선택됐을 때 텍스트 색상 */
+}
+
+/* 버튼 자체의 테두리 및 배경 스타일 (이미지에 맞게 조정) */
+.custom-checkbox-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px; /* 패딩 조정 */
+    border: 1px solid #DEDEDE; /* 버튼 기본 테두리 색상 */
+    border-radius: 20px; /* 둥근 모서리 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 0 1 auto;
+    background-color: #fff; /* 버튼 배경색 (흰색 유지) */
+    margin-left: 15px; /* 버튼 간 간격 */
+}
+
+/* 버튼이 선택되었을 때 전체 버튼 스타일 변경 */
+.custom-checkbox-btn:has(input[type="checkbox"]:checked) {
+    border-color: #23ADB4; /* 선택된 버튼의 테두리 색상 */
+    background-color: #fff; /* 선택된 버튼의 배경색 (흰색으로 유지) */
 }
