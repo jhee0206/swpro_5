@@ -114,7 +114,7 @@ const riskMentDetail = computed(() => {
 
   const highRiskLabels = filteredRiskReport.filter(i => i.risk === '고위험').map(i => i.label);
   if (highRiskLabels.length)
-    strings.push(`${highRiskLabels.join(', ')}은(는) 고위험 단게에 해당해요. \n물질 사용 문제가 심각한 수준일 수 있어요. 전문가와의 상담을 통해 빠르게 조치를 받는 것이 중요합니다.`);
+    strings.push(`${highRiskLabels.join(', ')}은(는) 고위험 단계에 해당해요. \n물질 사용 문제가 심각한 수준일 수 있어요. 전문가와의 상담을 통해 빠르게 조치를 받는 것이 중요합니다.`);
 
   return strings.length ? strings.join('\n\n') : '';
 })
@@ -142,12 +142,12 @@ const showChatbotBtn = computed(() => {
 </script>
 
 <template>
-  <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역-->
-    <div> <!--헤더 영역-->
-      <p class="survey-title">나의 점수를 확인해보세요.</p>
-    </div>
+  <div class="survey-title"> <!--헤더 영역-->
+    <p>나의 점수를 확인해보세요.</p>
+  </div>
+  <div class="wrapper"> <!--콘텐츠 영역-->
     <div> <!--결과표-->
-      <table class="min-w-full text-center">
+      <table class="min-w-full text-center mt-[16px]">
         <thead>
         <tr class="bg-blue-50">
           <th class="border border-gray-200 p-[8px]">물질</th>
@@ -156,7 +156,7 @@ const showChatbotBtn = computed(() => {
         </tr>
         </thead>
         <tbody>
-        <tr v-for="item in riskReport" :key="item.label">
+        <tr v-for="item in riskReport" :key="item.label" class="bg-[#FFFFFF]">
           <td class="border border-gray-200 p-[8px]">{{ item.label }}</td>
           <td class="border border-gray-200 p-[8px]">{{ item.total }}점</td>
           <td class="border border-gray-200 p-[8px] text-[#FFFFFF]"
@@ -170,10 +170,10 @@ const showChatbotBtn = computed(() => {
       </table>
     </div> <!--결과표-->
     <div>
-      <ResultSafety class="pt-[16px]"/>
+      <ResultSafety class="py-[16px]"/>
     </div>
-    <div class="flex justify-center border-b-[2px] border-[#2260FF] pt-[16px] pb-[32px]">
-      <button @click="handleShowImage" class="habit-check">
+    <div class="habit-check">
+      <button @click="handleShowImage">
         나의 약물 사용습관 위험도 확인하기
       </button>
     </div>
@@ -196,17 +196,18 @@ const showChatbotBtn = computed(() => {
     </div>
     <div class="py-[32px]"> <!-- 저중고 위험 안내문 -->
       <div class="whitespace-pre-line">{{ riskMent }}</div>
-      <div class="whitespace-pre-line border border-[2px] p-[4px] border-[#2260FF]">{{ riskMentDetail }}</div>
+      <div class="whitespace-pre-line border border-[2px]  border-[#258FB3] rounded-[12px] p-[12px] bg-[#FFFFFF]"
+           style="box-shadow: 0 1px 6.8px 1px rgba(130, 130, 130, 0.25);">{{ riskMentDetail }}</div>
       <div><br>앱에서 도움을 받을 수 있는 경로를 안내해드릴게요.</div>
     </div>
-    <div class="flex justify-center mb-[65px]"> <!-- '확인'버튼 -->
+    <div class="flex justify-center mb-[30%]"> <!-- '확인'버튼 -->
       <ButtonComponent
-      class="p-[4px]"
+      class="px-[4px]"
       nextLink="카드뉴스 보기"
       @next="handleCardnews"/>
       <ButtonComponent
           v-if="showChatbotBtn"
-          class="p-[4px]"
+          class="px-[4px]"
           nextLink="챗봇 이동"
           @next="handleChatbot"/>
     </div>
@@ -216,11 +217,25 @@ const showChatbotBtn = computed(() => {
 
 <style scoped>
 .survey-title {
-  font-size: 25px;
+  font-size: 22px;
+  line-height: 30px;
   font-weight: bold;
   text-align: center;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding-top: 30px;
+  padding-bottom: 21.5px;
+  font-family: 'Pretendard', serif;
+  box-shadow: 0 1px 6.8px 1px rgba(130, 130, 130, 0.25);
+  background-color: #FFFFFF;
+}
+
+.wrapper {
+  width: 100vw;
+  height: 90vh;
+  padding-left: 18px;
+  padding-right: 18px;
+  background-color: #F8F8F8;
+  font-family: 'Pretendard', serif;
+  overflow-y: auto;
 }
 
 .habit-check {
@@ -229,10 +244,14 @@ const showChatbotBtn = computed(() => {
   border-style: solid;
   border-width: 1px;
   border-color: #C31D1D;
+  border-radius: 12px;
   padding-top: 12px;
   padding-bottom: 12px;
   padding-left: 16px;
   padding-right: 16px;
+  text-align: center;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 6.8px 1px rgba(130, 130, 130, 0.25);
 }
 
 .habit-check:hover {

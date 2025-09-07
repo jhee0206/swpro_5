@@ -48,26 +48,27 @@ function handleNext() {
 </script>
 
 <template>
-  <div class="min-h-screen w-full lg:max-w-[50%] mx-auto p-[20px]"> <!--전체 영역 -->
-    <FixedHeader
-        prevLink="이전으로"
-        @prev="handlePrev"/>
-    <div class="w-full flex flex-col justify-between"> <!-- 컨텐츠 -->
+  <FixedHeader
+      prevLink="이전으로"
+      @click="handlePrev"
+  /> <!-- 이전버튼 생성 해야함 -->
+  <div class="wrapper"> <!--컨텐츠 영역 -->
       <div> <!-- 세부 질문 -->
         <div> <!-- 질문지 -->
           <div class="w-full">
             <!-- 질문 제목 -->
             <div class="question-title">
-              <p>Q1. 일생 동안, 다음 물질 중 어떤 것을 사용해 본 경험이 있습니까?
-              <span>(의학적 사용은 제외)</span></p>
+              <p>Q1. 일생 동안, 다음 물질 중 어떤 것을 사용해 본 경험이 있습니까?<span class="font-normal">&nbsp(의학적 사용은 제외)</span></p>
             </div>
             <!-- 표 그리드 -->
-            <div class="grid grid-cols-4 border border-gray-200 text-center text-[15px]">
-              <div class="py-[8px] bg-blue-50 border border-gray-200 col-span-2">물질의 종류</div>
-              <div class="py-[8px] bg-blue-50 border border-gray-200">아니오</div>
-              <div class="py-[8px] bg-blue-50 border border-gray-200">예</div>
+            <div class="grid grid-cols-4 text-center text-[15px] bg-[#FFFFFF] rounded-[12px]">
+              <div class="py-[8px] bg-[#258FB3] text-[#FFFFFF] border border-gray-200 col-span-2">물질의 종류</div>
+              <div class="py-[8px] bg-[#258FB3] text-[#FFFFFF] border border-gray-200">아니오</div>
+              <div class="py-[8px] bg-[#258FB3] text-[#FFFFFF] border border-gray-200">예</div>
               <template v-for="(item, idx) in items" :key="item.label">
-                <div class="py-[8px] border border-gray-200 col-span-2">{{ item.label }}</div>
+                <div class="py-[8px] border border-gray-200 col-span-2"
+                     :class="{ 'rounded-bl-[12px]': idx === items.length - 1, /* 마지막 행 왼쪽 아래 둥글기 */ }"
+                >{{ item.label }}</div>
                 <div class="py-[8px] border border-gray-200">
                   <input
                       type="radio"
@@ -77,7 +78,8 @@ function handleNext() {
                       class="accent-blue-500"
                   />
                 </div>
-                <div class="py-[8px] border border-gray-200">
+                <div class="py-[8px] border border-gray-200"
+                     :class="{ 'rounded-br-[12px]': idx === items.length - 1, /* 마지막 행 오른쪽 아래 둥글기 */ }">
                   <input
                       type="radio"
                       :name="`q1_${idx}`"
@@ -91,17 +93,35 @@ function handleNext() {
           </div>
         </div>
       </div>
-    </div>
-    <div class="flex justify-end pt-[12px] mb-[65px]"> <!-- 다음버튼 -->
+    <div class="flex justify-end pt-[5%]"> <!-- 다음버튼 -->
       <ButtonComponent
-        nextLink="다음"
-        @next="handleNext"
+          nextLink="다음"
+          @next="handleNext"
       />
     </div>
-  </div>
+    </div>
   <NavigationBar/>
 </template>
 
 <style scoped>
   @import "/src/assert/main.css";
+
+  .wrapper {
+    width: 100vw;
+    height: 90vh;
+    padding-left: 18px;
+    padding-right: 18px;
+    background-color: #F8F8F8;
+    font-family: 'Pretendard', serif;
+  }
+
+  /* 헤더 둥근 테두리는 CSS로 */
+  .grid > div.col-span-2:first-child {
+    border-top-left-radius: 12px;
+  }
+
+  .grid > div.py-\[8px\]:nth-child(3),
+  .grid > div.py-\[8px\]:nth-child(4) {
+    border-top-right-radius: 12px;
+  }
 </style>

@@ -17,11 +17,12 @@ const emit = defineEmits(['next'])
 </template>
 
 <style scoped>
+.button-wrapper {
+  padding-top: 5%;
+}
+
 .button {
-  position: fixed;
-  left: 18px;
-  right: 18px;
-  bottom: 85px;
+  width: 100%;
   height: 58px;
   color: #FFFFFF;
   font-size: 16px;
