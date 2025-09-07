@@ -3,7 +3,7 @@
     <!-- 챗봇일 경우 왼쪽에 프로필 이미지 -->
     <img
         v-if="role === 'bot'"
-        src="/icon/chatimg.svg"
+        src="/icon/chatimg2.png"
         alt="챗봇"
         class="profile-img"
     />

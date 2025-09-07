@@ -12,12 +12,20 @@
         class="slogan-swiper"
     >
       <SwiperSlide>
-        <img src="@/assets/mainlog.svg" alt="슬로건1" class="slogan-logo" />
+        <img src="@/assets/mainlog.png" alt="슬로건1" class="slogan-logo" />
+        <div class="logo-text1">중독은 <span class="text-aje">어제로,</span><br> 행복은 <span class="today">
+          오늘로</span></div>
       </SwiperSlide>
+
+
       <SwiperSlide>
-        <img src="@/assets/mainlog2.svg" alt="슬로건2" class="slogan-logo" @click="goSurvey" />
+        <img src="@/assets/mainlog2.png" alt="슬로건2" class="slogan-logo" @click="goSurvey" />
+        <div class="logo-text2">ASSIST 검사<br> 하러가기</div>
       </SwiperSlide>
+
+
     </Swiper>
+
 
     <div class="ajeroinfo">
       '어제로' 소개
@@ -197,4 +205,39 @@ export default {
   height: auto;
   margin: 0 auto;
 }
+
+.logo-text2{
+  color: #fff;
+  position: absolute;
+  top: 10%;
+  left: 28%;
+  transform: translateX(-50%);
+  font-size: clamp(27px, 5vw, 30px);
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.4;
+  /*font-family: 'S-Core Dream', serif;*/
+}
+
+.logo-text1{
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  transform: translateX(-50%);
+  font-size: clamp(27px, 5vw, 30px);
+  font-weight: bold;
+  color: #555555;
+  text-align: center;
+  line-height: 1.4;
+  /*font-family: 'S-Core Dream', serif;*/
+}
+
+.text-aje {
+  color: #0C8F96;  /* 어제로 */
+}
+
+.today {
+  color: #1B67C4;  /* 오늘로 */
+}
+
 </style>

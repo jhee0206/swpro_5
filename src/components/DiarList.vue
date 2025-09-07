@@ -44,23 +44,23 @@ export default {
     };
   },
   //computed: {
-   // sortedDailyList() {
+  // sortedDailyList() {
 
-      computed: {
-        sortedDailyList() {
-          return [...this.diaryList].sort((a, b) => {
-            const dateA = new Date(a.date.replace(/\./g, '-')).getTime();
-            const dateB = new Date(b.date.replace(/\./g, '-')).getTime();
-            return dateB - dateA; // 이제 number 타입끼리 연산이므로 오류 없음
-          });
-        },
-      },
-      //return [...this.diaryList].sort((a, b) => {
-        //const dateA = new Date(a.date.replace(/\./g, '-'));
-        //const dateB = new Date(b.date.replace(/\./g, '-'));
-        //return dateB - dateA;
-      //});
-    //},
+  computed: {
+    sortedDailyList() {
+      return [...this.diaryList].sort((a, b) => {
+        const dateA = new Date(a.date.replace(/\./g, '-')).getTime();
+        const dateB = new Date(b.date.replace(/\./g, '-')).getTime();
+        return dateB - dateA; // 이제 number 타입끼리 연산이므로 오류 없음
+      });
+    },
+  },
+  //return [...this.diaryList].sort((a, b) => {
+  //const dateA = new Date(a.date.replace(/\./g, '-'));
+  //const dateB = new Date(b.date.replace(/\./g, '-'));
+  //return dateB - dateA;
+  //});
+  //},
   //},
   mounted() {
     const stored = localStorage.getItem('diaryList');
@@ -226,7 +226,3 @@ export default {
 
 
 </style>
-<script setup lang="ts">
-</script>
-<script setup lang="ts">
-</script>
