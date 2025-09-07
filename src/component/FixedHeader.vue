@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// title이라는 prop(문자열) 선언
 const props = defineProps<{
   title?: string
   prevLink?: string
@@ -9,13 +8,15 @@ const emit = defineEmits(['prev'])
 </script>
 
 <template>
-  <div>
-    <p class="survey-title">{{ props.title || 'ASSIST 검사' }}</p>
+  <div class="survey-title">
+      <p>{{ props.title || 'ASSIST 검사' }}</p>
   </div>
 </template>
 
 <style scoped>
 .survey-title {
+  display: flex;
+  justify-content: center;
   font-size: 22px;
   line-height: 30px;
   font-weight: bold;
@@ -24,5 +25,15 @@ const emit = defineEmits(['prev'])
   padding-top: 30px;
   padding-bottom: 21.5px;
   font-family: 'Pretendard', serif;
+}
+
+.button {
+  display: flex;
+}
+
+.arrow {
+  font-size: 32px;
+  color: #333;
+  transition: color 0.2s;
 }
 </style>

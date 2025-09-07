@@ -4,7 +4,8 @@
 
 <template>
   <div>
-    <div class="flex justify-between">
+    <div class="flex justify-between"
+         style="box-shadow: 0 1px 6.8px 1px rgba(130, 130, 130, 0.25);">
       <div class="safety-low-div">
         <p class="safety-low-p">저위험</p>
         <p class="safety-step-descript">약물 0-3점,<br> 알코올 0-10점</p>
@@ -25,7 +26,7 @@
 .safety-low-p {
   font-size: 14px;
   text-align: center;
-  border-top-left-radius: 8px;
+  border-top-left-radius: 12px;
   color: #ffffff;
 
 }
@@ -46,8 +47,8 @@
   background-color: #6AAA5B;
   padding: 8px;
   flex: 1 1 0%;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 
 .safety-middle-div {
@@ -60,8 +61,8 @@
   background-color: #C31D1D;
   padding: 8px;
   flex: 1 1 0%;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .safety-step-descript {
