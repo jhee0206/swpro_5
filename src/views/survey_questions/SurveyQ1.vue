@@ -108,7 +108,7 @@ function handleNext() {
 
   .wrapper {
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     padding-left: 18px;
     padding-right: 18px;
     background-color: #F8F8F8;
