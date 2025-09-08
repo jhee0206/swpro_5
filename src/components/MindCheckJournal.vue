@@ -8,7 +8,7 @@
       </div>
     </header>
 
-    <div class="content"><!--캡쳐 시작지점-->
+    <div class="content" id="journal-content-to-capture"><!--캡쳐 시작지점-->
       <div class="intro-card">
         <p>
           <strong>나의 하루를 한 문장으로 표현해주세요.</strong>
@@ -104,6 +104,9 @@
         </div>
       </div>
     </div>
+    <GoToSurveyButton
+        nextLink="저장하기"
+        @next="saveJournal"/>
 
 
     <NavigationBar />
@@ -116,10 +119,12 @@
 import NavigationBar from "@/components/NavigationBar.vue";
 import html2canvas from "html2canvas";
 import BackButton from "@/components/BackButton.vue";
+import GoToSurveyButton from "@/component/GoToSurveyButton.vue";
+
 
 export default {
   name: "MindCheckJournal",
-  components: {BackButton, NavigationBar },
+  components: {BackButton, NavigationBar, GoToSurveyButton },
   data() {
     return {
       entryDate: "",
