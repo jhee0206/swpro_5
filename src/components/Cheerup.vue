@@ -1,16 +1,15 @@
 <template>
   <div class="container">
-    <BackButton :to="'/DiarList'"/>
+    <BackButton :to="'/DiarList'" />
     <h1 class="headline"><br>{{ headlineMessage }} <br><br>아래의 카드뉴스를 확인해 봅시다!</h1>
-    <div class ="card-grid">
+    <div class="card-grid">
       <button
           v-for="(card, index) in cardList"
           :key="card.type"
           class="card-button"
           @click="goToDetail(card.type)">
-        <img :src="card.image" :alt="`card-${index}`" class="card-image" />
+        <img :src="card.image" :alt="'card-' + index" class="card-image" />
       </button>
-
     </div>
   </div>
   <NavigationBar />
@@ -19,41 +18,37 @@
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
 import BackButton from "@/components/BackButton.vue";
-
+import { getAllDiaries } from "@/db.js"; // IndexedDB에서 가져오기
 
 export default {
   name: "NextDetailwin",
-  components: {BackButton, NavigationBar},
-  data(){
-    return{
-      cardList:[
+  components: { BackButton, NavigationBar },
+  data() {
+    return {
+      cardList: [
         { type: "cheer01", image: "/cheer01/운동할결심01.png" },
         { type: "cheer02", image: "/cheer02/올바른물섭취01.jpg" },
         { type: "cheer03", image: "/cheer03/건강한수면습관01.png" }
       ],
+      headlineMessage: "영역이 부족하시네요."
     };
   },
-  computed: {
-    headlineMessage(){
-      const latestDiary = JSON.parse(localStorage.getItem("diaryList"))?.slice(-1)[0];
-      if(!latestDiary) return "영역이 부족하시네요.";
-
-      const {water, hour, exercise} = latestDiary.checklist;
+  async mounted() {
+    const diaries = await getAllDiaries();
+    const latestDiary = diaries.slice(-1)[0];
+    if (latestDiary) {
+      const { water, hour, exercise } = latestDiary.checklist;
       const message = [];
-
-      if(["1cup", "2_4cup", "11cup"].includes(water)) message.push("수분");
+      if (["1cup", "2_4cup", "11cup"].includes(water)) message.push("수분");
       if (["4hour", "5_6hour", "10hour"].includes(hour)) message.push("수면");
       if (exercise === "no") message.push("운동");
-
-      return message.join(", ")+" 영역이 부족하시네요. "
+      this.headlineMessage = message.length ? message.join(", ") + " 영역이 부족하시네요." : "모든 영역이 괜찮아요!";
     }
   },
-
-  methods:{
+  methods: {
     goToDetail(type) {
       this.$router.push({ name: 'Cheerup_detail', params: { type } });
     }
-
   }
 };
 </script>
@@ -98,7 +93,7 @@ export default {
   object-fit: cover;
 }
 
-.arrow{
+.arrow {
   position: absolute;
   top: 15px;
   left: 20px;
@@ -107,3 +102,4 @@ export default {
   z-index: 100;
 }
 </style>
+
