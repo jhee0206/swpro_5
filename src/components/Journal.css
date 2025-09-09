@@ -10,75 +10,93 @@
 /* 캡처 대상인 'journal-content-to-capture'에도 동일한 배경색을 적용합니다. */
 
 @font-face {
-    font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff') format('woff');
+    font-family: "Pretendard";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff")
+    format("woff");
     font-weight: 100;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraLight.woff') format('woff');
+    font-family: "Pretendard";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraLight.woff")
+    format("woff");
     font-weight: 200;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
+    font-family: "Pretendard";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff")
+    format("woff");
     font-weight: 300;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-family: "Pretendard";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
     font-weight: 400;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff') format('woff');
+    font-family: "Pretendard";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff")
+    format("woff");
     font-weight: 500;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff');
+    font-family: "Pretendard";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff")
+    format("woff");
     font-weight: 600;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    font-family: "Pretendard";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
+    format("woff");
     font-weight: 700;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+    font-family: "Pretendard";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff")
+    format("woff");
     font-weight: 800;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff') format('woff');
+    font-family: "Pretendard";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff")
+    format("woff");
     font-weight: 900;
     font-display: swap;
 }
 
 .my-text {
-    font-family: 'Pretendard', sans-serif; /* 'Pretendard' 폰트를 먼저 사용하고, 없으면 기본 sans-serif 폰트 사용 */
+    font-family: "Pretendard", sans-serif; /* 'Pretendard' 폰트를 먼저 사용하고, 없으면 기본 sans-serif 폰트 사용 */
     font-weight: 200; /* 원하는 굵기를 설정 */
 }
 
 #journal-content-to-capture {
     background-color: #fff;
+    /*
+       캡처 대상 영역은 기본적으로 스크롤이 생길 수 있는 구조를 가집니다.
+       html2canvas가 이 스크롤을 인식하고 전체 내용을 캡처하도록 하려면,
+       이 요소 자체에 overflow: auto; 와 같은 속성을 명시적으로 적용하는 것이 도움이 됩니다.
+       하지만 여기서는 `saveJournal` 메소드 내에서 `elementToCapture.style.height = `${currentHeight}px`;` 를 통해
+       강제로 전체 높이를 부여하는 방식으로 해결합니다.
+       만약 부모 요소에 `overflow: hidden;` 이 적용되어 있다면, 캡처 대상 요소(`journal-content-to-capture`)가
+       전체 내용을 담을 수 있도록 CSS를 조정해야 합니다.
+    */
 }
 
 /* h1 태그 (제목) 스타일 */
@@ -98,7 +116,7 @@ h2 {
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
-    padding-bottom:1px;
+    padding-bottom: 1px;
 }
 
 /* 체크리스트 제목 스타일 */
@@ -134,7 +152,7 @@ h2 {
     outline: none;
     color: #444;
     box-sizing: border-box;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
 }
 .rating-container {
     display: flex;
@@ -149,7 +167,7 @@ h2 {
     display: flex;
     align-items: center;
     gap: 5px;
-    border: 1px solid #DEDEDE; /* 버튼 테두리 색상: 누르기 전 */
+    border: 1px solid #dedede; /* 버튼 테두리 색상: 누르기 전 */
     border-radius: 20px;
     padding: 3px 9px;
     cursor: pointer;
@@ -183,7 +201,7 @@ h2 {
     align-items: center;
 }
 
-/* 제목 구역 (나의 기록) */
+/* 제목 구역 (오늘의 일지) */
 .title-section {
     width: 100%;
     text-align: center;
@@ -223,10 +241,10 @@ h2 {
 }
 .intro-card {
     width: 95%;
-    background:#fff;
+    background: #fff;
     border-radius: 10px;
     padding: 5px 15px;
-    border: 1.5px solid #70B9BD;
+    border: 1.5px solid #70b9bd;
     margin-bottom: 20px;
     color: #555555;
     box-shadow: 0 0 10px #ccc;
@@ -242,15 +260,15 @@ h2 {
     display: block;
     padding-top: 6px;
 }
-.textarea-style{
+.textarea-style {
     width: 95%;
     font-size: 14px;
-    color:#9C9C9C;
+    color: #9c9c9c;
     resize: vertical;
     white-space: pre-wrap;
     word-wrap: break-word;
     text-align: center;
-    background: #F3F3F3;
+    background: #f3f3f3;
     border-radius: 5px;
     padding-top: 9px; /* 위쪽 여백 */
     padding-bottom: 9px; /* 아래쪽 여백 */
@@ -259,7 +277,7 @@ h2 {
 textarea {
     margin-top: 10px; /* 위쪽 여백을 0으로 설정 */
 }
-.check-list{
+.check-list {
     padding-top: 15px;
     padding-bottom: 15px;
 }
@@ -267,7 +285,6 @@ textarea {
     margin-left: 15px;
     color: #555555;
     font-size: 14px;
-
 }
 .check-list span {
     color: #555555;
@@ -281,12 +298,12 @@ textarea {
 
 /* 커스텀 동그라미 스타일 (누르기 전) */
 .custom-radio span::before {
-    content: ''; /* 빈 가상 요소로 동그라미만 만듭니다. */
+    content: ""; /* 빈 가상 요소로 동그라미만 만듭니다. */
     display: inline-block;
     width: 16px;
     height: 16px;
     border-radius: 50%; /* 동그라미 모양 */
-    border: 2px solid #DEDEDE; /* 누르기 전 동그라미 테두리 색상 */
+    border: 2px solid #dedede; /* 누르기 전 동그라미 테두리 색상 */
     margin-right: 8px; /* 텍스트와의 간격 */
     vertical-align: middle;
     box-sizing: border-box; /* 패딩, 보더 포함하여 크기 계산 */
@@ -295,14 +312,14 @@ textarea {
 
 /* 선택된 상태의 동그라미 스타일 */
 .custom-radio input[type="radio"]:checked + span::before {
-    content: '\2713'; /* 유니코드 체크 마크 (✓) */
-    font-family: 'Pretendard', sans-serif; /* 체크 마크를 표시할 폰트 */
+    content: "\2713"; /* 유니코드 체크 마크 (✓) */
+    font-family: "Pretendard", sans-serif; /* 체크 마크를 표시할 폰트 */
     font-size: 11px; /* 체크 마크 크기 */
     line-height: 12px; /* 체크 마크 세로 정렬 */
     text-align: center; /* 체크 마크 가로 정렬 */
 
-    border-color: #23ADB4; /* 선택됐을 때의 동그라미 테두리 색상 */
-    background-color: #23ADB4; /* 동그라미 배경색 (흰색으로 유지) */
+    border-color: #23adb4; /* 선택됐을 때의 동그라미 테두리 색상 */
+    background-color: #23adb4; /* 동그라미 배경색 (흰색으로 유지) */
     color: #fff; /* 체크 마크 색상 */
 }
 
@@ -321,12 +338,12 @@ textarea {
 
 /* 커스텀 체크박스 (동그라미) 스타일 - 기본 상태 */
 .custom-checkbox-btn span.btn-text::before {
-    content: ''; /* 가상 요소를 생성 */
+    content: ""; /* 가상 요소를 생성 */
     display: inline-block;
     width: 16px; /* 동그라미 크기 */
     height: 16px;
     border-radius: 50%; /* 동그라미 모양 */
-    border: 2px solid #DEDEDE; /* 누르기 전 테두리 색상 */
+    border: 2px solid #dedede; /* 누르기 전 테두리 색상 */
     margin-right: 8px; /* 텍스트와의 간격 */
     vertical-align: middle;
     box-sizing: border-box; /* 패딩, 보더 포함하여 크기 계산 */
@@ -335,14 +352,14 @@ textarea {
 
 /* 체크박스가 선택되었을 때의 동그라미 스타일 */
 .custom-checkbox-btn input[type="checkbox"]:checked + span.btn-text::before {
-    content: '\2713'; /* 유니코드 체크 마크 (✓) */
-    font-family: 'Pretendard', sans-serif; /* 체크 마크를 표시할 폰트 */
+    content: "\2713"; /* 유니코드 체크 마크 (✓) */
+    font-family: "Pretendard", sans-serif; /* 체크 마크를 표시할 폰트 */
     font-size: 11px; /* 체크 마크 크기 */
     line-height: 12px; /* 체크 마크 세로 정렬 */
     text-align: center; /* 체크 마크 가로 정렬 */
 
-    border-color: #23ADB4; /* 선택됐을 때의 동그라미 테두리 색상 */
-    background-color: #23ADB4; /* 동그라미 배경색 (채워짐) */
+    border-color: #23adb4; /* 선택됐을 때의 동그라미 테두리 색상 */
+    background-color: #23adb4; /* 동그라미 배경색 (채워짐) */
     color: #fff; /* 체크 마크 색상 */
 }
 
@@ -356,7 +373,7 @@ textarea {
     display: inline-flex;
     align-items: center;
     padding: 3px 9px; /* 패딩 조정 */
-    border: 1px solid #DEDEDE; /* 버튼 기본 테두리 색상 */
+    border: 1px solid #dedede; /* 버튼 기본 테두리 색상 */
     border-radius: 20px; /* 둥근 모서리 */
     cursor: pointer;
     transition: all 0.3s ease;
@@ -367,6 +384,17 @@ textarea {
 
 /* 버튼이 선택되었을 때 전체 버튼 스타일 변경 */
 .custom-checkbox-btn:has(input[type="checkbox"]:checked) {
-    border-color: #23ADB4; /* 선택된 버튼의 테두리 색상 */
+    border-color: #23adb4; /* 선택된 버튼의 테두리 색상 */
     background-color: #fff; /* 선택된 버튼의 배경색 (흰색으로 유지) */
+}
+/* GoToSurveyButton을 담을 컨테이너 */
+.button-container {
+    position: fixed; /* 화면에 고정 */
+    bottom: 80px; /* 네비게이션 바의 높이(50px) + 여백(10px)만큼 위로 올림 */
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 0 20px; /* 좌우 여백 */
+    box-sizing: border-box;
 }

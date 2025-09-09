@@ -104,14 +104,14 @@
           </div>
         </div>
 
-        <div>
-          <GoToSurveyButton
-              nextLink="저장하기"
-              @next="saveJournal"/>
-        </div>
       </div>
 
 
+      <div class="button-container">
+        <GoToSurveyButton
+            nextLink="저장하기"
+            @next="saveJournal"/>
+      </div>
 
       <NavigationBar />
     </div>
