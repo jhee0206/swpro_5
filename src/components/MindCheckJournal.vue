@@ -103,15 +103,13 @@
             </div>
           </div>
         </div>
-
-        <div>
-          <GoToSurveyButton
-              nextLink="저장하기"
-              @next="saveJournal"/>
-        </div>
       </div>
 
-
+      <div>
+        <GoToSurveyButton
+            nextLink="저장하기"
+            @next="saveJournal"/>
+      </div>
 
       <NavigationBar />
     </div>
