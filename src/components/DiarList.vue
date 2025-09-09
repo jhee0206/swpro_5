@@ -16,7 +16,6 @@
         <h2 class="popup-title">{{ popupData.title }}</h2>
         <img v-if="popupData.image" :src="popupData.image" alt="Popup Image" class="popup-image"/>
         <p class="popup-text">{{ popupData.text }}</p>
-        <!--<p v-html="popupData.text"></p>-->
       </div>
     </div>
 
@@ -38,6 +37,7 @@
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
 import BackButton from "@/components/BackButton.vue";
+import { getAllDiaries } from "@/db.js";
 
 export default {
   name: 'DiaryList',
@@ -53,39 +53,30 @@ export default {
       }
     };
   },
-
   computed: {
     sortedDailyList() {
       return [...this.diaryList].sort((a, b) => {
-        const dateA = new Date(a.date.replace(/\./g, '-')).getTime();
-        const dateB = new Date(b.date.replace(/\./g, '-')).getTime();
+        const dateA = new Date(a.date.replace(/\./g, '-'));
+        const dateB = new Date(b.date.replace(/\./g, '-'));
         return dateB - dateA;
       });
     },
   },
-
-  mounted() {
-    const stored = localStorage.getItem('diaryList');
-    this.diaryList = stored ? JSON.parse(stored) : [];
-
-    this.checkMilestonePopup();
+  async mounted() {
+    try {
+      this.diaryList = await getAllDiaries();
+      this.checkMilestonePopup();
+    } catch (error) {
+      console.error("일지를 불러오는 데 실패했습니다:", error);
+    }
   },
-
   watch: {
     diaryList(newList, oldList) {
       if (newList.length > oldList.length) {
         this.checkMilestonePopup();
       }
-    },
-    $route(to, from) {
-      const stored = JSON.parse(localStorage.getItem('diaryList')) || [];
-      if (stored.length !== this.diaryList.length) {
-        this.diaryList = stored;
-        this.checkMilestonePopup();
-      }
     }
   },
-
   methods: {
     viewDiary(entry) {
       this.$router.push({path: '/diarydetail', query: {id: entry.id}});
@@ -96,22 +87,22 @@ export default {
 
       const messages = {
         3: {
-          title: "3회째 기록 달성 ",
+          title: "3회째 기록 달성",
           image: "/public/cheericon/good_3.png",
           text: "스스로 건강을 챙기려는 노력이 이미 시작됐네요. 이렇게 기록하는 게 변화를 향한 중요한 첫걸음이에요!"
         },
         7: {
-          title: "7회째 기록 달성 ",
+          title: "7회째 기록 달성",
           image: "/public/cheericon/good_7.png",
           text: "벌써 7번이나 기록했어요! 스스로 건강을 지키려는 마음이 꾸준히 이어지고 있다는 증거예요."
         },
         14: {
-          title: "14회째 기록 달성 ",
+          title: "14회째 기록 달성",
           image: "/public/cheericon/good14.png",
           text: "14번째 기록까지 해내셨어요. 스스로 선택하고 실천한 결과가 이렇게 쌓여가고 있네요."
         },
         30: {
-          title: "30회째 기록 달성 ",
+          title: "30회째 기록 달성",
           image: "/public/cheericon/good30.png",
           text: "30번째 기록을 달성했군요! 지금까지 보여준 꾸준함이 앞으로도 건강을 지켜주는 큰 힘이 될 거예요."
         }
@@ -125,7 +116,7 @@ export default {
           this.showPopup = false;
         }, 5000);
       }
-    },
+    }
   }
 }
 </script>
@@ -229,16 +220,16 @@ export default {
   z-index: 999;
   text-align: center;
   box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-  max-width: 600px;         /* 최대 너비 확장 */
+  max-width: 600px;
   width: 95%;
 }
 
 .popup-content {
   position: relative;
   display: flex;
-  flex-direction: column; /* 세로 정렬 */
-  align-items: center;    /* 가로 중앙 */
-  justify-content: center;/* 세로 중앙 */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .popup-title {
@@ -263,9 +254,4 @@ export default {
   text-align: center;
   word-break: keep-all;
 }
-
-
 </style>
-
-<script setup lang="ts">
-</script>

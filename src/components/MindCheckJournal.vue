@@ -2,28 +2,29 @@
   <div class="my-text">
     <div>
       <header class="header">
-        <div class="header-content">
+        <div class="top-section">
           <BackButton :to="'/CardNewsMain'"/>
+        </div>
+        <div class="title-section">
           <p class="page-title">오늘의 일지</p>
         </div>
       </header>
-
       <div class="content" id="journal-content-to-capture"><!--캡쳐 시작지점-->
         <div class="intro-card">
           <p>
             <strong>나의 하루를 한 문장으로 표현해주세요.</strong>
           </p>
           <p>
-             <textarea
-                 id="entryMood"
-                 v-model="entryMood"
-                 maxlength="20"
-                 rows="1"
-                 ref="myAutoGrowTextarea"
-                 @input="adjustTextareaHeight"
-                 placeholder="오늘은 행복한 날이예요!"
-                 class="textarea-style"
-             ></textarea>
+<textarea
+    id="entryMood"
+    v-model="entryMood"
+    maxlength="20"
+    rows="1"
+    ref="myAutoGrowTextarea"
+    @input="adjustTextareaHeight"
+    placeholder="오늘은 행복한 날이예요!"
+    class="textarea-style"
+></textarea>
           </p>
         </div>
         <h2 class="h2-text">나의 라이프스타일 체크리스트</h2>
@@ -38,7 +39,6 @@
               <label class="rating-option custom-radio"><input type="radio" name="mood" value="vlevle" v-model="checklist.mood" /> <span class="btn-text">매우 나빠요</span> </label>
             </div>
           </div>
-
           <div class="check-list">
             <strong>2. 오늘 수분 섭취량</strong>
             <div class="rating-container">
@@ -103,6 +103,7 @@
             </div>
           </div>
         </div>
+
         <div>
           <GoToSurveyButton
               nextLink="저장하기"
@@ -110,17 +111,20 @@
         </div>
       </div>
 
+
+
       <NavigationBar />
     </div>
   </div>
+
 </template>
-
-
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
 import html2canvas from "html2canvas";
 import BackButton from "@/components/BackButton.vue";
 import GoToSurveyButton from "@/component/GoToSurveyButton.vue";
+// 1. db.js에서 addDiary 함수를 가져옵니다.
+import { addDiary } from "@/db.js"; // 파일 경로가 맞는지 확인하세요.
 
 export default {
   name: "MindCheckJournal",
@@ -135,9 +139,9 @@ export default {
         mood: "",
         water: "",
         hour: "",
-        meals: [], // checkbox용 배열로 변경
+        meals: [],
         enjoyableActivity: "",
-        exercise: "", // socialInteraction → exercise 로 구분
+        exercise: "",
         heartSharing: "",
         kindness: "",
       },
@@ -156,71 +160,79 @@ export default {
       this.entryDate = `${year}.${month}.${day}`;
     },
     adjustTextareaHeight() {
-      this.$nextTick(() => { // DOM 업데이트 후에 실행되도록 보장
-        const textarea = this.$refs.myAutoGrowTextarea; // ref로 요소 접근
+      this.$nextTick(() => {
+        const textarea = this.$refs.myAutoGrowTextarea;
         if (textarea) {
-          textarea.style.height = 'auto'; // 높이 초기화
-          textarea.style.height = (textarea.scrollHeight) + 'px'; // 스크롤 가능한 높이만큼 설정
+          textarea.style.height = 'auto';
+          textarea.style.height = (textarea.scrollHeight) + 'px';
         }
       });
     },
-    saveJournal: async function () {
+    async saveJournal() { // async 키워드는 이미 있으므로 그대로 둡니다.
       const waterBad = ["1cup", "2_4cup", "11cup"];
       const hourBad = ["4hour", "5_6hour", "10hour"];
       const exerciseBad = ["no"];
 
       const elementToCapture = document.getElementById("journal-content-to-capture");
-      //this.entryDate = "2025.09.23";
-      if (elementToCapture) {
-        setTimeout(async () => {
-          try {
-            const captureHeight = elementToCapture.scrollHeight + 50;
-
-            const canvas = await html2canvas(elementToCapture, {
-              useCORS: true,
-              scrollY: -window.scrollY,
-              height: captureHeight,
-              windowHeight: captureHeight,
-            });
-
-            const imageDataURL = canvas.toDataURL("image/png");
-
-            const newEntry = {
-              id: Date.now(),
-              date: this.entryDate,
-              title: this.entryTitle,
-              mood: this.entryMood,
-              phrase: this.entryPhrase,
-              checklist: this.checklist,
-              image: imageDataURL,
-            };
-
-            const storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
-            storedDiaryList.push(newEntry);
-            localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-
-            alert("일지 저장 완료!");
-            if (
-                waterBad.includes(this.checklist.water) ||
-                hourBad.includes(this.checklist.hour) ||
-                exerciseBad.includes(this.checklist.exercise)
-            ) {
-              this.$router.push("/Cheerup");
-            } else {
-              this.$router.push("/DiarList");
-            }
-          } catch (error) {
-            console.error("이미지 캡처 및 저장 중 오류 발생:", error);
-            alert("일지 저장 중 오류가 발생했습니다.");
-          }
-        }, 500);
-      } else {
+      if (!elementToCapture) {
         console.error("캡처할 요소를 찾을 수 없습니다.");
         alert("일지 내용을 캡처할 수 없습니다.");
+        return;
+      }
+
+      // setTimeout을 사용하지 않고 직접 비동기 처리합니다.
+      try {
+        await new Promise(resolve => setTimeout(resolve, 500)); // 캡처 전 렌더링 대기 시간
+
+        const captureHeight = elementToCapture.scrollHeight + 50;
+        const canvas = await html2canvas(elementToCapture, {
+          useCORS: true,
+          scrollY: -window.scrollY,
+          height: captureHeight,
+          windowHeight: captureHeight,
+        });
+
+        const imageDataURL = canvas.toDataURL("image/png");
+
+        const newEntry = {
+          id: Date.now(),
+          date: this.entryDate,
+          title: this.entryTitle,
+          mood: this.entryMood,
+          phrase: this.entryPhrase,
+          checklist: JSON.parse(JSON.stringify(this.checklist)), // ✅ Proxy → Plain Object
+          image: imageDataURL,
+        };
+
+        // --- 2. 여기가 핵심 변경 부분입니다 ---
+        // 기존 localStorage 로직을 삭제하고 addDiary 함수를 호출합니다.
+        /*
+          // --- 삭제될 기존 코드 ---
+          const storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
+          storedDiaryList.push(newEntry);
+          localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
+        */
+
+        // --- 새로 추가된 IndexedDB 저장 코드 ---
+        await addDiary(newEntry);
+        // --- 여기까지 변경 ---
+
+        alert("일지 저장 완료!");
+        if (
+            waterBad.includes(this.checklist.water) ||
+            hourBad.includes(this.checklist.hour) ||
+            exerciseBad.includes(this.checklist.exercise)
+        ) {
+          this.$router.push("/Cheerup");
+        } else {
+          this.$router.push("/DiarList"); // DiarList -> DiaryList 오타 수정 제안
+        }
+      } catch (error) {
+        console.error("이미지 캡처 및 IndexedDB 저장 중 오류 발생:", error);
+        alert("일지 저장 중 오류가 발생했습니다.");
       }
     },
   },
 };
 </script>
-
 <style scoped src="./Journal.css"></style>

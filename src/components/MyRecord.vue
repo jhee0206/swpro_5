@@ -25,7 +25,7 @@
         <strong>하루톡</strong>은 이런 회복의 여정 속에서 오늘의 나를 기록 하고 점검할 수 있는 공간입니다.<br><br>
 
         <u><strong>‘마음 체크 일지’</strong></u>에는 하루의 라이프스타일을 돌아볼 수 있는
-        <strong>‘라이프스타일 체크리스트’’</strong>가 포함되어 있어, 신체적·정신적·사회적 건강을 균형 있게 돌볼 수 있도록 돕습니다.
+        <strong>‘라이프스타일 체크리스트’</strong>가 포함되어 있어, 신체적·정신적·사회적 건강을 균형 있게 돌볼 수 있도록 돕습니다.
         <strong>'마음 체크 일지'</strong>를 통해 하루의 행동을 돌아보고, 나 자신에 대한 작은 기록을 남겨보세요!</p>
 
       <!--그람자 선 추가-->
@@ -296,9 +296,11 @@ export default {
 }
 
 .section-divider {
-  border-bottom: 5px solid #F0F0F0;
-  width: calc(100% + 24px); /* 좌우 padding(12px씩) 무시 */
-  margin-left: -12px;
+  border-bottom: 5px solid rgba(127, 135, 156, 0.31);
+  width: 100%;
+  margin: 20px 0;  /* 위아래 여백 */
+  position: relative;  /* 레이아웃 흔들림 방지 */
+  flex-shrink: 0;
 }
 
 
@@ -320,21 +322,6 @@ export default {
 .collapsible-content p {
   margin: 0;
   text-align: left;
-}
-
-/* 새롭게 추가된 고정 버튼 영역 스타일 */
-.fixed-bottom-button-area {
-  position: fixed;
-  bottom: 65px;
-  left: 0;
-  right: 0;
-  max-width: 450px;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  z-index: 9;
-  height: 70px;
 }
 
 .floating-button {
