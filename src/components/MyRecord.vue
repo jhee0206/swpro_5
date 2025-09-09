@@ -220,7 +220,6 @@ export default {
   align-items: center;
 }
 
-
 /* 제목 구역 (나의 기록) */
 .title-section {
   width: 100%;

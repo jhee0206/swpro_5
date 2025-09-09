@@ -27,7 +27,7 @@ export default {
 <style scoped>
 .arrow {
   position: absolute;
-  top: 15px;
+  top: 37px;
   left: 20px;
   font-size: 28px;
   color: #333333;
