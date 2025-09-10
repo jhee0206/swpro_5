@@ -286,12 +286,15 @@ textarea {
     color: #555555;
     font-size: 14px;
 }
-/* ✨ CSS 줄바꿈 방지 속성 추가 */
+/* ✨ 수정된 부분 1: span 태그에 Flexbox 적용 */
 .check-list span {
     color: #555555;
     font-size: 11px;
-    word-break: keep-all; /* 단어 단위 줄바꿈 */
-    white-space: nowrap;   /* 자동 줄바꿈 방지 */
+    word-break: keep-all;
+    white-space: nowrap;
+    /* Flexbox를 사용하여 내부 요소(체크마크 + 텍스트) 세로 가운데 정렬 */
+    display: inline-flex;
+    align-items: center;
 }
 /* 숨겨진 라디오 버튼 */
 .custom-radio input[type="radio"] {
@@ -299,18 +302,21 @@ textarea {
     opacity: 0;
 }
 
+/* ✨ 수정된 부분 2: ::before 가상 요소 스타일 수정 */
 /* 커스텀 동그라미 스타일 (누르기 전) */
-.custom-radio span::before {
-    content: ""; /* 빈 가상 요소로 동그라미만 만듭니다. */
+.custom-radio span::before,
+.custom-checkbox-btn span.btn-text::before {
+    content: "";
     display: inline-block;
     width: 16px;
     height: 16px;
-    border-radius: 50%; /* 동그라미 모양 */
-    border: 2px solid #dedede; /* 누르기 전 동그라미 테두리 색상 */
-    margin-right: 8px; /* 텍스트와의 간격 */
-    vertical-align: middle;
-    box-sizing: border-box; /* 패딩, 보더 포함하여 크기 계산 */
+    border-radius: 50%;
+    border: 2px solid #dedede;
+    margin-right: 8px;
+    /* vertical-align: middle;  - Flexbox 사용으로 불필요해져 삭제 */
+    box-sizing: border-box;
     transition: all 0.3s ease;
+    flex-shrink: 0; /* 체크박스 아이콘이 줄어들지 않도록 방지 */
 }
 
 /* 선택된 상태의 동그라미 스타일 */
@@ -318,7 +324,7 @@ textarea {
     content: "\2713"; /* 유니코드 체크 마크 (✓) */
     font-family: "Pretendard", sans-serif; /* 체크 마크를 표시할 폰트 */
     font-size: 11px; /* 체크 마크 크기 */
-    line-height: 12px; /* 체크 마크 세로 정렬 */
+    line-height: 14px; /* 체크 마크 세로 정렬 */
     text-align: center; /* 체크 마크 가로 정렬 */
 
     border-color: #23adb4; /* 선택됐을 때의 동그라미 테두리 색상 */
@@ -339,26 +345,12 @@ textarea {
     height: 0;
 }
 
-/* 커스텀 체크박스 (동그라미) 스타일 - 기본 상태 */
-.custom-checkbox-btn span.btn-text::before {
-    content: ""; /* 가상 요소를 생성 */
-    display: inline-block;
-    width: 16px; /* 동그라미 크기 */
-    height: 16px;
-    border-radius: 50%; /* 동그라미 모양 */
-    border: 2px solid #dedede; /* 누르기 전 테두리 색상 */
-    margin-right: 8px; /* 텍스트와의 간격 */
-    vertical-align: middle;
-    box-sizing: border-box; /* 패딩, 보더 포함하여 크기 계산 */
-    transition: all 0.3s ease;
-}
-
 /* 체크박스가 선택되었을 때의 동그라미 스타일 */
 .custom-checkbox-btn input[type="checkbox"]:checked + span.btn-text::before {
     content: "\2713"; /* 유니코드 체크 마크 (✓) */
     font-family: "Pretendard", sans-serif; /* 체크 마크를 표시할 폰트 */
     font-size: 11px; /* 체크 마크 크기 */
-    line-height: 12px; /* 체크 마크 세로 정렬 */
+    line-height: 14px; /* 체크 마크 세로 정렬 */
     text-align: center; /* 체크 마크 가로 정렬 */
 
     border-color: #23adb4; /* 선택됐을 때의 동그라미 테두리 색상 */

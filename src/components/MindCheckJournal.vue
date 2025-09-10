@@ -149,7 +149,7 @@ async function getFontEmbedCSS() {
   }
 
   // CDN 폰트 CSS를 직접 가져오기
-  const cdnUrl = 'https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard.css';
+  const cdnUrl = 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css';
   try {
     const response = await fetch(cdnUrl);
     if (response.ok) {
