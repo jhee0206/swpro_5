@@ -23,7 +23,7 @@
                 rows="1"
                 ref="myAutoGrowTextarea"
                 @input="adjustTextareaHeight"
-                placeholder="오늘은 행복한 날이예요!"
+                placeholder="오늘은 행복한 날이에요!"
                 class="textarea-style"
             ></textarea>
           </p>

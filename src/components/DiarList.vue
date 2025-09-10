@@ -4,13 +4,11 @@
       <div class="top-section">
         <BackButton :to="'/CardNewsMain'"/>
       </div>
-
       <div class="title-section">
         <h1 class="page-title"> 내가 쓴 일지 </h1>
       </div>
     </header>
 
-    <!-- 팝업 -->
     <div v-if="showPopup" class="popup-message">
       <div class="popup-content">
         <h2 class="popup-title">{{ popupData.title }}</h2>
@@ -20,18 +18,17 @@
     </div>
 
     <div class="diary-button-list">
-      <div
-          v-for="(entry) in sortedDailyList"
-          :key="entry.id"
-          class="diary-entry-box"
-      >
-        <span class="entry-date">{{ entry.date }}</span>
+      <div v-for="(entry) in sortedDailyList" :key="entry.id" class="diary-entry-box">
+        <div class="entry-content">
+          <p class="entry-mood">{{ entry.mood }}</p>
+          <span class="entry-date">{{ entry.date }}</span>
+        </div>
         <button class="view-button" @click="viewDiary(entry)">></button>
       </div>
     </div>
-  </div>
 
-  <NavigationBar />
+    <NavigationBar />
+  </div>
 </template>
 
 <script>
@@ -199,8 +196,14 @@ export default {
   border-radius: 12px 0 0 12px;
 }
 
-.entry-date {
+.entry-mood {
   font-weight: bold;
+  font-size: clamp(16px, 4.5vw, 20px);
+  color:#292929;
+}
+
+.entry-date{
+  color:#9C9C9C;
 }
 
 .view-button {
