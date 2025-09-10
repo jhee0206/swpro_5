@@ -9,22 +9,23 @@
           <p class="page-title">오늘의 일지</p>
         </div>
       </header>
-      <div class="content" id="journal-content-to-capture"><!--캡쳐 시작지점-->
+
+      <div class="content" id="journal-content-to-capture" ref="scrollableContent">
         <div class="intro-card">
           <p>
             <strong>나의 하루를 한 문장으로 표현해주세요.</strong>
           </p>
           <p>
-<textarea
-    id="entryMood"
-    v-model="entryMood"
-    maxlength="20"
-    rows="1"
-    ref="myAutoGrowTextarea"
-    @input="adjustTextareaHeight"
-    placeholder="오늘은 행복한 날이예요!"
-    class="textarea-style"
-></textarea>
+            <textarea
+                id="entryMood"
+                v-model="entryMood"
+                maxlength="20"
+                rows="1"
+                ref="myAutoGrowTextarea"
+                @input="adjustTextareaHeight"
+                placeholder="오늘은 행복한 날이예요!"
+                class="textarea-style"
+            ></textarea>
           </p>
         </div>
         <h2 class="h2-text">나의 라이프스타일 체크리스트</h2>
@@ -103,9 +104,7 @@
             </div>
           </div>
         </div>
-
       </div>
-
 
       <div class="button-container">
         <GoToSurveyButton
@@ -113,28 +112,65 @@
             @next="saveJournal"/>
       </div>
 
+
       <NavigationBar />
     </div>
   </div>
-
 </template>
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
-import html2canvas from "html2canvas";
 import BackButton from "@/components/BackButton.vue";
 import GoToSurveyButton from "@/component/GoToSurveyButton.vue";
-// 1. db.js에서 addDiary 함수를 가져옵니다.
-import { addDiary } from "@/db.js"; // 파일 경로가 맞는지 확인하세요.
+import { addDiary } from "@/db.js";
+import * as htmlToImage from "html-to-image";
+
+// ✨ 폰트 CSS를 가져오는 헬퍼 함수
+async function getFontEmbedCSS() {
+  const fontFamilies = ["Pretendard"]; // 사용하는 폰트 패밀리 이름
+  const styleSheets = Array.from(document.styleSheets).filter(sheet =>
+      !sheet.href || sheet.href.startsWith(window.location.origin)
+  );
+
+  let cssString = '';
+  for (const sheet of styleSheets) {
+    try {
+      const rules = sheet.cssRules ? Array.from(sheet.cssRules) : [];
+      for (const rule of rules) {
+        if (rule.type === CSSRule.FONT_FACE_RULE) {
+          const fontFamily = rule.style.getPropertyValue('font-family').replace(/['"]/g, '');
+          if (fontFamilies.includes(fontFamily)) {
+            cssString += rule.cssText;
+          }
+        }
+      }
+    } catch (e) {
+      console.warn("Can't read the css rules of: ", sheet.href, e);
+    }
+  }
+
+  // CDN 폰트 CSS를 직접 가져오기
+  const cdnUrl = 'https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard.css';
+  try {
+    const response = await fetch(cdnUrl);
+    if (response.ok) {
+      const cdnCssText = await response.text();
+      cssString += cdnCssText;
+    }
+  } catch(e) {
+    console.error("Failed to fetch CDN font CSS:", e);
+  }
+
+  return cssString;
+}
+
 
 export default {
   name: "MindCheckJournal",
-  components: {GoToSurveyButton, BackButton, NavigationBar },
+  components: { GoToSurveyButton, BackButton, NavigationBar },
   data() {
     return {
       entryDate: "",
-      entryTitle: "",
       entryMood: "",
-      entryPhrase: "",
       checklist: {
         mood: "",
         water: "",
@@ -145,7 +181,6 @@ export default {
         heartSharing: "",
         kindness: "",
       },
-      dailyRecord: "",
     };
   },
   mounted() {
@@ -168,56 +203,43 @@ export default {
         }
       });
     },
-    async saveJournal() { // async 키워드는 이미 있으므로 그대로 둡니다.
+    // ✨ saveJournal 함수 수정
+    async saveJournal() {
       const waterBad = ["1cup", "2_4cup", "11cup"];
       const hourBad = ["4hour", "5_6hour", "10hour"];
       const exerciseBad = ["no"];
 
-      const elementToCapture = document.getElementById("journal-content-to-capture");
+      const elementToCapture = this.$refs.scrollableContent;
       if (!elementToCapture) {
         console.error("캡처할 요소를 찾을 수 없습니다.");
         alert("일지 내용을 캡처할 수 없습니다.");
         return;
       }
 
-      // setTimeout을 사용하지 않고 직접 비동기 처리합니다.
       try {
-        await new Promise(resolve => setTimeout(resolve, 500)); // 캡처 전 렌더링 대기 시간
+        // 1. 폰트 CSS 가져오기
+        const fontEmbedCSS = await getFontEmbedCSS();
 
-        const captureHeight = elementToCapture.scrollHeight + 50;
-        const canvas = await html2canvas(elementToCapture, {
-          useCORS: true,
-          scrollY: -window.scrollY,
-          height: captureHeight,
-          windowHeight: captureHeight,
+        // 2. 이미지 생성 시 fontEmbedCSS 옵션 추가
+        const dataUrl = await htmlToImage.toPng(elementToCapture, {
+          backgroundColor: "#ffffff",
+          pixelRatio: 2,
+          fontEmbedCSS: fontEmbedCSS, // 폰트 임베딩 옵션
         });
 
-        const imageDataURL = canvas.toDataURL("image/png");
-
+        // 3. DB 저장 로직 유지
         const newEntry = {
           id: Date.now(),
           date: this.entryDate,
-          title: this.entryTitle,
           mood: this.entryMood,
-          phrase: this.entryPhrase,
-          checklist: JSON.parse(JSON.stringify(this.checklist)), // ✅ Proxy → Plain Object
-          image: imageDataURL,
+          checklist: JSON.parse(JSON.stringify(this.checklist)),
+          image: dataUrl,
         };
 
-        // --- 2. 여기가 핵심 변경 부분입니다 ---
-        // 기존 localStorage 로직을 삭제하고 addDiary 함수를 호출합니다.
-        /*
-          // --- 삭제될 기존 코드 ---
-          const storedDiaryList = JSON.parse(localStorage.getItem("diaryList")) || [];
-          storedDiaryList.push(newEntry);
-          localStorage.setItem("diaryList", JSON.stringify(storedDiaryList));
-        */
-
-        // --- 새로 추가된 IndexedDB 저장 코드 ---
         await addDiary(newEntry);
-        // --- 여기까지 변경 ---
 
         alert("일지 저장 완료!");
+
         if (
             waterBad.includes(this.checklist.water) ||
             hourBad.includes(this.checklist.hour) ||
@@ -225,7 +247,7 @@ export default {
         ) {
           this.$router.push("/Cheerup");
         } else {
-          this.$router.push("/DiarList"); // DiarList -> DiaryList 오타 수정 제안
+          this.$router.push("/DiarList");
         }
       } catch (error) {
         console.error("이미지 캡처 및 IndexedDB 저장 중 오류 발생:", error);

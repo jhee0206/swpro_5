@@ -156,7 +156,7 @@ h2 {
 }
 .rating-container {
     display: flex;
-    flex-wrap: wrap; /* 버튼이 넘치면 다음 줄로 넘어갑니다. */
+    flex-wrap: wrap;
     gap: 10px; /* 버튼 사이의 간격 */
     justify-content: flex-start; /* 버튼을 왼쪽부터 정렬합니다. */
     margin-top: 10px;
@@ -286,9 +286,12 @@ textarea {
     color: #555555;
     font-size: 14px;
 }
+/* ✨ CSS 줄바꿈 방지 속성 추가 */
 .check-list span {
     color: #555555;
     font-size: 11px;
+    word-break: keep-all; /* 단어 단위 줄바꿈 */
+    white-space: nowrap;   /* 자동 줄바꿈 방지 */
 }
 /* 숨겨진 라디오 버튼 */
 .custom-radio input[type="radio"] {
