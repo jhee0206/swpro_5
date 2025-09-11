@@ -99,7 +99,7 @@ function handleNext() {
           @next="handleNext"
       />
     </div>
-    </div>
+  </div>
   <NavigationBar/>
 </template>
 
@@ -107,12 +107,13 @@ function handleNext() {
   @import "/src/assert/main.css";
 
   .wrapper {
-    width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     padding-left: 18px;
     padding-right: 18px;
+    padding-bottom: 80px; /* NavigationBar 높이만큼 확보 */
     background-color: #F8F8F8;
     font-family: 'Pretendard', serif;
+    box-sizing: border-box;
   }
 
   /* 헤더 둥근 테두리는 CSS로 */

@@ -128,18 +128,19 @@ function handleNext() {
       />
     </div>
   </div>
-  <NavigationBar/>
+  <NavigationBar />
 </template>
 
 <style scoped>
   @import "/src/assert/main.css";
 
   .wrapper {
-    width: 100vw;
-    height: 90vh;
+    min-height: 100vh;
     padding-left: 18px;
     padding-right: 18px;
+    padding-bottom: 80px; /* NavigationBar 높이만큼 확보 */
     background-color: #F8F8F8;
     font-family: 'Pretendard', serif;
+    box-sizing: border-box;
   }
 </style>
