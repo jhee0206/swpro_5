@@ -85,7 +85,7 @@ export default {
       const messages = {
         3: {
           title: "3회째 기록 달성",
-          image: "/public/cheericon/good_3.png",
+          image: "public/cheericon/good_3.png",
           text: "스스로 건강을 챙기려는 노력이 이미 시작됐네요. 이렇게 기록하는 게 변화를 향한 중요한 첫걸음이에요!"
         },
         7: {

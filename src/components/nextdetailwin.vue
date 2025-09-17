@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <header class="header">
-    <h1 class="headline"><br>오늘은 어떤 카드뉴스가<br> 궁금하세요? </h1>
+    <h1 class="headline"><br>마약, 얼마나<br>알고 계세요? </h1>
     </header>
     <div class ="card-grid">
       <button
