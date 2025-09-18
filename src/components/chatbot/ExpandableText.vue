@@ -157,19 +157,18 @@ export default {
           continue;
         }
 
+        // 그룹을 하나의 문자열로 만들기 시작
+        let groupHtml = '<span class="sec-group">';
+        groupHtml += line; // 소제목 추가
+
         const keyMatch = line.match(/data-sec="([^"]+)"/);
         const key = keyMatch ? keyMatch[1] : 'sec';
         const open = !!this.sectionOpen[key];
 
-        out.push('<span class="sec-group">');
-        out.push(line); // 소제목
+        // “자세히 보기” 버튼 추가
+        groupHtml += `<button class="sec-link sec-readmore" data-sec="${key}" style="display:${open ? 'none' : 'inline'};">자세히 보기</button>`;
 
-        // “자세히 보기”
-        out.push(
-            `<button class="sec-link sec-readmore" data-sec="${key}" style="display:${open ? 'none' : 'inline'};">자세히 보기</button>`
-        );
-
-        // 본문 3줄 수집
+        // 본문 내용 수집
         const body = [];
         let count = 0;
         i++;
@@ -184,13 +183,18 @@ export default {
           }
         }
 
-        // 패널 + 내부 “간략히 보기”
-        const display = open ? 'block' : 'none';
+        // “간략히 보기” 버튼을 본문 마지막에 추가
         body.push(
             `<button class="sec-link sec-readless" data-sec="${key}" style="display:${open ? 'inline' : 'none'}; margin-top:6px;">간략히 보기</button>`
         );
-        out.push(`<div class="sec-panel" data-sec="${key}" style="display:${display}; margin: 6px 0 10px;">${body.join('<br>')}</div>`);
-        out.push('</span>');
+
+        // 패널을 만들고 그룹 문자열에 추가
+        const display = open ? 'block' : 'none';
+        groupHtml += `<div class="sec-panel" data-sec="${key}" style="display:${display};"> ${body.join('<br>')}</div>`;
+
+        // 그룹 태그를 닫고 완성된 그룹을 out 배열에 추가
+        groupHtml += '</span>';
+        out.push(groupHtml);
       }
       return out.join('<br>');
     }
@@ -233,7 +237,7 @@ export default {
   -webkit-text-decoration-color: #f284a6 !important;
   text-underline-offset: 2px;
   text-decoration-thickness: 2px;
-  margin-left: 8px;
+  margin-left: 4px;
 }
 
 :deep(.sec-link:hover),
@@ -254,7 +258,9 @@ export default {
 
 /* 본문 패널 */
 :deep(.sec-panel) {
-  padding-left: 10px;
+  padding-left: 8px;
+  margin-top: 2px;   /* 위쪽 살짝 띄우기 */
+  margin-bottom: 0;  /* 아래쪽 여백 제거 */
 }
 
 /* 전체 길이 더보기/간략히 보기 */
@@ -272,7 +278,7 @@ export default {
   text-decoration: underline;
 }
 .button-wrapper {
-  margin-top: 12px;
+  margin-top: 5px;
 }
 
 /* 폴백: text-decoration-color 미지원 환경 */
@@ -291,4 +297,3 @@ export default {
   }
 }
 </style>
-<!--//수정완료-->
