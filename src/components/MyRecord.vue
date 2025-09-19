@@ -48,10 +48,43 @@
         <p><strong>한국영양학회</strong>에서 제시하는 1일 수분 섭취 기준은 아래와 같으며,
           연령대와 성별에 따라 권장량이 다릅니다.</p>
 
-        <div>
-          남성: 19~29세 2,600mL, 30~49세 2,500mL, 50~64세 2,200mL<br>
-          여성: 19~29세 2,100mL, 30~49세 2,000mL, 50~64세 1,900mL
-        </div>
+        <table class="water-intake-table">
+          <tbody>
+          <tr>
+            <td class="gender">남성:</td>
+            <td class="age">19~29세</td>
+            <td class="amount">2,600mL</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="age">30~49세</td>
+            <td class="amount">2,500mL</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="age">50~64세</td>
+            <td class="amount">2,200mL</td>
+          </tr>
+          <tr class="group-separator">
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td class="gender">여성:</td>
+            <td class="age">19~29세</td>
+            <td class="amount">2,100mL</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="age">30~49세</td>
+            <td class="amount">2,000mL</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="age">50~64세</td>
+            <td class="amount">1,900mL</td>
+          </tr>
+          </tbody>
+        </table>
 
         <p>
           <strong>수분 부족</strong>은 탈수, 변비, 피로 등 다양한 문제를 유발할 수 있으며,<br>
@@ -354,5 +387,43 @@ export default {
 
 .collapsible-content.is-active {
   display: block; /* 'is-active' 클래스가 추가되면 보이도록 함 */
+}
+
+.water-intake-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #FFF;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+  font-size: 15px;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.water-intake-table td {
+  padding: 5px;
+  line-height: 1.5;
+}
+
+.water-intake-table .gender {
+  width: 60px; /* '남성:', '여성:' 텍스트 너비 고정 */
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.water-intake-table .age {
+  width: 90px; /* '00~00세' 텍스트 너비 고정 */
+  vertical-align: top;
+}
+
+.water-intake-table .amount {
+  font-weight: 500;
+  vertical-align: top;
+}
+
+/* 남성/여성 그룹 사이에 간격을 주기 위한 스타일 */
+.water-intake-table .group-separator td {
+  padding: 4px 0; /* 위아래로 약간의 여백만 줌 */
 }
 </style>
