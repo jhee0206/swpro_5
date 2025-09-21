@@ -85,22 +85,22 @@ export default {
       const messages = {
         3: {
           title: "3회째 기록 달성",
-          image: "public/cheericon/good_3.png",
+          image: "/cheericon/good_3.png",
           text: "스스로 건강을 챙기려는 노력이 이미 시작됐네요. 이렇게 기록하는 게 변화를 향한 중요한 첫걸음이에요!"
         },
         7: {
           title: "7회째 기록 달성",
-          image: "/public/cheericon/good_7.png",
+          image: "/cheericon/good_7.png",
           text: "벌써 7번이나 기록했어요! 스스로 건강을 지키려는 마음이 꾸준히 이어지고 있다는 증거예요."
         },
         14: {
           title: "14회째 기록 달성",
-          image: "/public/cheericon/good14.png",
+          image: "/cheericon/good14.png",
           text: "14번째 기록까지 해내셨어요. 스스로 선택하고 실천한 결과가 이렇게 쌓여가고 있네요."
         },
         30: {
           title: "30회째 기록 달성",
-          image: "/public/cheericon/good30.png",
+          image: "/cheericon/good30.png",
           text: "30번째 기록을 달성했군요! 지금까지 보여준 꾸준함이 앞으로도 건강을 지켜주는 큰 힘이 될 거예요."
         }
       };
